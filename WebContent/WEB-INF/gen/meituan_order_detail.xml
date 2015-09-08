@@ -1,0 +1,35 @@
+<?xml version="1.0"	encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC	"-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<!-- classPathEntry:数据库的JDBC驱动,换成你自己的驱动位置 -->
+		<classPathEntry location="C:\workspace\Manicure\WebRoot\WEB-INF\lib\mysql-connector-java-5.1.36-bin.jar" />
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<property name="autoDelimitKeywords" value="true"/>
+		<property name="beginningDelimiter" value="`"/>
+		<property name="endingDelimiter" value="`"/> 
+		<!-- 去除自动生成的注释 -->
+		<commentGenerator>
+			<property name="suppressAllComments" value="false" />
+		</commentGenerator>
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://120.26.103.47:3306/test"
+			userId="root" password="fnst_1234">
+		</jdbcConnection>
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<!-- targetProject:自动生成代码的位置 -->
+		<javaModelGenerator targetPackage="com.meituan.detail.entity" targetProject="MeituanAPI">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<sqlMapGenerator targetPackage="com.meituan.detail.sqlmap" targetProject="MeituanAPI">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.meituan.detail.mapper" targetProject="MeituanAPI">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		<!-- tableName:用于自动生成代码的数据库表；domainObjectName:对应于数据库表的javaBean类名 -->
+		<table tableName="meituan_order_detail" domainObjectName="MeituanOrderDetail" />
+
+	</context>
+</generatorConfiguration>
