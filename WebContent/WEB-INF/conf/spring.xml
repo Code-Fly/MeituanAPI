@@ -26,6 +26,5 @@
 	<!-- 导入基础配置文件 -->
 	<!-- 导入 myBatis 基础配置文件 -->
 	<import resource="mybatis.xml" />
-	<!-- 导入 Quartz 基础配置文件 -->
-	<import resource="quartz.xml" />
+	
 </beans>
