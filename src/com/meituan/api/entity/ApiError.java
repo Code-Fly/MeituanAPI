@@ -3,13 +3,11 @@
  */
 package com.meituan.api.entity;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**
  * @author Barrie
  *
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiError {
 	private int code;
 	private String msg;

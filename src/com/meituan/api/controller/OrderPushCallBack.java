@@ -58,7 +58,7 @@ public class OrderPushCallBack extends BaseController {
 			} else {
 				ApiData resp = new ApiData(MeituanConst.RETURN_OK);
 				logger.info(params.toString());
-				return JSONObject.fromObject(resp).toString();
+				return JSONObject.fromObject(resp).discard("error").toString();
 			}
 		} else {
 			ApiError err = new ApiError(RETURN_CODE.CODE_701, "缺少参数，数据不完整");
