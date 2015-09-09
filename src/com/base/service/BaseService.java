@@ -1,17 +1,16 @@
-package com.meituan.controller;
+package com.base.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 /**
  * 
- * @author zhangqw
+ * @author Barrie
  *
- * @param <T>
  */
-public abstract class BaseController {
+public class BaseService {
 
+	// logger
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 }
