@@ -7,7 +7,7 @@ package com.base.common;
  * @author zhangqw
  * 常量
  */
-public interface Constant {
+public interface MeituanConst {
     String SIG = "sig";
     String APP_ID = "app_id";
     String TIME_STAMP = "timestamp";
@@ -22,4 +22,5 @@ public interface Constant {
     }
     
     String RETURN_OK = "ok";
+    String RETURN_NG = "ng";
 }
