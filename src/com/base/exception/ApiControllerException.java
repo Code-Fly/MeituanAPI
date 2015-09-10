@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.base.entity;
+package com.base.exception;
 
 /**
  * @author Administrator

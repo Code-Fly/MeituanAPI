@@ -8,14 +8,14 @@ package com.meituan.api.entity;
  * @author Barrie
  *
  */
-public class ApiData {
+public class MeituanRespData {
 	private String data;
-	private ApiError error;
+	private MeituanRespError error;
 
 	/**
 	 * @param data
 	 */
-	public ApiData(String data) {
+	public MeituanRespData(String data) {
 		super();
 		this.data = data;
 	}
@@ -24,7 +24,7 @@ public class ApiData {
 	 * @param data
 	 * @param error
 	 */
-	public ApiData(String data, ApiError error) {
+	public MeituanRespData(String data, MeituanRespError error) {
 		super();
 		this.data = data;
 		this.error = error;
@@ -48,7 +48,7 @@ public class ApiData {
 	/**
 	 * @return the error
 	 */
-	public ApiError getError() {
+	public MeituanRespError getError() {
 		return error;
 	}
 
@@ -56,7 +56,7 @@ public class ApiData {
 	 * @param error
 	 *            the error to set
 	 */
-	public void setError(ApiError error) {
+	public void setError(MeituanRespError error) {
 		this.error = error;
 	}
 

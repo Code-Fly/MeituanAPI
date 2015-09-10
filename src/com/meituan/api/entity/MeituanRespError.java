@@ -8,7 +8,7 @@ package com.meituan.api.entity;
  * @author Barrie
  *
  */
-public class ApiError {
+public class MeituanRespError {
 	private int code;
 	private String msg;
 
@@ -16,7 +16,7 @@ public class ApiError {
 	 * @param code
 	 * @param msg
 	 */
-	public ApiError(int code, String msg) {
+	public MeituanRespError(int code, String msg) {
 		super();
 		this.code = code;
 		this.msg = msg;

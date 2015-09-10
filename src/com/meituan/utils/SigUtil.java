@@ -24,22 +24,7 @@ import org.apache.http.message.BasicNameValuePair;
 
 public class SigUtil {
 
-	/**
-	 * 获取签名
-	 * 
-	 * @param serverUrl
-	 *            请求url（必填）
-	 * @param params
-	 *            参数集合
-	 * @param app_id
-	 *            应用ID（必填）
-	 * @param appSecret
-	 *            应用密钥（必填）
-	 * @param timestamp
-	 *            时间戳（必填）
-	 * @return
-	 */
-	public static String signRequest(String serverUrl, Map<String, Object> params, String appSecret) {
+	public static String sign(String serverUrl, Map<String, Object> params, String appSecret, String algorithm) {
 		List<NameValuePair> nameValueParams = new ArrayList<NameValuePair>();
 		// nameValueParams.add(new BasicNameValuePair("app_id", app_id));
 		if (params != null && !params.isEmpty()) {
@@ -48,22 +33,12 @@ public class SigUtil {
 			}
 		}
 		String paramForSig = getSortedParam(nameValueParams);
-		return signRequest(serverUrl, paramForSig, appSecret);
-	}
-
-	/**
-	 * 获取签名
-	 * 
-	 * @param serverUrl
-	 *            请求url（必填）
-	 * @param paramContent
-	 *            已排序的参数内容（必填）
-	 * @param appSecret
-	 *            应用密钥（必填）
-	 * @return
-	 */
-	public static String signRequest(String serverUrl, String paramContent, String appSecret) {
-		return md5sum(serverUrl + "?" + paramContent + appSecret);
+		if (null == serverUrl || serverUrl.isEmpty()) {
+			return sum(paramForSig + appSecret, algorithm);
+		} else {
+			return sum(serverUrl + "?" + paramForSig + appSecret, algorithm);
+		}
+		// return signRequest(serverUrl, paramForSig, appSecret);
 	}
 
 	/**
@@ -91,16 +66,10 @@ public class SigUtil {
 		return StringUtils.join(keyList, "&");
 	}
 
-	/**
-	 * 使用MD5加密
-	 * 
-	 * @param src
-	 * @return
-	 */
-	private static String md5sum(String src) {
+	private static String sum(String src, String algorithm) {
 		MessageDigest md = null;
 		try {
-			md = MessageDigest.getInstance("MD5");
+			md = MessageDigest.getInstance(algorithm);
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}

@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.base.controller.BaseController;
 import com.base.entity.ApiResp;
 import com.base.utils.MapUtil;
-import com.base.utils.PathUtil;
 import com.meituan.app.service.iface.AppService;
 import com.meituan.order.entity.MeituanOrder;
 import com.meituan.order.entity.MeituanOrderExample;
@@ -33,8 +32,7 @@ import com.meituan.utils.SigUtil;
  */
 @Controller
 @RequestMapping(value = "/Api")
-public class DoGetOrder extends BaseController {
-
+public class DoConfirm extends BaseController {
 	@Autowired
 	private AppService appService;
 
@@ -42,8 +40,8 @@ public class DoGetOrder extends BaseController {
 	private OrderService orderService;
 
 	@ResponseBody
-	@RequestMapping(value = "/do_get_order")
-	public String doGetOrder(HttpServletRequest request, 
+	@RequestMapping(value = "/do_confirm")
+	public String doConfirm(HttpServletRequest request,
 			// system params
 			@RequestParam(value = "msid", required = true) String msid,
 			@RequestParam(value = "timestamp", required = true) String timestamp,
@@ -51,22 +49,25 @@ public class DoGetOrder extends BaseController {
 			@RequestParam(value = "signtype", required = true) String signtype, 
 			@RequestParam(value = "msg_sign", required = true) String msg_sign,
 			//application params
-			@RequestParam(value = "id", required = true) String id) {
+			@RequestParam(value = "id", required = true) String id, 
+			@RequestParam(value = "state", required = true) String state,
+			@RequestParam(value = "bzid", required = true) String bzid, 
+			@RequestParam(value = "info", required = true) String info,
+			@RequestParam(value = "hint", required = true) String hint) {
 		
 		Map<String, Object> params = MapUtil.getParameterMap(request);
 		params.remove("msg_sign");
+		params.remove("info");
+		params.remove("hint");
 		String sha1sum = SigUtil.sign(null, params, appService.selectByPrimaryKey(params.get("msid").toString()).getSecret(), "SHA-1");
 		if (!msg_sign.equals(sha1sum)) {
 			ApiResp resp = new ApiResp(0, "签名验证错误");
 			logger.error("签名验证错误, sig:" + msg_sign + ", sha1sum:" + sha1sum);
 			return JSONObject.fromObject(resp).toString();
 		} else {
-			MeituanOrderExample example = new MeituanOrderExample();
-			example.or().andAppPoiCodeEqualTo(id).andAppStatusEqualTo(0);
-			List<MeituanOrder> oList = orderService.selectByExample(example);
-			JSONArray resp = JSONArray.fromObject(oList);
-			return resp.toString();
+			
+			return null;
 		}
-		
 	}
+
 }
