@@ -39,12 +39,12 @@ public class SigUtil {
 	 *            时间戳（必填）
 	 * @return
 	 */
-	public static String signRequest(String serverUrl, Map<String, String> params, String appSecret) {
+	public static String signRequest(String serverUrl, Map<String, Object> params, String appSecret) {
 		List<NameValuePair> nameValueParams = new ArrayList<NameValuePair>();
 		// nameValueParams.add(new BasicNameValuePair("app_id", app_id));
 		if (params != null && !params.isEmpty()) {
 			for (String paramName : params.keySet()) {
-				nameValueParams.add(new BasicNameValuePair(paramName, params.get(paramName)));
+				nameValueParams.add(new BasicNameValuePair(paramName, params.get(paramName).toString()));
 			}
 		}
 		String paramForSig = getSortedParam(nameValueParams);

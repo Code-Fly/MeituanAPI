@@ -6,6 +6,7 @@ package com.base.utils;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,18 +21,17 @@ public class MapUtil {
 	 * @param request
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
-	public static Map getParameterMap(HttpServletRequest request) {
+	public static Map<String,Object> getParameterMap(HttpServletRequest request) {
 		// 参数Map
-		Map properties = request.getParameterMap();
+		 Map<String,String[]> properties = request.getParameterMap();
 		// 返回值Map
-		Map returnMap = new HashMap();
-		Iterator entries = properties.entrySet().iterator();
-		Map.Entry entry;
+		 Map<String,Object> returnMap = new HashMap<String,Object>();
+		Iterator<Entry<String, String[]>> entries = properties.entrySet().iterator();
+		Entry entry;
 		String name = "";
 		String value = "";
 		while (entries.hasNext()) {
-			entry = (Map.Entry) entries.next();
+			entry = (Entry) entries.next();
 			name = (String) entry.getKey();
 			Object valueObj = entry.getValue();
 			if (null == valueObj) {
