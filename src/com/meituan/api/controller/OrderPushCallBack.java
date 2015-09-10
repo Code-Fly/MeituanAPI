@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.base.common.MeituanConst;
-import com.base.common.MeituanConst.MEITUAN_RETURN_CODE;
 import com.base.controller.BaseController;
 import com.base.entity.ApiResp;
 import com.base.exception.ApiControllerException;
@@ -28,6 +26,8 @@ import com.base.utils.PathUtil;
 import com.meituan.api.entity.MeituanRespData;
 import com.meituan.api.entity.MeituanRespError;
 import com.meituan.app.service.iface.AppService;
+import com.meituan.common.MeituanConst;
+import com.meituan.common.MeituanConst.MEITUAN_RETURN_CODE;
 import com.meituan.order.entity.MeituanOrder;
 import com.meituan.order.service.iface.OrderService;
 import com.meituan.utils.SigUtil;

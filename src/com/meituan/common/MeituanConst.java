@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.base.common;
+package com.meituan.common;
 
 /**
  * @author zhangqw 常量
