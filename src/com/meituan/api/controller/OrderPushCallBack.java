@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.base.controller.BaseController;
-import com.base.entity.ApiResp;
 import com.base.exception.ApiControllerException;
 import com.base.utils.CommonUtil;
 import com.base.utils.HttpClientUtil;

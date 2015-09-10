@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.base.controller.BaseController;
 import com.base.entity.ApiResp;
 import com.base.utils.MapUtil;
-import com.base.utils.PathUtil;
 import com.meituan.app.service.iface.AppService;
 import com.meituan.order.entity.MeituanOrder;
 import com.meituan.order.entity.MeituanOrderExample;

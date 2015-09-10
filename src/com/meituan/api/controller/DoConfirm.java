@@ -3,12 +3,10 @@
  */
 package com.meituan.api.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +19,6 @@ import com.base.controller.BaseController;
 import com.base.entity.ApiResp;
 import com.base.utils.MapUtil;
 import com.meituan.app.service.iface.AppService;
-import com.meituan.order.entity.MeituanOrder;
-import com.meituan.order.entity.MeituanOrderExample;
 import com.meituan.order.service.iface.OrderService;
 import com.meituan.utils.SigUtil;
 
