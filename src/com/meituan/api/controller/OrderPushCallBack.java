@@ -70,11 +70,10 @@ public class OrderPushCallBack extends BaseController {
 				 */
 				meituanOrder = (MeituanOrder) CommonUtil.transMap2Bean(params, meituanOrder);
 			} catch (Exception e) {
+				MeituanRespError err = new MeituanRespError(MEITUAN_RETURN_CODE.CODE_600, "内部错误");
+				MeituanRespData resp = new MeituanRespData(MeituanConst.RETURN_NG, err);
 				logger.error("数据转换错误.", e);
-				/**
-				 * 异常 交给Basecontroller处理
-				 */
-				throw new ApiControllerException(e.getMessage());
+				return JSONObject.fromObject(resp).toString();
 			}
 			orderService.insertSelective(meituanOrder);
 			MeituanRespData resp = new MeituanRespData(MeituanConst.RETURN_OK);
