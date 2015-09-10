@@ -2,13 +2,7 @@
 -- 主机:                           120.26.103.47
 -- 服务器版本:                        5.6.21-log - MySQL Community Server (GPL)
 -- 服务器操作系统:                      linux-glibc2.5
--- HeidiSQL 版本:                  9.2.0.4947
 -- --------------------------------------------------------
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8mb4 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- 导出  表 test.app 结构
 CREATE TABLE IF NOT EXISTS `app` (
@@ -54,40 +48,7 @@ CREATE TABLE IF NOT EXISTS `meituan_order` (
   `app_status` int(2) NOT NULL DEFAULT '0' COMMENT '门店是否已下载该订单（0：否，1：是）'
 )  ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 数据导出被取消选择。
 
 
--- 导出  表 test.meituan_order_detail 结构
-CREATE TABLE IF NOT EXISTS `meituan_order_detail` (
-  `detail_id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `order_id` varchar(36) DEFAULT NULL,
-  `app_food_code` int(2) DEFAULT NULL,
-  `food_name` varchar(80) DEFAULT NULL,
-  `sku_id` varchar(8) DEFAULT NULL,
-  `quantity` int(4) DEFAULT NULL,
-  `price` decimal(5,1) DEFAULT NULL,
-  `box_num` int(4) DEFAULT NULL,
-  `box_price` decimal(5,1) DEFAULT NULL,
-  `unit` varchar(8) DEFAULT NULL,
-  `food_discount` decimal(3,2) DEFAULT NULL,
-  PRIMARY KEY (`detail_id`)
-)  ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- 数据导出被取消选择。
 
 
--- 导出  表 test.meituan_order_extras 结构
-CREATE TABLE IF NOT EXISTS `meituan_order_extras` (
-  `act_detail_id` int(10) NOT NULL,
-  `order_id` varchar(36) NOT NULL,
-  `reduce_fee` decimal(5,1) DEFAULT NULL,
-  `remark` varchar(128) DEFAULT NULL,
-  `type` int(2) DEFAULT NULL,
-  `avg_send_time` int(5) DEFAULT NULL,
-  PRIMARY KEY (`act_detail_id`)
-)  ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- 数据导出被取消选择。
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
