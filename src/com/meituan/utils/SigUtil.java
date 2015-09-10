@@ -16,8 +16,8 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 /**
- * @author zhanglingman
- * @version 2015年6月3日
+ * @author zhangqw
+ * @version 2015年9月9日
  *
  * @description 系统工具类
  */
