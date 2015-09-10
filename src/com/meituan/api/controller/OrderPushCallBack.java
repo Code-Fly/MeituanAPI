@@ -67,7 +67,6 @@ public class OrderPushCallBack extends BaseController {
 					 * 数据转换后插入数据库
 					 */
 					meituanOrder = (MeituanOrder) CommonUtil.transMap2Bean(params, meituanOrder);
-					orderService.insertSelective(meituanOrder);
 				} catch (Exception e) {
 					logger.error("数据转换错误.", e);
 					/**
@@ -75,6 +74,7 @@ public class OrderPushCallBack extends BaseController {
 					 */
 					throw new ApiControllerException(e.getMessage());
 				}
+				orderService.insertSelective(meituanOrder);
 				ApiData resp = new ApiData(MeituanConst.RETURN_OK);
 				logger.info(params.toString());
 				return JSONObject.fromObject(resp).discard("error").toString();
