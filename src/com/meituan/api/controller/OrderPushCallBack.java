@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+
 import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.base.common.MeituanConst;
-import com.base.common.MeituanConst.RETURN_CODE;
+import com.base.common.MeituanConst.MEITUAN_RETURN_CODE;
 import com.base.controller.BaseController;
 import com.base.entity.ApiControllerException;
 import com.base.utils.CommonUtil;
@@ -40,7 +41,7 @@ public class OrderPushCallBack extends BaseController {
 
 	@Autowired
 	private AppService appService;
-	
+
 	@Autowired
 	private OrderService orderService;
 
@@ -48,13 +49,14 @@ public class OrderPushCallBack extends BaseController {
 	@RequestMapping(value = "/orderPushCallBack")
 	public String orderPushCallBack(HttpServletRequest request) {
 		Map<String, Object> params = MapUtil.getParameterMap(request);
+
 		if (null != params && !params.isEmpty() && params.containsKey(MeituanConst.SIG) && params.containsKey(MeituanConst.APP_ID) && params.containsKey(MeituanConst.TIME_STAMP)) {
 			String sig = params.get(MeituanConst.SIG).toString();
 			params.remove(MeituanConst.SIG);
 			String url = PathUtil.getServerUrl(request) + "/Api" + "/orderPushCallBack";
 			String md5sum = SigUtil.signRequest(url, params, appService.selectByPrimaryKey(params.get(MeituanConst.APP_ID).toString()).getSecret());
 			if (!sig.equals(md5sum)) {
-				ApiError err = new ApiError(RETURN_CODE.CODE_703, "签名验证错误");
+				ApiError err = new ApiError(MEITUAN_RETURN_CODE.CODE_703, "签名验证错误");
 				ApiData resp = new ApiData(MeituanConst.RETURN_NG, err);
 				logger.error("签名验证错误, sig:" + sig + ", md5sum:" + md5sum);
 				return JSONObject.fromObject(resp).toString();
@@ -64,12 +66,12 @@ public class OrderPushCallBack extends BaseController {
 					/**
 					 * 数据转换后插入数据库
 					 */
-					meituanOrder = (MeituanOrder)CommonUtil.transMap2Bean(params, meituanOrder);
+					meituanOrder = (MeituanOrder) CommonUtil.transMap2Bean(params, meituanOrder);
 					orderService.insertSelective(meituanOrder);
 				} catch (Exception e) {
 					logger.error("数据转换错误.", e);
 					/**
-					 *异常 交给Basecontroller处理
+					 * 异常 交给Basecontroller处理
 					 */
 					throw new ApiControllerException(e.getMessage());
 				}
@@ -78,7 +80,7 @@ public class OrderPushCallBack extends BaseController {
 				return JSONObject.fromObject(resp).discard("error").toString();
 			}
 		} else {
-			ApiError err = new ApiError(RETURN_CODE.CODE_701, "缺少参数，数据不完整");
+			ApiError err = new ApiError(MEITUAN_RETURN_CODE.CODE_701, "缺少参数，数据不完整");
 			ApiData resp = new ApiData(MeituanConst.RETURN_NG, err);
 			logger.error("缺少参数，数据不完整, params:" + params);
 			return JSONObject.fromObject(resp).toString();
