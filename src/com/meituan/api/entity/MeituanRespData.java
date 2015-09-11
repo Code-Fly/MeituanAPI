@@ -3,20 +3,28 @@
  */
 package com.meituan.api.entity;
 
+import com.meituan.common.MeituanConst;
+
 
 /**
  * @author Barrie
  *
  */
-public class MeituanRespData {
+public enum MeituanRespData {
+	
+	REP_OK(MeituanConst.RETURN_OK),
+	REP_ERROR_600(MeituanConst.RETURN_NG,MeituanRespError.ERROR_600),
+	REP_ERROR_702(MeituanConst.RETURN_NG,MeituanRespError.ERROR_702),
+	REP_ERROR_703(MeituanConst.RETURN_NG,MeituanRespError.ERROR_703);
+	
 	private String data;
 	private MeituanRespError error;
 
+	
 	/**
 	 * @param data
 	 */
-	public MeituanRespData(String data) {
-		super();
+	private MeituanRespData(String data) {
 		this.data = data;
 	}
 
@@ -24,8 +32,7 @@ public class MeituanRespData {
 	 * @param data
 	 * @param error
 	 */
-	public MeituanRespData(String data, MeituanRespError error) {
-		super();
+	private MeituanRespData(String data, MeituanRespError error) {
 		this.data = data;
 		this.error = error;
 	}

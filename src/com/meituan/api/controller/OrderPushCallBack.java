@@ -17,16 +17,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.base.controller.BaseController;
-import com.base.exception.ApiControllerException;
 import com.base.utils.CommonUtil;
 import com.base.utils.HttpClientUtil;
 import com.base.utils.MapUtil;
 import com.base.utils.PathUtil;
 import com.meituan.api.entity.MeituanRespData;
-import com.meituan.api.entity.MeituanRespError;
+import com.meituan.app.entity.App;
 import com.meituan.app.service.iface.AppService;
-import com.meituan.common.MeituanConst;
-import com.meituan.common.MeituanConst.MEITUAN_RETURN_CODE;
 import com.meituan.order.entity.MeituanOrder;
 import com.meituan.order.service.iface.OrderService;
 import com.meituan.utils.SigUtil;
@@ -52,17 +49,10 @@ public class OrderPushCallBack extends BaseController {
 			@RequestParam(value = "sig", required = true) String sig, 
 			@RequestParam(value = "app_id", required = true) String app_id,
 			@RequestParam(value = "timestamp", required = true) String timestamp) {
-		
-		Map<String, Object> params = MapUtil.getParameterMap(request);
-		params.remove("sig");
-		String url = PathUtil.getServerUrl(request) + "/Api" + "/order_push_callback";
-		String md5sum = SigUtil.sign(url, params, appService.selectByPrimaryKey(params.get("app_id").toString()).getSecret(), "MD5");
-		if (!sig.equals(md5sum)) {
-			MeituanRespError err = new MeituanRespError(MEITUAN_RETURN_CODE.CODE_703, "签名验证错误");
-			MeituanRespData resp = new MeituanRespData(MeituanConst.RETURN_NG, err);
-			logger.error("签名验证错误, sig:" + sig + ", md5sum:" + md5sum);
-			return JSONObject.fromObject(resp).toString();
-		} else {
+		String result = CommonUtil.sigIsOk(request, "/Api/order_push_callback", sig, app_id);
+		if(result.equals(CommonUtil.RETURN_TRUE)){
+			Map<String, Object> params = MapUtil.getParameterMap(request);
+			params.remove("sig");
 			MeituanOrder meituanOrder = new MeituanOrder();
 			try {
 				/**
@@ -70,15 +60,15 @@ public class OrderPushCallBack extends BaseController {
 				 */
 				meituanOrder = (MeituanOrder) CommonUtil.transMap2Bean(params, meituanOrder);
 			} catch (Exception e) {
-				MeituanRespError err = new MeituanRespError(MEITUAN_RETURN_CODE.CODE_600, "内部错误");
-				MeituanRespData resp = new MeituanRespData(MeituanConst.RETURN_NG, err);
 				logger.error("数据转换错误.", e);
-				return JSONObject.fromObject(resp).toString();
+				return JSONObject.fromObject(MeituanRespData.REP_ERROR_600).toString();
 			}
 			orderService.insertSelective(meituanOrder);
-			MeituanRespData resp = new MeituanRespData(MeituanConst.RETURN_OK);
 			logger.info(params.toString());
-			return JSONObject.fromObject(resp).discard("error").toString();
+			return JSONObject.fromObject(MeituanRespData.REP_OK).discard("error").toString();
+		}
+		else {
+			return result;
 		}
 		
 	}

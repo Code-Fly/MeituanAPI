@@ -8,7 +8,14 @@ package com.meituan.api.entity;
  * @author Barrie
  *
  */
-public class MeituanRespError {
+public enum MeituanRespError {
+	
+	
+	ERROR_600(600,"内部错误"),
+	ERROR_702(702,"app_id不存在"),
+	ERROR_703(703,"签名验证错误 ");
+	
+	
 	private int code;
 	private String msg;
 
@@ -16,8 +23,7 @@ public class MeituanRespError {
 	 * @param code
 	 * @param msg
 	 */
-	public MeituanRespError(int code, String msg) {
-		super();
+	private MeituanRespError(int code, String msg) {
 		this.code = code;
 		this.msg = msg;
 	}
