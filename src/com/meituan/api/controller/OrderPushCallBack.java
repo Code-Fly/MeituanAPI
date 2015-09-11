@@ -21,8 +21,7 @@ import com.base.utils.CommonUtil;
 import com.base.utils.HttpClientUtil;
 import com.base.utils.MapUtil;
 import com.base.utils.PathUtil;
-import com.meituan.api.entity.MeituanRespData;
-import com.meituan.app.entity.App;
+import com.meituan.api.entity.ApiData;
 import com.meituan.app.service.iface.AppService;
 import com.meituan.order.entity.MeituanOrder;
 import com.meituan.order.service.iface.OrderService;
@@ -44,33 +43,31 @@ public class OrderPushCallBack extends BaseController {
 	private OrderService orderService;
 
 	@ResponseBody
-	@RequestMapping(value = "/order_push_callback")
-	public String orderPushCallBack(HttpServletRequest request, 
+	@RequestMapping(value = "/orderPushCallback")
+	public String orderPushCallBack(HttpServletRequest request,
+			// system params
 			@RequestParam(value = "sig", required = true) String sig, 
 			@RequestParam(value = "app_id", required = true) String app_id,
 			@RequestParam(value = "timestamp", required = true) String timestamp) {
-		String result = CommonUtil.sigIsOk(request, "/Api/order_push_callback", sig, app_id);
-		if(result.equals(CommonUtil.RETURN_TRUE)){
-			Map<String, Object> params = MapUtil.getParameterMap(request);
-			params.remove("sig");
+
+		Map<String, Object> params = MapUtil.getParameterMap(request);
+		params.remove("sig");
+		String url = PathUtil.getServerUrl(request) + "/Api" + "/orderPushCallBack";
+		String md5sum = SigUtil.sign(url, params, appService.selectByPrimaryKey(app_id).getSecret(), "MD5");
+		if (!sig.equals(md5sum)) {
+			logger.error("签名验证错误, sig:" + sig + ", md5sum:" + md5sum);
+			return JSONObject.fromObject(ApiData.REP_ERROR_703).toString();
+		} else {
 			MeituanOrder meituanOrder = new MeituanOrder();
 			try {
-				/**
-				 * 数据转换后插入数据库
-				 */
 				meituanOrder = (MeituanOrder) CommonUtil.transMap2Bean(params, meituanOrder);
 			} catch (Exception e) {
 				logger.error("数据转换错误.", e);
-				return JSONObject.fromObject(MeituanRespData.REP_ERROR_600).toString();
+				return JSONObject.fromObject(ApiData.REP_ERROR_600).toString();
 			}
 			orderService.insertSelective(meituanOrder);
-			logger.info(params.toString());
-			return JSONObject.fromObject(MeituanRespData.REP_OK).discard("error").toString();
+			return JSONObject.fromObject(ApiData.REP_OK).discard("error").toString();
 		}
-		else {
-			return result;
-		}
-		
 	}
 
 	@ResponseBody

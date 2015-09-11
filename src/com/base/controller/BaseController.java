@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.base.entity.ApiResp;
+import com.meituan.api.entity.ApiData;
+
 
 /**
  * 
@@ -25,8 +26,7 @@ public abstract class BaseController {
 	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
 	@ResponseBody
 	public String handleUnexpectedServerError(RuntimeException ex) {
-		ApiResp resp = new ApiResp(0, "内部错误");
-		return JSONObject.fromObject(resp).toString();		
+		return JSONObject.fromObject(ApiData.REP_ERROR_600).toString();
 	}
 
 }

@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.base.controller.BaseController;
-import com.base.entity.ApiResp;
 import com.base.utils.MapUtil;
+import com.base.utils.PathUtil;
+import com.meituan.api.entity.ApiData;
 import com.meituan.app.service.iface.AppService;
 import com.meituan.order.service.iface.OrderService;
 import com.meituan.utils.SigUtil;
@@ -36,30 +37,22 @@ public class DoConfirm extends BaseController {
 	private OrderService orderService;
 
 	@ResponseBody
-	@RequestMapping(value = "/do_confirm")
+	@RequestMapping(value = "/orderConfirm")
 	public String doConfirm(HttpServletRequest request,
 			// system params
-			@RequestParam(value = "msid", required = true) String msid,
+			@RequestParam(value = "sig", required = true) String sig, 
+			@RequestParam(value = "app_id", required = true) String app_id,
 			@RequestParam(value = "timestamp", required = true) String timestamp,
-			@RequestParam(value = "nonce", required = true) String none,
-			@RequestParam(value = "signtype", required = true) String signtype, 
-			@RequestParam(value = "msg_sign", required = true) String msg_sign,
-			//application params
-			@RequestParam(value = "id", required = true) String id, 
-			@RequestParam(value = "state", required = true) String state,
-			@RequestParam(value = "bzid", required = true) String bzid, 
-			@RequestParam(value = "info", required = true) String info,
-			@RequestParam(value = "hint", required = true) String hint) {
+			// application params
+			@RequestParam(value = "oids", required = true) String oids) {
 		
 		Map<String, Object> params = MapUtil.getParameterMap(request);
-		params.remove("msg_sign");
-		params.remove("info");
-		params.remove("hint");
-		String sha1sum = SigUtil.sign(null, params, appService.selectByPrimaryKey(params.get("msid").toString()).getSecret(), "SHA-1");
-		if (!msg_sign.equals(sha1sum)) {
-			ApiResp resp = new ApiResp(0, "签名验证错误");
-			logger.error("签名验证错误, sig:" + msg_sign + ", sha1sum:" + sha1sum);
-			return JSONObject.fromObject(resp).toString();
+		params.remove("sig");
+		String url = PathUtil.getServerUrl(request) + "/Api" + "/orderConfirm";
+		String md5sum = SigUtil.sign(url, params, appService.selectByPrimaryKey(app_id).getSecret(), "MD5");
+		if (!sig.equals(md5sum)) {
+			logger.error("签名验证错误, sig:" + sig + ", md5sum:" + md5sum);
+			return JSONObject.fromObject(ApiData.REP_ERROR_703).toString();
 		} else {
 			
 			return null;

@@ -18,8 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.base.controller.BaseController;
-import com.base.entity.ApiResp;
 import com.base.utils.MapUtil;
+import com.base.utils.PathUtil;
+import com.meituan.api.entity.ApiData;
 import com.meituan.app.service.iface.AppService;
 import com.meituan.order.entity.MeituanOrder;
 import com.meituan.order.entity.MeituanOrderExample;
@@ -41,27 +42,25 @@ public class DoGetOrder extends BaseController {
 	private OrderService orderService;
 
 	@ResponseBody
-	@RequestMapping(value = "/do_get_order")
+	@RequestMapping(value = "/doGetOrder")
 	public String doGetOrder(HttpServletRequest request, 
 			// system params
-			@RequestParam(value = "msid", required = true) String msid,
+			@RequestParam(value = "sig", required = true) String sig, 
+			@RequestParam(value = "app_id", required = true) String app_id,
 			@RequestParam(value = "timestamp", required = true) String timestamp,
-			@RequestParam(value = "nonce", required = true) String none,
-			@RequestParam(value = "signtype", required = true) String signtype, 
-			@RequestParam(value = "msg_sign", required = true) String msg_sign,
-			//application params
-			@RequestParam(value = "id", required = true) String id) {
+			// application params
+			@RequestParam(value = "mid", required = true) String mid) {
 		
 		Map<String, Object> params = MapUtil.getParameterMap(request);
-		params.remove("msg_sign");
-		String sha1sum = SigUtil.sign(null, params, appService.selectByPrimaryKey(params.get("msid").toString()).getSecret(), "SHA-1");
-		if (!msg_sign.equals(sha1sum)) {
-			ApiResp resp = new ApiResp(0, "签名验证错误");
-			logger.error("签名验证错误, sig:" + msg_sign + ", sha1sum:" + sha1sum);
-			return JSONObject.fromObject(resp).toString();
+		params.remove("sig");
+		String url = PathUtil.getServerUrl(request) + "/Api" + "/doGetOrder";
+		String md5sum = SigUtil.sign(url, params, appService.selectByPrimaryKey(app_id).getSecret(), "MD5");
+		if (!sig.equals(md5sum)) {
+			logger.error("签名验证错误, sig:" + sig + ", md5sum:" + md5sum);
+			return JSONObject.fromObject(ApiData.REP_ERROR_703).toString();
 		} else {
 			MeituanOrderExample example = new MeituanOrderExample();
-			example.or().andAppPoiCodeEqualTo(id).andAppStatusEqualTo(0);
+			example.or().andAppPoiCodeEqualTo(mid).andAppStatusEqualTo(0);
 			List<MeituanOrder> oList = orderService.selectByExample(example);
 			JSONArray resp = JSONArray.fromObject(oList);
 			return resp.toString();

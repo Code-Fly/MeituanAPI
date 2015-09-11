@@ -10,21 +10,21 @@ import com.meituan.common.MeituanConst;
  * @author Barrie
  *
  */
-public enum MeituanRespData {
+public enum ApiData {
 	
 	REP_OK(MeituanConst.RETURN_OK),
-	REP_ERROR_600(MeituanConst.RETURN_NG,MeituanRespError.ERROR_600),
-	REP_ERROR_702(MeituanConst.RETURN_NG,MeituanRespError.ERROR_702),
-	REP_ERROR_703(MeituanConst.RETURN_NG,MeituanRespError.ERROR_703);
+	REP_ERROR_600(MeituanConst.RETURN_NG,ApiError.ERROR_600),
+	REP_ERROR_702(MeituanConst.RETURN_NG,ApiError.ERROR_702),
+	REP_ERROR_703(MeituanConst.RETURN_NG,ApiError.ERROR_703);
 	
 	private String data;
-	private MeituanRespError error;
+	private ApiError error;
 
 	
 	/**
 	 * @param data
 	 */
-	private MeituanRespData(String data) {
+	private ApiData(String data) {
 		this.data = data;
 	}
 
@@ -32,7 +32,7 @@ public enum MeituanRespData {
 	 * @param data
 	 * @param error
 	 */
-	private MeituanRespData(String data, MeituanRespError error) {
+	private ApiData(String data, ApiError error) {
 		this.data = data;
 		this.error = error;
 	}
@@ -55,7 +55,7 @@ public enum MeituanRespData {
 	/**
 	 * @return the error
 	 */
-	public MeituanRespError getError() {
+	public ApiError getError() {
 		return error;
 	}
 
@@ -63,7 +63,7 @@ public enum MeituanRespData {
 	 * @param error
 	 *            the error to set
 	 */
-	public void setError(MeituanRespError error) {
+	public void setError(ApiError error) {
 		this.error = error;
 	}
 

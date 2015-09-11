@@ -8,7 +8,7 @@ package com.meituan.api.entity;
  * @author Barrie
  *
  */
-public enum MeituanRespError {
+public enum ApiError {
 	
 	
 	ERROR_600(600,"内部错误"),
@@ -23,7 +23,7 @@ public enum MeituanRespError {
 	 * @param code
 	 * @param msg
 	 */
-	private MeituanRespError(int code, String msg) {
+	private ApiError(int code, String msg) {
 		this.code = code;
 		this.msg = msg;
 	}
