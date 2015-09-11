@@ -1,5 +1,5 @@
 /**
- * 
+ * order service
  */
 package com.meituan.order.service.imp;
 
@@ -32,6 +32,12 @@ public class OrderServiceImp implements OrderService {
 	@Override
 	public List<MeituanOrder> selectByExample(MeituanOrderExample example) {
 		return orderMapper.selectByExample(example);
+	}
+
+	@Override
+	public int updateByExampleSelective(MeituanOrder record,
+			MeituanOrderExample example) {
+		return orderMapper.updateByExampleSelective(record, example);
 	}
 	
 }

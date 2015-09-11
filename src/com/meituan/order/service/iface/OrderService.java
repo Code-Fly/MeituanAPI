@@ -5,6 +5,8 @@ package com.meituan.order.service.iface;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.meituan.order.entity.MeituanOrder;
 import com.meituan.order.entity.MeituanOrderExample;
 
@@ -15,4 +17,5 @@ import com.meituan.order.entity.MeituanOrderExample;
 public interface OrderService {
 	 int insertSelective(MeituanOrder record);
 	 List<MeituanOrder> selectByExample(MeituanOrderExample example);
+	 int updateByExampleSelective(@Param("record") MeituanOrder record, @Param("example") MeituanOrderExample example);
 }
