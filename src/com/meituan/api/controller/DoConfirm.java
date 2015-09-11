@@ -49,7 +49,7 @@ public class DoConfirm extends BaseController {
 			@RequestParam(value = "app_id", required = true) String app_id,
 			@RequestParam(value = "timestamp", required = true) String timestamp,
 			// application params
-			@RequestParam(value = "oids", required = true) String oids) {
+			@RequestParam(value = "order_id_list", required = true) String order_id_list) {
 		
 		Map<String, Object> params = MapUtil.getParameterMap(request);
 		params.remove("sig");
@@ -64,7 +64,7 @@ public class DoConfirm extends BaseController {
 			MeituanOrder mOrder = new MeituanOrder();
 			mOrder.setAppStatus(1);
 			MeituanOrderExample example = new MeituanOrderExample();
-			example.or().andOrderIdIn(JSONArray.toList(JSONArray.fromObject(oids)));
+			example.or().andOrderIdIn(JSONArray.toList(JSONArray.fromObject(order_id_list)));
 			orderService.updateByExampleSelective(mOrder, example);
 			
 			ApiData ret = new ApiData(MeituanConst.RETURN_OK);
