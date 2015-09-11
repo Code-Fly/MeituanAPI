@@ -41,6 +41,7 @@ public class DoConfirm extends BaseController {
 	@Autowired
 	private OrderService orderService;
 
+	@SuppressWarnings({ "deprecation", "unchecked" })
 	@ResponseBody
 	@RequestMapping(value = "/orderConfirm")
 	public String doConfirm(HttpServletRequest request,
