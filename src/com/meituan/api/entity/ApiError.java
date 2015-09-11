@@ -8,12 +8,12 @@ package com.meituan.api.entity;
  * @author Barrie
  *
  */
-public enum ApiError {
+public class ApiError {
 	
 	
-	ERROR_600(600,"内部错误"),
-	ERROR_702(702,"app_id不存在"),
-	ERROR_703(703,"签名验证错误 ");
+//	ERROR_600(600,"内部错误"),
+//	ERROR_702(702,"app_id不存在"),
+//	ERROR_703(703,"签名验证错误 ");
 	
 	
 	private int code;
@@ -23,7 +23,7 @@ public enum ApiError {
 	 * @param code
 	 * @param msg
 	 */
-	private ApiError(int code, String msg) {
+	public ApiError(int code, String msg) {
 		this.code = code;
 		this.msg = msg;
 	}

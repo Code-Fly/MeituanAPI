@@ -21,7 +21,9 @@ import com.base.controller.BaseController;
 import com.base.utils.MapUtil;
 import com.base.utils.PathUtil;
 import com.meituan.api.entity.ApiData;
+import com.meituan.api.entity.ApiError;
 import com.meituan.app.service.iface.AppService;
+import com.meituan.common.MeituanConst;
 import com.meituan.order.entity.MeituanOrder;
 import com.meituan.order.entity.MeituanOrderExample;
 import com.meituan.order.service.iface.OrderService;
@@ -56,14 +58,18 @@ public class DoGetOrder extends BaseController {
 		String url = PathUtil.getServerUrl(request) + "/Api" + "/doGetOrder";
 		String md5sum = SigUtil.sign(url, params, appService.selectByPrimaryKey(app_id).getSecret(), "MD5");
 		if (!sig.equals(md5sum)) {
+			ApiError err = new ApiError(MeituanConst.CODE_703, "签名验证错误");
+			ApiData ret = new ApiData(MeituanConst.RETURN_NG, err);
 			logger.error("签名验证错误, sig:" + sig + ", md5sum:" + md5sum);
-			return JSONObject.fromObject(ApiData.REP_ERROR_703).toString();
+			return JSONObject.fromObject(ret).toString();
 		} else {
 			MeituanOrderExample example = new MeituanOrderExample();
 			example.or().andAppPoiCodeEqualTo(mid).andAppStatusEqualTo(0);
 			List<MeituanOrder> oList = orderService.selectByExample(example);
 			JSONArray resp = JSONArray.fromObject(oList);
-			return resp.toString();
+			
+			ApiData ret = new ApiData(JSONArray.fromObject(resp).toString());
+			return JSONObject.fromObject(ret).discard("error").toString();
 		}
 		
 	}

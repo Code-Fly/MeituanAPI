@@ -32,7 +32,7 @@ public class SigUtil {
 				nameValueParams.add(new BasicNameValuePair(paramName, params.get(paramName).toString()));
 			}
 		}
-		String paramForSig = getSortedParam(nameValueParams);
+		String paramForSig = sortParams(nameValueParams);
 		if (null == serverUrl || serverUrl.isEmpty()) {
 			return sum(paramForSig + appSecret, algorithm);
 		} else {
@@ -50,7 +50,7 @@ public class SigUtil {
 	 *            时间戳
 	 * @return
 	 */
-	private static String getSortedParam(List<NameValuePair> params) {
+	private static String sortParams(List<NameValuePair> params) {
 		List<String> keyList = new ArrayList<String>();
 		// params.add(new BasicNameValuePair("timestamp", timestamp + ""));
 		Collections.sort(params, new Comparator<NameValuePair>() {

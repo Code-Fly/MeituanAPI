@@ -22,7 +22,9 @@ import com.base.utils.HttpClientUtil;
 import com.base.utils.MapUtil;
 import com.base.utils.PathUtil;
 import com.meituan.api.entity.ApiData;
+import com.meituan.api.entity.ApiError;
 import com.meituan.app.service.iface.AppService;
+import com.meituan.common.MeituanConst;
 import com.meituan.order.entity.MeituanOrder;
 import com.meituan.order.service.iface.OrderService;
 import com.meituan.utils.SigUtil;
@@ -55,18 +57,23 @@ public class OrderPushCallBack extends BaseController {
 		String url = PathUtil.getServerUrl(request) + "/Api" + "/orderPushCallBack";
 		String md5sum = SigUtil.sign(url, params, appService.selectByPrimaryKey(app_id).getSecret(), "MD5");
 		if (!sig.equals(md5sum)) {
+			ApiError err = new ApiError(MeituanConst.CODE_703, "签名验证错误");
+			ApiData ret = new ApiData(MeituanConst.RETURN_NG, err);
 			logger.error("签名验证错误, sig:" + sig + ", md5sum:" + md5sum);
-			return JSONObject.fromObject(ApiData.REP_ERROR_703).toString();
+			return JSONObject.fromObject(ret).toString();
 		} else {
 			MeituanOrder meituanOrder = new MeituanOrder();
 			try {
 				meituanOrder = (MeituanOrder) CommonUtil.transMap2Bean(params, meituanOrder);
-			} catch (Exception e) {
+			} catch (Exception e) {				
+				ApiError err = new ApiError(MeituanConst.CODE_600, "内部错误");
+				ApiData ret = new ApiData(MeituanConst.RETURN_NG, err);
 				logger.error("数据转换错误.", e);
-				return JSONObject.fromObject(ApiData.REP_ERROR_600).toString();
+				return JSONObject.fromObject(ret).toString();
 			}
 			orderService.insertSelective(meituanOrder);
-			return JSONObject.fromObject(ApiData.REP_OK).discard("error").toString();
+			ApiData ret = new ApiData(MeituanConst.RETURN_OK);
+			return JSONObject.fromObject(ret).discard("error").toString();
 		}
 	}
 

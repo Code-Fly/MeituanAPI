@@ -3,19 +3,18 @@
  */
 package com.meituan.api.entity;
 
-import com.meituan.common.MeituanConst;
 
 
 /**
  * @author Barrie
  *
  */
-public enum ApiData {
+public class ApiData {
 	
-	REP_OK(MeituanConst.RETURN_OK),
-	REP_ERROR_600(MeituanConst.RETURN_NG,ApiError.ERROR_600),
-	REP_ERROR_702(MeituanConst.RETURN_NG,ApiError.ERROR_702),
-	REP_ERROR_703(MeituanConst.RETURN_NG,ApiError.ERROR_703);
+//	REP_OK(MeituanConst.RETURN_OK),
+//	REP_ERROR_600(MeituanConst.RETURN_NG,ApiError.ERROR_600),
+//	REP_ERROR_702(MeituanConst.RETURN_NG,ApiError.ERROR_702),
+//	REP_ERROR_703(MeituanConst.RETURN_NG,ApiError.ERROR_703);
 	
 	private String data;
 	private ApiError error;
@@ -24,7 +23,7 @@ public enum ApiData {
 	/**
 	 * @param data
 	 */
-	private ApiData(String data) {
+	public ApiData(String data) {
 		this.data = data;
 	}
 
@@ -32,7 +31,7 @@ public enum ApiData {
 	 * @param data
 	 * @param error
 	 */
-	private ApiData(String data, ApiError error) {
+	public ApiData(String data, ApiError error) {
 		this.data = data;
 		this.error = error;
 	}
