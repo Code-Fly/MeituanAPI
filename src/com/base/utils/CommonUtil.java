@@ -62,12 +62,14 @@ public class CommonUtil {
         }
         
         
-        /**
-   	  * Map --> Bean 1: 利用Introspector,PropertyDescriptor实现 Map --> Bean
-   	  *@param map
-   	  *@param obj
-   	  *@throws Exception 
-   	  */
+      /**
+       * 校验签名
+       * @param request
+       * @param path
+       * @param sig
+       * @param appId
+       * @return
+       */
        public static String  sigIsOk(HttpServletRequest request,String path,String sig,String appId) {
     	   Map<String, Object> params = MapUtil.getParameterMap(request);
    		params.remove("sig");
