@@ -14,6 +14,10 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.base.utils.HttpClientUtil;
 
 /**
  * @author zhangqw
@@ -23,6 +27,8 @@ import org.apache.http.message.BasicNameValuePair;
  */
 
 public class SigUtil {
+	private static final Logger logger = LoggerFactory.getLogger(SigUtil.class);
+
 
 	public static String sign(String serverUrl, Map<String, Object> params, String appSecret, String algorithm) {
 		List<NameValuePair> nameValueParams = new ArrayList<NameValuePair>();
@@ -67,6 +73,8 @@ public class SigUtil {
 	}
 
 	private static String sum(String src, String algorithm) {
+		logger.debug(src);
+		logger.debug(algorithm);
 		MessageDigest md = null;
 		try {
 			md = MessageDigest.getInstance(algorithm);
