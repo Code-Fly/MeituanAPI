@@ -59,7 +59,14 @@ public class OrderPushCallBack extends BaseController {
 		Map<String, Object> params = MapUtil.getParameterMap(request);
 		params.remove("sig");
 		String url = PathUtil.getServerUrl(request) + "/Api" + "/orderPushCallBack";
-		String md5sum = SigUtil.sign(url, params, appService.selectByPrimaryKey(app_id).getSecret(), "MD5");
+		String appSecret = appService.selectByPrimaryKey(app_id).getSecret();
+		if(null == appSecret || appSecret.isEmpty()){
+			ApiError err = new ApiError(MeituanConst.CODE_702, "app_id不存在");
+			ApiData ret = new ApiData(MeituanConst.RETURN_NG, err);
+			logger.error("app_id不存在");
+			return JSONObject.fromObject(ret).toString();
+		}
+		String md5sum = SigUtil.sign(url, params, appSecret, "MD5");
 		if (!sig.equals(md5sum)) {
 			ApiError err = new ApiError(MeituanConst.CODE_703, "签名验证错误");
 			ApiData ret = new ApiData(MeituanConst.RETURN_NG, err);
