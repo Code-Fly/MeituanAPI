@@ -51,7 +51,7 @@ public class DoGetOrder extends BaseController {
 			@RequestParam(value = "app_id", required = true) String app_id,
 			@RequestParam(value = "timestamp", required = true) String timestamp,
 			// application params
-			@RequestParam(value = "poi_id", required = true) String poi_id) {
+			@RequestParam(value = "app_poi_code", required = true) String app_poi_code) {
 		
 		Map<String, Object> params = MapUtil.getParameterMap(request);
 		params.remove("sig");
@@ -64,7 +64,7 @@ public class DoGetOrder extends BaseController {
 			return JSONObject.fromObject(ret).toString();
 		} else {
 			MeituanOrderExample example = new MeituanOrderExample();
-			example.or().andAppPoiCodeEqualTo(poi_id).andAppStatusEqualTo(0);
+			example.or().andAppPoiCodeEqualTo(app_poi_code).andAppStatusEqualTo(0);
 			List<MeituanOrder> oList = orderService.selectByExample(example);
 			JSONArray resp = JSONArray.fromObject(oList);
 			
