@@ -30,6 +30,7 @@ public abstract class BaseController {
 	public String handleUnexpectedServerError(RuntimeException ex) {
 		ApiError err = new ApiError(MeituanConst.CODE_600, "内部错误");
 		ApiData ret = new ApiData(MeituanConst.RETURN_NG, err);
+		logger.error(ex.getMessage());
 		return JSONObject.fromObject(ret).toString();
 	}
 

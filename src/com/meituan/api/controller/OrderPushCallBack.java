@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.base.controller.BaseController;
+import com.base.exception.ApiControllerException;
 import com.base.utils.CommonUtil;
 import com.base.utils.HttpClientUtil;
 import com.base.utils.MapUtil;
@@ -68,10 +69,8 @@ public class OrderPushCallBack extends BaseController {
 			try {
 				meituanOrder = (MeituanOrder) CommonUtil.transMap2Bean(params, meituanOrder);
 			} catch (Exception e) {				
-				ApiError err = new ApiError(MeituanConst.CODE_600, "内部错误");
-				ApiData ret = new ApiData(MeituanConst.RETURN_NG, err);
-				logger.error("数据转换错误.", e);
-				return JSONObject.fromObject(ret).toString();
+				logger.error("数据转换错误");
+				throw new ApiControllerException(e.getMessage());
 			}
 			orderService.insertSelective(meituanOrder);
 			ApiData ret = new ApiData(MeituanConst.RETURN_OK);
