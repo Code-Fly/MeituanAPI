@@ -71,7 +71,7 @@ public class OrderPushCallBack extends BaseController {
 				meituanOrder = (MeituanOrder) CommonUtil.transMap2Bean(params, meituanOrder);
 			} catch (Exception e) {				
 				logger.error("数据转换错误");
-				throw new ApiControllerException(e.getMessage());
+				throw new ApiControllerException("数据转换错误",e);
 			}
 			orderService.insertSelective(meituanOrder);
 			ApiData ret = new ApiData(MeituanConst.RETURN_OK);

@@ -27,9 +27,12 @@
 		</sqlMapGenerator>
 		<javaClientGenerator type="XMLMAPPER" targetPackage="com.meituan.order.mapper" targetProject="MeituanAPI">
 			<property name="enableSubPackages" value="true" />
+			
 		</javaClientGenerator>
 		<!-- tableName:用于自动生成代码的数据库表；domainObjectName:对应于数据库表的javaBean类名 -->
-		<table tableName="meituan_order" domainObjectName="MeituanOrder" />
+		<table tableName="meituan_order" domainObjectName="MeituanOrder" >
+		   <property name="useActualColumnNames" value="true"/>
+		</table>
 
 	</context>
 </generatorConfiguration>

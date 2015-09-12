@@ -63,9 +63,9 @@ public class DoConfirm extends BaseController {
 			return JSONObject.fromObject(ret).toString();
 		} else {
 			MeituanOrder mOrder = new MeituanOrder();
-			mOrder.setAppStatus(1);
+			mOrder.setApp_status(1);
 			MeituanOrderExample example = new MeituanOrderExample();
-			example.or().andOrderIdIn(JSONArray.toList(JSONArray.fromObject(order_id_list)));
+			example.or().andOrder_idIn(JSONArray.toList(JSONArray.fromObject(order_id_list)));
 			orderService.updateByExampleSelective(mOrder, example);
 			
 			ApiData ret = new ApiData(MeituanConst.RETURN_OK);

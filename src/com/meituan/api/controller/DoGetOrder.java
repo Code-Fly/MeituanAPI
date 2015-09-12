@@ -64,7 +64,7 @@ public class DoGetOrder extends BaseController {
 			return JSONObject.fromObject(ret).toString();
 		} else {
 			MeituanOrderExample example = new MeituanOrderExample();
-			example.or().andAppPoiCodeEqualTo(app_poi_code).andAppStatusEqualTo(0);
+			example.or().andApp_poi_codeEqualTo(app_poi_code).andApp_statusEqualTo(0);
 			List<MeituanOrder> oList = orderService.selectByExample(example);
 			JSONArray resp = JSONArray.fromObject(oList);
 			
