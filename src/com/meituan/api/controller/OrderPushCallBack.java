@@ -56,7 +56,7 @@ public class OrderPushCallBack extends BaseController {
 			@RequestParam(value = "order_id", required = true) String order_id,
 			@RequestParam(value = "app_poi_code", required = true) String app_poi_code) {
 
-		Map<String, Object> params = MapUtil.getParameterMap(request);
+		Map<String, Object> params = MapUtil.decodeParameterMap(MapUtil.getParameterMap(request));
 		params.remove("sig");
 		String url = PathUtil.getServerUrl(request) + "/Api" + "/orderPushCallBack";
 		String appSecret = appService.selectByPrimaryKey(app_id).getSecret();

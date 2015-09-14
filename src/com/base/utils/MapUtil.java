@@ -21,11 +21,11 @@ public class MapUtil {
 	 * @param request
 	 * @return
 	 */
-	public static Map<String,Object> getParameterMap(HttpServletRequest request) {
+	public static Map<String, Object> getParameterMap(HttpServletRequest request) {
 		// 参数Map
-		 Map<String,String[]> properties = request.getParameterMap();
+		Map<String, String[]> properties = request.getParameterMap();
 		// 返回值Map
-		 Map<String,Object> returnMap = new HashMap<String,Object>();
+		Map<String, Object> returnMap = new HashMap<String, Object>();
 		Iterator<Entry<String, String[]>> entries = properties.entrySet().iterator();
 		Entry entry;
 		String name = "";
@@ -49,4 +49,13 @@ public class MapUtil {
 		}
 		return returnMap;
 	}
+
+	public static Map<String, Object> decodeParameterMap(Map<String, Object> map) {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		for (String key : map.keySet()) {
+			returnMap.put(key, UrlUtil.decode(map.get(key).toString(), "UTF-8"));
+		}
+		return returnMap;
+	}
+
 }
