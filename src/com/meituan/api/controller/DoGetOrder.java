@@ -68,7 +68,7 @@ public class DoGetOrder extends BaseController {
 			List<MeituanOrder> oList = orderService.selectByExample(example);
 			JSONArray resp = JSONArray.fromObject(oList);
 			
-			ApiData ret = new ApiData(JSONArray.fromObject(resp).toString());
+			ApiData ret = new ApiData(JSONArray.fromObject(resp));
 			return JSONObject.fromObject(ret).discard("error").toString();
 		}
 		

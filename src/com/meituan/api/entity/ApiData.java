@@ -3,27 +3,20 @@
  */
 package com.meituan.api.entity;
 
-
-
 /**
  * @author Barrie
  *
  */
 public class ApiData {
-	
-//	REP_OK(MeituanConst.RETURN_OK),
-//	REP_ERROR_600(MeituanConst.RETURN_NG,ApiError.ERROR_600),
-//	REP_ERROR_702(MeituanConst.RETURN_NG,ApiError.ERROR_702),
-//	REP_ERROR_703(MeituanConst.RETURN_NG,ApiError.ERROR_703);
-	
-	private String data;
+
+	private Object data;
 	private ApiError error;
 
-	
 	/**
 	 * @param data
 	 */
-	public ApiData(String data) {
+	public ApiData(Object data) {
+		super();
 		this.data = data;
 	}
 
@@ -31,7 +24,8 @@ public class ApiData {
 	 * @param data
 	 * @param error
 	 */
-	public ApiData(String data, ApiError error) {
+	public ApiData(Object data, ApiError error) {
+		super();
 		this.data = data;
 		this.error = error;
 	}
@@ -39,7 +33,7 @@ public class ApiData {
 	/**
 	 * @return the data
 	 */
-	public String getData() {
+	public Object getData() {
 		return data;
 	}
 
@@ -47,7 +41,7 @@ public class ApiData {
 	 * @param data
 	 *            the data to set
 	 */
-	public void setData(String data) {
+	public void setData(Object data) {
 		this.data = data;
 	}
 
