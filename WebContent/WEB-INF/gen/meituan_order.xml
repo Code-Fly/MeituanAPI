@@ -2,7 +2,7 @@
 <!DOCTYPE generatorConfiguration PUBLIC	"-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
 	<!-- classPathEntry:数据库的JDBC驱动,换成你自己的驱动位置 -->
-		<classPathEntry location="D:\WS\MeituanAPI\WebContent\WEB-INF\lib\mysql-connector-java-5.1.36-bin.jar" />
+		<classPathEntry location="C:\workspace\Manicure\WebRoot\WEB-INF\lib\mysql-connector-java-5.1.36-bin.jar" />
 	<context id="DB2Tables" targetRuntime="MyBatis3">
 		<property name="autoDelimitKeywords" value="true"/>
 		<property name="beginningDelimiter" value="`"/>
