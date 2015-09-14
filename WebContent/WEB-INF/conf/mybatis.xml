@@ -35,8 +35,8 @@
 		<property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}" />
 	</bean>
 	
-	<!-- transaction Manager -->
-	<bean id="transactionManager"
+	<!-- transaction Manager 单表操作暂时 用不到事物-->
+<!-- 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 		<property name="validateExistingTransaction" value="true" />
@@ -62,7 +62,7 @@
 		<aop:pointcut id="pc"
 			expression="execution(* com.meituan.*.*.service.imp(..))" />
 		<aop:advisor pointcut-ref="pc" advice-ref="meituanTxAdvice" />
-	</aop:config>
+	</aop:config>  -->
 	
 	<!-- Mybatis Configuration -->
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
