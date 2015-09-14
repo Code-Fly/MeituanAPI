@@ -105,8 +105,4 @@ public class SigUtil {
 		return buf.toString();
 	}
 
-	public static void main(String[] args) {
-		String a = "http://120.26.103.47/MeituanAPI/Api/orderPushCallBack?app_id=123&app_poi_code=lesu_01&caution= 没零钱&city_id=110100&ctime=1442228861&delivery_time=0&detail=[{\"app_food_code\":\"83e3a2702f01469ca537b3ddcd1e97d2\",\"box_num\":0,\"box_price\":0,\"food_discount\":1,\"food_name\":\"二块香辣鸡翅M\",\"price\":11.1,\"quantity\":1,\"sku_id\":\"83e3a2702f01469ca537b3ddcd1e97d2\",\"unit\":\"份\"},{\"app_food_code\":\"e21393cf73094f49a2b07584be6ca0a6\",\"box_num\":0,\"box_price\":0,\"food_discount\":1,\"food_name\":\"楚味烤翅2块\",\"price\":11,\"quantity\":1,\"sku_id\":\"e21393cf73094f49a2b07584be6ca0a6\",\"unit\":\"份\"},{\"app_food_code\":\"3e4427521e884e34b8e9756e119aa119\",\"box_num\":0,\"box_price\":0,\"food_discount\":1,\"food_name\":\"劲爆鸡米花(大)\",\"price\":12.5,\"quantity\":1,\"sku_id\":\"3e4427521e884e34b8e9756e119aa119\",\"unit\":\"份\"}]&extras=[]&has_invoiced=1&invoice_title=11&is_third_shipping=0&latitude=39.903849&longitude=116.397731&order_id=6124977&original_price=44.1&pay_type=1&recipient_address=天安门广场 (111)&recipient_name=张三 (先生)&recipient_phone=15950592210&shipper_phone=&shipping_fee=9.5&status=2&timestamp=1442228899&total=44.1&utime=1442228861&wm_order_id_view=1060443550696829&wm_poi_address=北京市西城区北三环中路18号&wm_poi_id=106044&wm_poi_name=BJN180马甸&wm_poi_phone=025-52668940c613fa5af229499caf01acf757919965";
-		System.out.println(SigUtil.sum(a, "MD5"));
-	}
 }
