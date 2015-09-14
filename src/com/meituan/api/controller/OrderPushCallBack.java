@@ -3,7 +3,6 @@
  */
 package com.meituan.api.controller;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.base.controller.BaseController;
 import com.base.exception.ApiControllerException;
 import com.base.utils.CommonUtil;
-import com.base.utils.HttpClientUtil;
 import com.base.utils.MapUtil;
 import com.base.utils.PathUtil;
 import com.meituan.api.entity.ApiData;
@@ -29,7 +27,6 @@ import com.meituan.common.MeituanConst;
 import com.meituan.order.entity.MeituanOrder;
 import com.meituan.order.service.iface.OrderService;
 import com.meituan.utils.SigUtil;
-import com.meituan.utils.TimeUtil;
 
 /**
  * @author zhangqw
@@ -84,26 +81,5 @@ public class OrderPushCallBack extends BaseController {
 			ApiData ret = new ApiData(MeituanConst.RETURN_OK);
 			return JSONObject.fromObject(ret).discard("error").toString();
 		}
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "/test")
-	public String test() {
-		String url = "http://waimaiopen.meituan.com/api/v1/poi/getids";
-		int timestamp = TimeUtil.unixtime();
-
-		Map<String, String> params = new HashMap<String, String>();
-		// params.put("app_id", Path.MEITUAN_APP_ID);
-		params.put("timestamp", Integer.toString(timestamp));
-
-		// String md5sum = SigUtil.signRequest(url, params,
-		// Path.MEITUAN_APP_SECRET);
-		// params.put("sig", md5sum);
-		logger.info(params.toString());
-		String resp = HttpClientUtil.doGet(url, params, "UTF-8");
-		if (null == resp) {
-			logger.error("fail to post");
-		}
-		return resp;
 	}
 }
