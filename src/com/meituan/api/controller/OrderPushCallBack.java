@@ -58,7 +58,7 @@ public class OrderPushCallBack extends BaseController {
 
 		Map<String, Object> params = MapUtil.decodeParameterMap(MapUtil.getParameterMap(request));
 		params.remove("sig");
-		String url = PathUtil.getServerUrl(request) + "/Api" + "/orderPushCallBack";
+		String url = PathUtil.getServerUrl(request) + "/Api" + "/orderPushCallback";
 		String appSecret = appService.selectByPrimaryKey(app_id).getSecret();
 		if(null == appSecret || appSecret.isEmpty()){
 			ApiError err = new ApiError(MeituanConst.CODE_702, "app_id不存在");
