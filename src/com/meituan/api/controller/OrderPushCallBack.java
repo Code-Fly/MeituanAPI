@@ -22,6 +22,7 @@ import com.base.utils.MapUtil;
 import com.base.utils.PathUtil;
 import com.meituan.api.entity.ApiData;
 import com.meituan.api.entity.ApiError;
+import com.meituan.app.entity.App;
 import com.meituan.app.service.iface.AppService;
 import com.meituan.common.MeituanConst;
 import com.meituan.order.entity.MeituanOrder;
@@ -56,13 +57,14 @@ public class OrderPushCallBack extends BaseController {
 		Map<String, Object> params = MapUtil.decodeParameterMap(MapUtil.getParameterMap(request));
 		params.remove("sig");
 		String url = PathUtil.getServerUrl(request) + "/Api" + "/orderPushCallback";
-		String appSecret = appService.selectByPrimaryKey(app_id).getSecret();
-		if(null == appSecret || appSecret.isEmpty()){
+		App app = appService.selectByPrimaryKey(app_id);
+		if(null == app ){
 			ApiError err = new ApiError(MeituanConst.CODE_702, "app_id不存在");
 			ApiData ret = new ApiData(MeituanConst.RETURN_NG, err);
 			logger.error("app_id不存在");
 			return JSONObject.fromObject(ret).toString();
 		}
+		String appSecret = app.getSecret();
 		String md5sum = SigUtil.sign(url, params, appSecret, "MD5");
 		if (!sig.equals(md5sum)) {
 			ApiError err = new ApiError(MeituanConst.CODE_703, "签名验证错误");
