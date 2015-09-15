@@ -51,7 +51,7 @@ public class OrderPushCallBack extends BaseController {
 			@RequestParam(value = "app_id", required = true) String app_id,
 			@RequestParam(value = "timestamp", required = true) String timestamp,
 			// application params
-			@RequestParam(value = "order_ids", required = true) String order_id,
+			@RequestParam(value = "order_id", required = true) String order_id,
 			@RequestParam(value = "app_poi_code", required = true) String app_poi_code) {
 
 		Map<String, Object> params = MapUtil.decodeParameterMap(MapUtil.getParameterMap(request));
