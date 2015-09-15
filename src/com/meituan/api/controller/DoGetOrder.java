@@ -29,7 +29,7 @@ import com.meituan.common.MeituanConst;
 import com.meituan.order.entity.MeituanOrder;
 import com.meituan.order.entity.MeituanOrderExample;
 import com.meituan.order.service.iface.OrderService;
-import com.meituan.utils.JsonStringValueProcessor;
+
 import com.meituan.utils.SigUtil;
 
 /**
@@ -78,8 +78,6 @@ public class DoGetOrder extends BaseController {
 			example.or().andApp_poi_codeEqualTo(app_poi_code).andApp_statusEqualTo(0).andStatusNotEqualTo(9);
 			List<MeituanOrder> oList = orderService.selectByExample(example);
 			
-			JsonConfig jsonConfig = new JsonConfig();  
-			jsonConfig.registerJsonValueProcessor(String.class, new JsonStringValueProcessor());
 			JSONArray resp = JSONArray.fromObject(oList);			
 			ApiData ret = new ApiData(resp);
 			return JSONObject.fromObject(ret).discard("error").toString();
