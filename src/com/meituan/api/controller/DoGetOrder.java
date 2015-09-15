@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,7 @@ import com.meituan.common.MeituanConst;
 import com.meituan.order.entity.MeituanOrder;
 import com.meituan.order.entity.MeituanOrderExample;
 import com.meituan.order.service.iface.OrderService;
+import com.meituan.utils.JsonStringValueProcessor;
 import com.meituan.utils.SigUtil;
 
 /**
@@ -56,7 +58,14 @@ public class DoGetOrder extends BaseController {
 		Map<String, Object> params = MapUtil.getParameterMap(request);
 		params.remove("sig");
 		String url = PathUtil.getServerUrl(request) + "/Api" + "/doGetOrder";
-		String md5sum = SigUtil.sign(url, params, appService.selectByPrimaryKey(app_id).getSecret(), "MD5");
+		String appSecret = appService.selectByPrimaryKey(app_id).getSecret();
+		if(null == appSecret || appSecret.isEmpty()){
+			ApiError err = new ApiError(MeituanConst.CODE_702, "app_id不存在");
+			ApiData ret = new ApiData(MeituanConst.RETURN_NG, err);
+			logger.error("app_id不存在");
+			return JSONObject.fromObject(ret).toString();
+		}
+		String md5sum = SigUtil.sign(url, params, appSecret, "MD5");
 		if (!sig.equals(md5sum)) {
 			ApiError err = new ApiError(MeituanConst.CODE_703, "签名验证错误");
 			ApiData ret = new ApiData(MeituanConst.RETURN_NG, err);
@@ -66,9 +75,11 @@ public class DoGetOrder extends BaseController {
 			MeituanOrderExample example = new MeituanOrderExample();
 			example.or().andApp_poi_codeEqualTo(app_poi_code).andApp_statusEqualTo(0).andStatusNotEqualTo(9);
 			List<MeituanOrder> oList = orderService.selectByExample(example);
-			JSONArray resp = JSONArray.fromObject(oList);
 			
-			ApiData ret = new ApiData(JSONArray.fromObject(resp));
+			JsonConfig jsonConfig = new JsonConfig();  
+			jsonConfig.registerJsonValueProcessor(String.class, new JsonStringValueProcessor());
+			JSONArray resp = JSONArray.fromObject(oList);			
+			ApiData ret = new ApiData(resp);
 			return JSONObject.fromObject(ret).discard("error").toString();
 		}
 		
