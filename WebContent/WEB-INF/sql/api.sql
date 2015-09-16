@@ -4,6 +4,11 @@
 -- 服务器操作系统:                      linux-glibc2.5
 -- --------------------------------------------------------
 
+grant all privileges on *.* to root@'%' identified by 'fnst_1234';
+
+CREATE USER 'wuzhong'@'%' IDENTIFIED BY 'Free10031204';
+GRANT SELECT, INSERT,UPDATE ON test.* TO 'wuzhong'@'%';
+
 -- 导出  表 test.app 结构
 CREATE TABLE IF NOT EXISTS `app` (
   `appid` varchar(32) NOT NULL,
