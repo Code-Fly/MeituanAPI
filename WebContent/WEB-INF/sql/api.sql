@@ -4,8 +4,6 @@
 -- 服务器操作系统:                      linux-glibc2.5
 -- --------------------------------------------------------
 
-grant all privileges on *.* to root@'%' identified by 'fnst_1234';
-
 CREATE USER 'wuzhong'@'%' IDENTIFIED BY 'Free10031204';
 GRANT SELECT, INSERT,UPDATE ON test.* TO 'wuzhong'@'%';
 grant SELECT, INSERT,UPDATE  on test.* to wuzhong@'localhost' identified by 'Free10031204';
