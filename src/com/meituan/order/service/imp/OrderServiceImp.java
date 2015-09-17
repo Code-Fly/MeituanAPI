@@ -39,5 +39,10 @@ public class OrderServiceImp implements OrderService {
 			MeituanOrderExample example) {
 		return orderMapper.updateByExampleSelective(record, example);
 	}
+
+	@Override
+	public int updateByPrimaryKeySelective(MeituanOrder order) {
+		return orderMapper.updateByPrimaryKeySelective(order);
+	}
 	
 }

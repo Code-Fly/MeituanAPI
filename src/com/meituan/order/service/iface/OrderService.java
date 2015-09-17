@@ -18,4 +18,5 @@ public interface OrderService {
 	 int insertSelective(MeituanOrder record);
 	 List<MeituanOrder> selectByExample(MeituanOrderExample example);
 	 int updateByExampleSelective(@Param("record") MeituanOrder record, @Param("example") MeituanOrderExample example);
+	 int updateByPrimaryKeySelective(MeituanOrder order);
 }

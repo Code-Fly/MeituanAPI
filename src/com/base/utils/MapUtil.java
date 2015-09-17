@@ -10,11 +10,17 @@ import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * @author Barrie
  *
  */
 public class MapUtil {
+	
+	private static Logger logger = LoggerFactory.getLogger(MapUtil.class);
+	
 	/**
 	 * 从request中获得参数Map，并返回可读的Map
 	 * 
@@ -22,6 +28,7 @@ public class MapUtil {
 	 * @return
 	 */
 	public static Map<String, Object> getParameterMap(HttpServletRequest request) {
+		logger.info("enter method  getParameterMap(HttpServletRequest request):requestPath="+request.getRequestURI());
 		// 参数Map
 		Map<String, String[]> properties = request.getParameterMap();
 		// 返回值Map
