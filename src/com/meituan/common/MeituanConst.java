@@ -5,7 +5,6 @@ package com.meituan.common;
 
 import com.meituan.api.entity.ApiData;
 import com.meituan.api.entity.ApiError;
-import com.meituan.app.entity.App;
 
 /**
  * @author zhangqw 常量
