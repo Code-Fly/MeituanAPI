@@ -8,7 +8,7 @@ grant all privileges on *.* to root@'%' identified by 'fnst_1234';
 
 CREATE USER 'wuzhong'@'%' IDENTIFIED BY 'Free10031204';
 GRANT SELECT, INSERT,UPDATE ON test.* TO 'wuzhong'@'%';
-grant all privileges on *.* to wuzhong@'localhost' identified by 'Free10031204';
+grant SELECT, INSERT,UPDATE  on test.* to wuzhong@'localhost' identified by 'Free10031204';
 
 -- 导出  表 test.app 结构
 CREATE TABLE IF NOT EXISTS `app` (
