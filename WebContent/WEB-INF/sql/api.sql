@@ -48,8 +48,8 @@ CREATE TABLE `meituan_order` (
 	`pay_type` INT(1) NULL DEFAULT NULL COMMENT '支付类型（1：货到付款；2：在线支付）',
 	`latitude` DECIMAL(11,7) NULL DEFAULT NULL COMMENT '实际送餐地址纬度',
 	`longitude` DECIMAL(11,7) NULL DEFAULT NULL COMMENT '实际送餐地址经度 ',
-	`detail` VARCHAR(2048) NULL DEFAULT NULL,
-	`extra` VARCHAR(2048) NULL DEFAULT NULL,
+	`detail` VARCHAR(4096) NULL DEFAULT NULL,
+	`extra` VARCHAR(4096) NULL DEFAULT NULL,
 	`app_status` INT(2) NOT NULL DEFAULT '0' COMMENT '门店是否已下载该订单（0：否，1：是）',
 	PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
