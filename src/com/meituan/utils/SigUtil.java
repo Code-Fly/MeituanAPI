@@ -73,8 +73,7 @@ public class SigUtil {
 	}
 
 	private static String sum(String src, String algorithm) {
-		logger.debug(src);
-		logger.debug(algorithm);
+		logger.info(algorithm + ":" + src);
 		MessageDigest md = null;
 		try {
 			md = MessageDigest.getInstance(algorithm);

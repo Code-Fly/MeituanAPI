@@ -57,7 +57,7 @@ public class OrderPushCallBack extends BaseController {
 			@RequestParam(value = "order_id", required = true) String order_id,
 			@RequestParam(value = "app_poi_code", required = true) String app_poi_code) {
 
-		Map<String, Object> params = MapUtil.decodeParameterMap(MapUtil.getParameterMap(request));
+		Map<String, Object> params = MapUtil.getParameterMap(request,true);
 		params.remove("sig");
 		String url = PathUtil.getServerUrl(request) + "/Api" + "/orderPushCallback";
 		App app = appService.selectByPrimaryKey(app_id);
@@ -110,7 +110,7 @@ public class OrderPushCallBack extends BaseController {
 			@RequestParam(value = "order_id", required = true) String order_id,
 			@RequestParam(value = "reason_code", required = false) String reason_code,
 			@RequestParam(value = "reason", required = false) String reason){
-		Map<String, Object> params = MapUtil.decodeParameterMap(MapUtil.getParameterMap(request));
+		Map<String, Object> params = MapUtil.getParameterMap(request,true);
 		params.remove("sig");
 		String url = PathUtil.getServerUrl(request) + "/Api/cancelOrder";
 		App app = appService.selectByPrimaryKey(app_id);

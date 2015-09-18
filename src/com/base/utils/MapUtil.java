@@ -19,16 +19,14 @@ import org.slf4j.LoggerFactory;
  */
 public class MapUtil {
 	
-	private static Logger logger = LoggerFactory.getLogger(MapUtil.class);
-	
 	/**
 	 * 从request中获得参数Map，并返回可读的Map
 	 * 
 	 * @param request
+	 * @param isDecode:是否需要解码
 	 * @return
 	 */
-	public static Map<String, Object> getParameterMap(HttpServletRequest request) {
-		logger.info("enter method  getParameterMap(HttpServletRequest request):requestPath="+request.getRequestURI());
+	public static Map<String, Object> getParameterMap(HttpServletRequest request,boolean isDecode) {
 		// 参数Map
 		Map<String, String[]> properties = request.getParameterMap();
 		// 返回值Map
@@ -52,17 +50,15 @@ public class MapUtil {
 			} else {
 				value = valueObj.toString();
 			}
-			returnMap.put(name, value);
+			if(isDecode){
+				returnMap.put(name, UrlUtil.decode(value, "UTF-8"));
+			} else {
+				returnMap.put(name, value);
+			}
+			
 		}
 		return returnMap;
 	}
 
-	public static Map<String, Object> decodeParameterMap(Map<String, Object> map) {
-		Map<String, Object> returnMap = new HashMap<String, Object>();
-		for (String key : map.keySet()) {
-			returnMap.put(key, UrlUtil.decode(map.get(key).toString(), "UTF-8"));
-		}
-		return returnMap;
-	}
 
 }

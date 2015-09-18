@@ -53,7 +53,7 @@ public class DoConfirm extends BaseController {
 			// application params
 			@RequestParam(value = "order_id_list", required = true) String order_id_list) {
 		
-		Map<String, Object> params = MapUtil.getParameterMap(request);
+		Map<String, Object> params = MapUtil.getParameterMap(request,false);
 		params.remove("sig");
 		String url = PathUtil.getServerUrl(request) + "/Api" + "/orderConfirm";
 		App app = appService.selectByPrimaryKey(app_id);

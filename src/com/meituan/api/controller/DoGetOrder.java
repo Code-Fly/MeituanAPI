@@ -54,7 +54,7 @@ public class DoGetOrder extends BaseController {
 			// application params
 			@RequestParam(value = "app_poi_code", required = true) String app_poi_code) {
 		
-		Map<String, Object> params = MapUtil.getParameterMap(request);
+		Map<String, Object> params = MapUtil.getParameterMap(request,false);
 		params.remove("sig");
 		String url = PathUtil.getServerUrl(request) + "/Api" + "/doGetOrder";
 		App app = appService.selectByPrimaryKey(app_id);
