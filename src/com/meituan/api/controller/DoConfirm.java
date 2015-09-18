@@ -19,11 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.base.controller.BaseController;
 import com.base.utils.MapUtil;
 import com.base.utils.PathUtil;
-import com.meituan.api.entity.ApiData;
-import com.meituan.api.entity.ApiError;
 import com.meituan.app.entity.App;
 import com.meituan.app.service.iface.AppService;
-import com.meituan.common.MeituanConst;
+import com.meituan.common.MeituanConst.MeituanResponse;
 import com.meituan.order.entity.MeituanOrder;
 import com.meituan.order.entity.MeituanOrderExample;
 import com.meituan.order.service.iface.OrderService;
@@ -58,27 +56,21 @@ public class DoConfirm extends BaseController {
 		String url = PathUtil.getServerUrl(request) + "/Api" + "/orderConfirm";
 		App app = appService.selectByPrimaryKey(app_id);
 		if(null == app ){
-			ApiError err = new ApiError(MeituanConst.CODE_702, "app_id不存在");
-			ApiData ret = new ApiData(MeituanConst.RETURN_NG, err);
-			logger.error("app_id不存在");
-			return JSONObject.fromObject(ret).toString();
+			logger.error("app_id("+app_id+")不存在");
+			return JSONObject.fromObject(MeituanResponse.RESPONSE_702).toString();
 		}
 		String appSecret = app.getSecret();
 		String md5sum = SigUtil.sign(url, params, appSecret, "MD5");
 		if (!sig.equals(md5sum)) {
-			ApiError err = new ApiError(MeituanConst.CODE_703, "签名验证错误");
-			ApiData ret = new ApiData(MeituanConst.RETURN_NG, err);
 			logger.error("签名验证错误, sig:" + sig + ", md5sum:" + md5sum);
-			return JSONObject.fromObject(ret).toString();
+			return JSONObject.fromObject(MeituanResponse.RESPONSE_703).toString();
 		} else {
 			MeituanOrder mOrder = new MeituanOrder();
 			mOrder.setApp_status(1);
 			MeituanOrderExample example = new MeituanOrderExample();
 			example.or().andOrder_idIn(JSONArray.toList(JSONArray.fromObject(order_id_list))).andStatusNotEqualTo(9);
 			orderService.updateByExampleSelective(mOrder, example);
-			
-			ApiData ret = new ApiData(MeituanConst.RETURN_OK);
-			return JSONObject.fromObject(ret).discard("error").toString();
+			return JSONObject.fromObject(MeituanResponse.RESPONSE_OK).discard("error").toString();
 		}
 	}
 
