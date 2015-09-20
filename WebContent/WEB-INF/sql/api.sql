@@ -1,12 +1,7 @@
--- --------------------------------------------------------
--- 主机:                           120.26.103.47
--- 服务器版本:                        5.6.21-log - MySQL Community Server (GPL)
--- 服务器操作系统:                      linux-glibc2.5
--- --------------------------------------------------------
 
 CREATE USER 'wuzhong'@'%' IDENTIFIED BY 'Free10031204';
 GRANT SELECT, INSERT,UPDATE ON test.* TO 'wuzhong'@'%';
-grant SELECT, INSERT,UPDATE  on test.* to wuzhong@'localhost' identified by 'Free10031204';
+grant SELECT, INSERT,UPDATE  on test.* to 'wuzhong'@'localhost' identified by 'Free10031204';
 
 -- 导出  表 test.app 结构
 CREATE TABLE IF NOT EXISTS `app` (
@@ -55,5 +50,14 @@ CREATE TABLE `meituan_order` (
 
 
 
+CREATE TABLE `refund` (
+	`order_id` INT(11) NOT NULL COMMENT '订单ID ',
+	`notify_type` VARCHAR(36) NOT NULL COMMENT '通知类型，apply：发起退款',
+	`reason` VARCHAR(1024) NULL DEFAULT NULL COMMENT '原因 ',
+	PRIMARY KEY (`order_id`)
+)
+COMMENT='退款'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
 
 
