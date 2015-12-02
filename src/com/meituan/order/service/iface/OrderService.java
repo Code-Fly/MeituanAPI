@@ -15,6 +15,7 @@ import com.meituan.order.entity.MeituanOrderExample;
  * 美团order接口
  */
 public interface OrderService {
+	 MeituanOrder selectByPrimaryKey(Integer  order_id);
 	 int insertSelective(MeituanOrder record);
 	 List<MeituanOrder> selectByExample(MeituanOrderExample example);
 	 int updateByExampleSelective(@Param("record") MeituanOrder record, @Param("example") MeituanOrderExample example);

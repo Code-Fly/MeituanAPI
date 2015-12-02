@@ -178,6 +178,7 @@ public class OrderPushCallBack extends BaseController {
 			refund.setOrder_id(order_id);
 			refund.setNotify_type(notify_type);
 			refund.setReason(reason);
+			refund.setApp_poi_code(orderService.selectByPrimaryKey(order_id).getApp_poi_code());
 			if(null == refundService.selectByPrimaryKey(order_id))
 			{
 				refundService.insertSelective(refund);
@@ -212,7 +213,8 @@ public class OrderPushCallBack extends BaseController {
 			@RequestParam(value = "app_id", required = true) String app_id,
 			@RequestParam(value = "timestamp", required = true) String timestamp,
 			// application params
-			@RequestParam(value = "notify_type", required = true) String notify_type){
+			@RequestParam(value = "notify_type", required = true) String notify_type,
+			@RequestParam(value = "app_poi_code", required = true) String app_poi_code){
 		Map<String, Object> params = MapUtil.getParameterMap(request,true);
 		params.remove("sig");
 		String url = PathUtil.getServerUrl(request) + "/Api/getRefund";
