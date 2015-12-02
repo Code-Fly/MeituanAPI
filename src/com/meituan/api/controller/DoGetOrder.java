@@ -73,15 +73,17 @@ public class DoGetOrder extends BaseController {
 			if (null == poi) {
 				return JSONObject.fromObject(MeituanResponse.RESPONSE_803).toString();
 			} else if (poi.getExpiredate().before(new Date())) {
+				return JSONObject.fromObject(MeituanResponse.RESPONSE_803).toString();
+			} else  {
+				MeituanOrderExample example = new MeituanOrderExample();
+				example.or().andApp_poi_codeEqualTo(app_poi_code).andApp_statusEqualTo(0).andStatusNotEqualTo(9);
+				List<MeituanOrder> oList = orderService.selectByExample(example);
 				
+				JSONArray resp = JSONArray.fromObject(oList);			
+				ApiData ret = new ApiData(resp);
+				return JSONObject.fromObject(ret).discard("error").toString();
 			}
-			MeituanOrderExample example = new MeituanOrderExample();
-			example.or().andApp_poi_codeEqualTo(app_poi_code).andApp_statusEqualTo(0).andStatusNotEqualTo(9);
-			List<MeituanOrder> oList = orderService.selectByExample(example);
-			
-			JSONArray resp = JSONArray.fromObject(oList);			
-			ApiData ret = new ApiData(resp);
-			return JSONObject.fromObject(ret).discard("error").toString();
+		
 		}
 		
 	}

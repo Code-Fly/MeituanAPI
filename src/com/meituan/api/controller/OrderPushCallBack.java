@@ -3,6 +3,7 @@
  */
 package com.meituan.api.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +27,7 @@ import com.base.utils.PathUtil;
 import com.meituan.api.entity.ApiData;
 import com.meituan.app.entity.App;
 import com.meituan.app.service.iface.AppService;
+import com.meituan.apppoi.entity.AppPoi;
 import com.meituan.common.MeituanConst.MeituanResponse;
 import com.meituan.common.MeituanConst.OrderStatus;
 import com.meituan.order.entity.MeituanOrder;
@@ -229,12 +231,19 @@ public class OrderPushCallBack extends BaseController {
 			logger.error("签名验证错误, sig:" + sig + ", md5sum:" + md5sum);
 			return JSONObject.fromObject(MeituanResponse.RESPONSE_703).toString();
 		} else {
-			RefundExample refundExample = new RefundExample();
-			refundExample.or().andNotify_typeEqualTo(notify_type);
-			List<Refund> refunds = refundService.selectByExample(refundExample);
-			JSONArray resp = JSONArray.fromObject(refunds);			
-			ApiData ret = new ApiData(resp);
-			return JSONObject.fromObject(ret).discard("error").toString();
+			AppPoi poi = appPoiService.selectByPrimaryKey(app_poi_code);
+			if (null == poi) {
+				return JSONObject.fromObject(MeituanResponse.RESPONSE_803).toString();
+			} else if (poi.getExpiredate().before(new Date())) {
+				return JSONObject.fromObject(MeituanResponse.RESPONSE_803).toString();
+			}  else  {
+				RefundExample refundExample = new RefundExample();
+				refundExample.or().andNotify_typeEqualTo(notify_type).andApp_poi_codeEqualTo(app_poi_code);
+				List<Refund> refunds = refundService.selectByExample(refundExample);
+				JSONArray resp = JSONArray.fromObject(refunds);			
+				ApiData ret = new ApiData(resp);
+				return JSONObject.fromObject(ret).discard("error").toString();
+			}
 		}
 		
 	}
