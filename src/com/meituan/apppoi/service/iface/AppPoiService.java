@@ -11,5 +11,5 @@ import com.meituan.apppoi.entity.AppPoi;
  *
  */
 public interface AppPoiService {
-    AppPoi selectByPrimaryKey(String app_poi_code);
+    AppPoi selectByPrimaryKey(String app_poi_code,String appid);
 }
