@@ -15,7 +15,8 @@ public interface MeituanConst {
 	int CODE_701 = 701; // 缺少参数，数据不完整
 	int CODE_702 = 702; // app_id不存在
 	int CODE_600 = 600; // 内部错误
-
+	int CODE_2000 = 2000; // 门店过期
+	
 	String RETURN_OK = "ok";
 	String RETURN_NG = "ng";
 
@@ -46,6 +47,7 @@ public interface MeituanConst {
 		ApiError ERROR_702 = new ApiError(MeituanConst.CODE_702, "app_id不存在");
 		ApiError ERROR_703 = new ApiError(MeituanConst.CODE_703, "签名验证错误");
 		ApiError ERROR_803 = new ApiError(MeituanConst.CODE_803, "不存在此门店 ");
+		ApiError ERROR_2000= new ApiError(MeituanConst.CODE_2000, "超过授权使用期 ");
 	}
 	
 	/**
@@ -59,6 +61,7 @@ public interface MeituanConst {
 		ApiData RESPONSE_702 = new ApiData(MeituanConst.RETURN_NG, MeituanError.ERROR_702);
 		ApiData RESPONSE_703 = new ApiData(MeituanConst.RETURN_NG, MeituanError.ERROR_703);
 		ApiData RESPONSE_803 = new ApiData(MeituanConst.RETURN_NG, MeituanError.ERROR_803);
+		ApiData RESPONSE_2000 = new ApiData(MeituanConst.RETURN_NG, MeituanError.ERROR_2000);
 	}
 	
 }

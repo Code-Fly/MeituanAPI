@@ -235,7 +235,7 @@ public class OrderPushCallBack extends BaseController {
 			if (null == poi) {
 				return JSONObject.fromObject(MeituanResponse.RESPONSE_803).toString();
 			} else if (poi.getExpiredate().before(new Date())) {
-				return JSONObject.fromObject(MeituanResponse.RESPONSE_803).toString();
+				return JSONObject.fromObject(MeituanResponse.RESPONSE_2000).toString();
 			}  else  {
 				RefundExample refundExample = new RefundExample();
 				refundExample.or().andNotify_typeEqualTo(notify_type).andApp_poi_codeEqualTo(app_poi_code);
