@@ -80,6 +80,14 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
 
-;
+CREATE DEFINER=`root`@`%` EVENT `clean_order_data`
+	ON SCHEDULE
+		EVERY 1 DAY STARTS '2015-12-04'
+	ON COMPLETION PRESERVE
+	ENABLE
+	COMMENT '每天定期清理meituan_order数据，保留2天的数据'
+	DO BEGIN
+delete from  meituan_order  where  datediff(DATE_FORMAT(CURDATE(),'%Y%m%d'),DATE_FORMAT(FROM_UNIXTIME(utime),'%Y%m%d')) > 2;
+END
 
 
