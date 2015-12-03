@@ -52,12 +52,34 @@ CREATE TABLE `meituan_order` (
 
 CREATE TABLE `refund` (
 	`order_id` INT(11) NOT NULL COMMENT '订单ID ',
+	`app_poi_code` VARCHAR(128) NOT NULL,
 	`notify_type` VARCHAR(36) NOT NULL COMMENT '通知类型，apply：发起退款',
 	`reason` VARCHAR(1024) NULL DEFAULT NULL COMMENT '原因 ',
 	PRIMARY KEY (`order_id`)
 )
 COMMENT='退款'
 COLLATE='utf8_general_ci'
-ENGINE=InnoDB;
+ENGINE=InnoDB
+;
+
+
+
+CREATE TABLE `app_poi` (
+	`app_poi_code` VARCHAR(128) NOT NULL COMMENT 'APP方商家ID ',
+	`appid` VARCHAR(32) NOT NULL,
+	`wm_poi_name` VARCHAR(128) NULL DEFAULT NULL COMMENT '美团商家名称 ',
+	`wm_poi_address` VARCHAR(512) NULL DEFAULT NULL COMMENT '美团商家地址',
+	`wm_poi_phone` VARCHAR(128) NULL DEFAULT NULL COMMENT '美团商家电话 ',
+	`amount` FLOAT(8,2) NULL DEFAULT NULL COMMENT '累计金额',
+	`price` FLOAT(8,2) NULL DEFAULT NULL COMMENT '单价',
+	`desc` VARCHAR(32) NULL DEFAULT NULL COMMENT '门店描述',
+	`expiredate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '门店有效期',
+	PRIMARY KEY (`app_poi_code`, `appid`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+;
 
 

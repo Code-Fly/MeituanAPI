@@ -3,6 +3,7 @@
  */
 package com.meituan.api.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +24,7 @@ import com.base.utils.PathUtil;
 import com.meituan.api.entity.ApiData;
 import com.meituan.app.entity.App;
 import com.meituan.app.service.iface.AppService;
+import com.meituan.apppoi.entity.AppPoi;
 import com.meituan.common.MeituanConst.MeituanResponse;
 import com.meituan.order.entity.MeituanOrder;
 import com.meituan.order.entity.MeituanOrderExample;
@@ -67,13 +69,21 @@ public class DoGetOrder extends BaseController {
 			logger.error("签名验证错误, sig:" + sig + ", md5sum:" + md5sum);
 			return JSONObject.fromObject(MeituanResponse.RESPONSE_703).toString();
 		} else {
-			MeituanOrderExample example = new MeituanOrderExample();
-			example.or().andApp_poi_codeEqualTo(app_poi_code).andApp_statusEqualTo(0).andStatusNotEqualTo(9);
-			List<MeituanOrder> oList = orderService.selectByExample(example);
-			
-			JSONArray resp = JSONArray.fromObject(oList);			
-			ApiData ret = new ApiData(resp);
-			return JSONObject.fromObject(ret).discard("error").toString();
+			AppPoi poi = appPoiService.selectByPrimaryKey(app_poi_code,app_id);
+			if (null == poi) {
+				return JSONObject.fromObject(MeituanResponse.RESPONSE_803).toString();
+			} else if (poi.getExpiredate().before(new Date())) {
+				return JSONObject.fromObject(MeituanResponse.RESPONSE_2000).toString();
+			} else  {
+				MeituanOrderExample example = new MeituanOrderExample();
+				example.or().andApp_poi_codeEqualTo(app_poi_code).andApp_statusEqualTo(0).andStatusNotEqualTo(9);
+				List<MeituanOrder> oList = orderService.selectByExample(example);
+				
+				JSONArray resp = JSONArray.fromObject(oList);			
+				ApiData ret = new ApiData(resp);
+				return JSONObject.fromObject(ret).discard("error").toString();
+			}
+		
 		}
 		
 	}

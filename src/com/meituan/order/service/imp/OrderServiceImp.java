@@ -23,6 +23,10 @@ public class OrderServiceImp implements OrderService {
 	@Autowired
 	MeituanOrderMapper orderMapper;
 	
+	@Override
+	public MeituanOrder selectByPrimaryKey(Integer  order_id) {
+		return orderMapper.selectByPrimaryKey(order_id);
+	}
 	
 	@Override
 	public int insertSelective(MeituanOrder record) {
