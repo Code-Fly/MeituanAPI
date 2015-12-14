@@ -180,9 +180,9 @@ public class OrderPushCallBack extends BaseController {
 			refund.setOrder_id(order_id);
 			refund.setNotify_type(notify_type);
 			refund.setReason(reason);
-			refund.setApp_poi_code(orderService.selectByPrimaryKey(order_id).getApp_poi_code());
 			if(null == refundService.selectByPrimaryKey(order_id))
 			{
+				refund.setApp_poi_code(orderService.selectByPrimaryKey(order_id).getApp_poi_code());
 				refundService.insertSelective(refund);
 			} 
 			else 
