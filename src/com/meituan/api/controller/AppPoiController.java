@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.base.controller.BaseController;
 import com.base.utils.MapUtil;
 import com.base.utils.PathUtil;
+import com.base.utils.JsonUtil;
+import com.meituan.api.entity.ApiData;
 import com.meituan.app.entity.App;
 import com.meituan.apppoi.entity.AppPoi;
 import com.meituan.apppoi.service.iface.AppPoiService;
@@ -57,7 +59,7 @@ public class AppPoiController extends BaseController {
 		
 		Map<String, Object> params = MapUtil.getParameterMap(request,true);
 		params.remove("sig");
-		String url = PathUtil.getServerUrl(request) + "/Api/getRefund";
+		String url = PathUtil.getServerUrl(request) + "/Api/getAppPoi";
 		App app = appService.selectByPrimaryKey(app_id);
 		if(null == app){
 			logger.error("app_id("+app_id+")不存在");
@@ -70,6 +72,7 @@ public class AppPoiController extends BaseController {
 			return JSONObject.fromObject(MeituanResponse.RESPONSE_703).toString();
 		}
 		AppPoi poi = appPoiService.selectByPrimaryKey(app_poi_code, app_id);
-		return JSONObject.fromObject(poi).discard("error").toString();
+		ApiData appData = new ApiData(poi.getExpiredate());
+		return JsonUtil.json2Sting(appData);
 	}
 }
