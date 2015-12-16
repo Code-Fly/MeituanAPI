@@ -36,7 +36,7 @@
 	</bean>
 	
 	<!-- transaction Manager 单表操作暂时 用不到事物-->
-<!-- 	<bean id="transactionManager"
+	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 		<property name="validateExistingTransaction" value="true" />
@@ -45,16 +45,8 @@
 	
 	<tx:advice id="meituanTxAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
-			<tx:method name="delete*" propagation="REQUIRED"
+			<tx:method name="insert*" propagation="REQUIRED"
 				rollback-for="java.lang.Exception" />
-			<tx:method name="create*" propagation="REQUIRED"
-				rollback-for="java.lang.Exception" />
-			<tx:method name="modify*" propagation="REQUIRED"
-				rollback-for="java.lang.Exception" />
-			<tx:method name="refresh*" propagation="REQUIRED"
-				rollback-for="java.lang.Exception" />
-			<tx:method name="find*" propagation="SUPPORTS" read-only="true" />
-			<tx:method name="select*" propagation="SUPPORTS" read-only="true" />
 		</tx:attributes>
 	</tx:advice>
 	
@@ -62,7 +54,7 @@
 		<aop:pointcut id="pc"
 			expression="execution(* com.meituan.*.*.service.imp(..))" />
 		<aop:advisor pointcut-ref="pc" advice-ref="meituanTxAdvice" />
-	</aop:config>  -->
+	</aop:config>  
 	
 	<!-- Mybatis Configuration -->
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">

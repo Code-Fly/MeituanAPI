@@ -3,6 +3,8 @@
  */
 package com.base.utils;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -25,5 +27,16 @@ public class CommonUtil {
 		BeanUtils.populate(obj, map);
 		return obj;
 	}
-
+	
+	
+	public static void main(String[] args) {
+		System.out.println(addYear(new Date(),2));
+	}
+	
+	public static Date addYear(Date date,int year){
+	        Calendar rightNow = Calendar.getInstance();
+	        rightNow.setTime(date);
+	        rightNow.add(Calendar.YEAR,+year);
+	        return rightNow.getTime();
+	}
 }
