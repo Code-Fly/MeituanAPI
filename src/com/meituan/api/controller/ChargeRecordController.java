@@ -27,8 +27,6 @@ import com.meituan.chargerecord.entity.ChargeRecord;
 import com.meituan.chargerecord.entity.ChargeRecordExample;
 import com.meituan.chargerecord.service.iface.ChargeRecordService;
 import com.meituan.common.MeituanConst.MeituanResponse;
-import com.meituan.order.entity.MeituanOrder;
-import com.meituan.order.entity.MeituanOrderExample;
 import com.meituan.utils.SigUtil;
 
 import net.sf.json.JSONArray;
