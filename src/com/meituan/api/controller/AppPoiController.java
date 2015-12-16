@@ -47,7 +47,7 @@ public class AppPoiController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/getAppPoi")
-	public String doGetOrder(HttpServletRequest request, 
+	public String getAppPoi(HttpServletRequest request, 
 			// system params
 			@RequestParam(value = "sig", required = true) String sig, 
 			@RequestParam(value = "app_id", required = true) String app_id,
