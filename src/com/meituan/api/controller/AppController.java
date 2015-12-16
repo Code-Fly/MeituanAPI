@@ -32,11 +32,7 @@ import net.sf.json.JSONObject;
  */
 @Controller
 @RequestMapping(value = "/Api")
-public class AppPoiController extends BaseController {
-	
-	@Autowired
-	private AppPoiService appPoiService;
-	
+public class AppController extends BaseController {
 	
 	/**
 	 * 获取门店信息
@@ -48,18 +44,16 @@ public class AppPoiController extends BaseController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/getAppPoi")
-	public String getAppPoi(HttpServletRequest request, 
+	@RequestMapping(value = "/getApp")
+	public String getApp(HttpServletRequest request, 
 			// system params
 			@RequestParam(value = "sig", required = true) String sig, 
 			@RequestParam(value = "app_id", required = true) String app_id,
-			@RequestParam(value = "timestamp", required = true) String timestamp,
-			// application params
-			@RequestParam(value = "app_poi_code", required = true) String app_poi_code) {
+			@RequestParam(value = "timestamp", required = true) String timestamp) {
 		
 		Map<String, Object> params = MapUtil.getParameterMap(request,true);
 		params.remove("sig");
-		String url = PathUtil.getServerUrl(request) + "/Api/getAppPoi";
+		String url = PathUtil.getServerUrl(request) + "/Api/getApp";
 		App app = appService.selectByPrimaryKey(app_id);
 		if(null == app){
 			logger.error("app_id("+app_id+")不存在");
@@ -71,8 +65,7 @@ public class AppPoiController extends BaseController {
 			logger.error("签名验证错误, sig:" + sig + ", md5sum:" + md5sum);
 			return JSONObject.fromObject(MeituanResponse.RESPONSE_703).toString();
 		}
-		AppPoi poi = appPoiService.selectByPrimaryKey(app_poi_code, app_id);
-		ApiData appData =  new ApiData(poi.getExpiredate());
+		ApiData appData = new ApiData(app.getPrice());
 		return JsonUtil.json2Sting(appData);
 	}
 }
