@@ -34,8 +34,7 @@ import com.meituan.utils.SigUtil;
 @Controller
 @RequestMapping(value = "/Api")
 public class DoConfirm extends BaseController {
-	@Autowired
-	private AppService appService;
+
 
 	@Autowired
 	private OrderService orderService;

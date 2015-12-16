@@ -45,8 +45,7 @@ import com.meituan.utils.SigUtil;
 @RequestMapping(value = "/Api")
 public class OrderPushCallBack extends BaseController {
 
-	@Autowired
-	private AppService appService;
+	
 
 	@Autowired
 	private OrderService orderService;

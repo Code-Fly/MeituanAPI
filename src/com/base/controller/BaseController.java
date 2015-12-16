@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.meituan.app.service.iface.AppService;
 import com.meituan.apppoi.service.iface.AppPoiService;
 import com.meituan.common.MeituanConst.MeituanResponse;
 
@@ -24,6 +25,9 @@ public abstract class BaseController {
 	
 	@Autowired
 	protected AppPoiService appPoiService;
+	
+	@Autowired
+	protected AppService appService;
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 

@@ -39,8 +39,7 @@ import com.meituan.utils.SigUtil;
 @RequestMapping(value = "/Api")
 public class DoGetOrder extends BaseController {
 
-	@Autowired
-	private AppService appService;
+	
 
 	@Autowired
 	private OrderService orderService;
