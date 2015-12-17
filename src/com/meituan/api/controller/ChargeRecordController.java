@@ -105,8 +105,6 @@ public class ChargeRecordController extends BaseController {
 			AppPoi poi = appPoiService.selectByPrimaryKey(app_poi_code,app_id);
 			if (null == poi) {
 				return JSONObject.fromObject(MeituanResponse.RESPONSE_803).toString();
-			} else if (poi.getExpiredate().before(new Date())) {
-				return JSONObject.fromObject(MeituanResponse.RESPONSE_2000).toString();
 			} else  {
 				ChargeRecordExample example = new ChargeRecordExample();
 				example.or().andApp_idEqualTo(app_id).andApp_poi_codeEqualTo(app_poi_code);
