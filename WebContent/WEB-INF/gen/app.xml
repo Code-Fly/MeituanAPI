@@ -11,8 +11,8 @@
 		<commentGenerator>
 			<property name="suppressAllComments" value="false" />
 		</commentGenerator>
-		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://120.26.103.47:3306/test"
-			userId="root" password="fnst_1234">
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://120.26.103.47:3306/develop"
+			userId="wuzhong1" password="Free10031204">
 		</jdbcConnection>
 		<javaTypeResolver>
 			<property name="forceBigDecimals" value="false" />
