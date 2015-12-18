@@ -86,7 +86,9 @@ public class ChargeRecordController extends BaseController {
 			@RequestParam(value = "app_id", required = true) String app_id,
 			@RequestParam(value = "timestamp", required = true) String timestamp,
 			// application params
-			@RequestParam(value = "app_poi_code", required = true) String app_poi_code) {
+			@RequestParam(value = "app_poi_code", required = true) String app_poi_code,
+			@RequestParam(value = "qsrq", required = true) Date qsrq,
+			@RequestParam(value = "jsrq", required = true) Date jsrq) {
 		
 		Map<String, Object> params = MapUtil.getParameterMap(request,false);
 		params.remove("sig");
@@ -105,9 +107,9 @@ public class ChargeRecordController extends BaseController {
 			AppPoi poi = appPoiService.selectByPrimaryKey(app_poi_code,app_id);
 			if (null == poi) {
 				return JSONObject.fromObject(MeituanResponse.RESPONSE_803).toString();
-			} else  {
+			} else  {	
 				ChargeRecordExample example = new ChargeRecordExample();
-				example.or().andApp_idEqualTo(app_id).andApp_poi_codeEqualTo(app_poi_code);
+				example.or().andApp_idEqualTo(app_id).andApp_poi_codeEqualTo(app_poi_code).andCzsjBetween(qsrq, jsrq);
 				List<ChargeRecord> oList = chargeRecordService.selectByExample(example);
 				JSONArray resp = JSONArray.fromObject(oList);			
 				ApiData ret = new ApiData(resp);
