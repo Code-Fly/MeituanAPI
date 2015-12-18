@@ -3,6 +3,7 @@
  */
 package com.meituan.api.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +11,11 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,6 +47,7 @@ public class ChargeRecordController extends BaseController {
 	
 	@Autowired
 	private ChargeRecordService chargeRecordService;
+	
 	
 	@ResponseBody
 	@RequestMapping(value = "/charge")
@@ -87,8 +93,8 @@ public class ChargeRecordController extends BaseController {
 			@RequestParam(value = "timestamp", required = true) String timestamp,
 			// application params
 			@RequestParam(value = "app_poi_code", required = true) String app_poi_code,
-			@RequestParam(value = "qsrq", required = true) Date qsrq,
-			@RequestParam(value = "jsrq", required = true) Date jsrq) {
+			@RequestParam(value = "qsrq", required = true) @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date qsrq,
+			@RequestParam(value = "jsrq", required = true) @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date jsrq) {
 		
 		Map<String, Object> params = MapUtil.getParameterMap(request,false);
 		params.remove("sig");
