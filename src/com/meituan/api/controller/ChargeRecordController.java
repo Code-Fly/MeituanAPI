@@ -3,7 +3,6 @@
  */
 package com.meituan.api.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -11,11 +10,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -68,7 +64,7 @@ public class ChargeRecordController extends BaseController {
 		}
 		String appSecret = app.getSecret();
 		String md5sum = SigUtil.sign(url, params, appSecret, "MD5");
-		if (false) {
+		if (!appSecret.equals(md5sum)) {
 			logger.error("签名验证错误, sig:" + sig + ", md5sum:" + md5sum);
 			return JSONObject.fromObject(MeituanResponse.RESPONSE_703).toString();
 		} else {
@@ -106,7 +102,7 @@ public class ChargeRecordController extends BaseController {
 		}
 		String appSecret = app.getSecret();
 		String md5sum = SigUtil.sign(url, params, appSecret, "MD5");
-		if (false) {
+		if (!appSecret.equals(md5sum)) {
 			logger.error("签名验证错误, sig:" + sig + ", md5sum:" + md5sum);
 			return JSONObject.fromObject(MeituanResponse.RESPONSE_703).toString();
 		} else {
