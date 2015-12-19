@@ -47,14 +47,12 @@
 		<tx:attributes>
 			<tx:method name="insert*" propagation="REQUIRED"
 				rollback-for="java.lang.Exception" />
-			<tx:method name="find*" propagation="SUPPORTS" read-only="true" />
-			<tx:method name="select*" propagation="SUPPORTS" read-only="true" />
 		</tx:attributes>
 	</tx:advice>
 	
 	<aop:config>
 		<aop:pointcut id="pc"
-			expression="execution(* com.meituan..*.service.imp.*.*(..))" />
+			expression="execution(* com.meituan.*.service.iface.*.*(..))" />
 		<aop:advisor pointcut-ref="pc" advice-ref="meituanTxAdvice" />
 	</aop:config>  
 	
