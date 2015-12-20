@@ -7,11 +7,11 @@ $(document).ready(function() {
 			success : function(data, textStatus, jqXHR) {
 				
 				if ("" != data && null != data) {
-					SessionCache.update("opID", data);
+					SessionCache.update("userId", data);
 					SessionCache.update("userName", $("#userName").val());					
 					window.location.href = _ctx + "/web/index";
 				} else {
-					SessionCache.remove("opID");
+					SessionCache.remove("userId");
 					SessionCache.remove("userName");
 					alert("用户名或密码错误");
 					$("#login").removeClass("disabled");
@@ -19,7 +19,7 @@ $(document).ready(function() {
 				
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
-				SessionCache.remove("opID");
+				SessionCache.remove("userId");
 				SessionCache.remove("userName");
 				alert("认证异常");
 				$("#login").removeClass("disabled");
