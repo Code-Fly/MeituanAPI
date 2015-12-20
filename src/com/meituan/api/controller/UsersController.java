@@ -22,7 +22,7 @@ import com.meituan.users.service.iface.LoginUsersService;
  *
  */
 @Controller
-@RequestMapping(value = "/webapi")
+@RequestMapping(value = "/Api")
 public class UsersController extends BaseController {
 	@Autowired
 	private LoginUsersService loginUsersService;

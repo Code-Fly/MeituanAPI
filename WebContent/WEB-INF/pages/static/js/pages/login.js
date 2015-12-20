@@ -2,7 +2,7 @@ $(document).ready(function() {
 	$("#login").click(function(e) {
 		$("#login").addClass("disabled");
 		$.ajax({
-			url : _ctx + "/webapi/login?opNm=" + $("#userName").val() + "&opPwd=" + $("#password").val(),
+			url : _ctx + "/Api/login?opNm=" + $("#userName").val() + "&opPwd=" + $("#password").val(),
 			cache : false,
 			success : function(data, textStatus, jqXHR) {
 				

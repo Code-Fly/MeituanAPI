@@ -3,6 +3,7 @@
  */
 package com.meituan.api.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +19,7 @@ import com.base.utils.PathUtil;
 import com.base.utils.JsonUtil;
 import com.meituan.api.entity.ApiData;
 import com.meituan.app.entity.App;
-
+import com.meituan.app.entity.AppExample;
 import com.meituan.common.MeituanConst.MeituanResponse;
 import com.meituan.utils.SigUtil;
 
@@ -65,5 +66,16 @@ public class AppController extends BaseController {
 		}
 		ApiData appData = new ApiData(app.getPrice());
 		return JsonUtil.json2Sting(appData);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/queryApps")
+	public String getApp(HttpServletRequest request, 
+			@RequestParam(value = "userId", required = true) int userId) {
+		AppExample example = new AppExample();
+		example.or().andUseridEqualTo(userId);
+		List<App> apps = appService.selectByExample(example);
+		ApiData ret = new ApiData(JsonUtil.jsonArray2Sting(apps));
+		return JsonUtil.json2Sting(ret);
 	}
 }
