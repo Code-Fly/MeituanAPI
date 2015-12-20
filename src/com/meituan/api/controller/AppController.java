@@ -7,7 +7,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,8 +18,7 @@ import com.base.utils.PathUtil;
 import com.base.utils.JsonUtil;
 import com.meituan.api.entity.ApiData;
 import com.meituan.app.entity.App;
-import com.meituan.apppoi.entity.AppPoi;
-import com.meituan.apppoi.service.iface.AppPoiService;
+
 import com.meituan.common.MeituanConst.MeituanResponse;
 import com.meituan.utils.SigUtil;
 

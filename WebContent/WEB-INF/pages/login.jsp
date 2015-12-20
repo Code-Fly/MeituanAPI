@@ -9,7 +9,7 @@
 
 <body class="pg-unitive-login theme--waimai_developer">
 	<header class="header cf">
-    <a class="site-logo" href="http://waimai.meituan.com">美团外卖后台管理</a>
+    <a class="site-logo" href="http://waimai.meituan.com"></a>
     <span class="site-des">美团外卖后台管理</span>
 </header>
 
@@ -31,7 +31,7 @@
 
         <div class="form-field form-field--icon">
             <i class="icon icon-user"></i>
-            <input id="username" class="f-text" name="email" placeholder="手机号/用户名/邮箱" value="" type="text">
+            <input id="userName" class="f-text" name="email" placeholder="手机号/用户名/邮箱" value="" type="text">
         </div>
         <div class="form-field form-field--icon">
             <i class="icon icon-password"></i>
