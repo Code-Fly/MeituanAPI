@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>登录 | 美团外卖后台管理</title>
-    <%@ include file="meta/meta.jsp"%>
+    <%@ include file="meta/homemeta.jsp"%>
 <script type="text/javascript" src="${ctx}/static/js/pages/login.js"></script>
 </head>
 

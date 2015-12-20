@@ -1,0 +1,24 @@
+.h150 {
+	height:150px;
+}
+.h120 {
+	height:120px;
+}
+.h280 {
+	height:280px;
+}.
+.pb5 {
+	padding-bottom : 5px;
+}
+.fr {
+	float:right;
+}
+.cursor-hand {
+	cursor:pointer;
+}
+.word-wrap {
+	word-wrap: break-word;
+}
+.scroll-y{
+	overflow-y:auto;
+}

@@ -3,12 +3,12 @@ $(function() {
 		sessionAuthentication();
 	}
 	
-	if("1"!=SessionCache.get("opID") && 1!=SessionCache.get("opID")){
+	if("1"!=SessionCache.get("userId") && 1!=SessionCache.get("userId")){
 		$("#authorization").hide();
 	}
 
 	$("#logout").click(function(e) {
-		SessionCache.remove("opID");
+		SessionCache.remove("userId");
 		SessionCache.remove("userName");
 		window.location.href = _ctx + "/web/login";
 	});
@@ -23,9 +23,9 @@ function GetQueryString(name) {
 }
 
 function sessionAuthentication() {
-	var opID = SessionCache.get("opID");
-	if (null == opID || "" == opID) {
-		SessionCache.remove("opID");
+	var userId = SessionCache.get("userId");
+	if (null == userId || "" == userId) {
+		SessionCache.remove("userId");
 		SessionCache.remove("userName");
 		window.location.href = _ctx + "/web/login";
 	}else{

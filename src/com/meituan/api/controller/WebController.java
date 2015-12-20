@@ -23,4 +23,9 @@ public class WebController extends BaseController {
 	public String login(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		return "/login";
 	}
+	
+	@RequestMapping(value = "/index")
+	public String app(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		return "/app";
+	}
 }
