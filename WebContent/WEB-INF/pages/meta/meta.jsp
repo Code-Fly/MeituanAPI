@@ -10,8 +10,8 @@
 	var _ctx = "${ctx}";
 </SCRIPT>
 <!-- external js -->
-
-
+	
+	
 	<script src="${ctx}/static/media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
 
 	<script src="${ctx}/static/media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
@@ -118,4 +118,5 @@
 	<link rel="shortcut icon" href="${ctx}/static/media/image/favicon.ico" />
 
 
-
+<script  src="${ctx}/static/js/global.js" type="text/javascript"></script>
+	

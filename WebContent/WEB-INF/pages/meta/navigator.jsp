@@ -1,4 +1,4 @@
-	<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+	
 	<!-- BEGIN HEADER -->
 
 	<div class="header navbar navbar-inverse navbar-fixed-top">
@@ -51,7 +51,7 @@
 
 						<img alt="" src="${ctx}/static/media/image/avatar1_small.jpg" />
 
-						<span class="username">Bob Nilson</span>
+						<span id="nav-userName" class="username"></span>
 
 						<i class="icon-angle-down"></i>
 
@@ -59,19 +59,7 @@
 
 						<ul class="dropdown-menu">
 
-							<li><a href="extra_profile.html"><i class="icon-user"></i> My Profile</a></li>
-
-							<li><a href="page_calendar.html"><i class="icon-calendar"></i> My Calendar</a></li>
-
-							<li><a href="inbox.html"><i class="icon-envelope"></i> My Inbox(3)</a></li>
-
-							<li><a href="#"><i class="icon-tasks"></i> My Tasks</a></li>
-
-							<li class="divider"></li>
-
-							<li><a href="extra_lock.html"><i class="icon-lock"></i> Lock Screen</a></li>
-
-							<li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
+							<li><a href="login"><i class="icon-key"></i> Log Out</a></li>
 
 						</ul>
 

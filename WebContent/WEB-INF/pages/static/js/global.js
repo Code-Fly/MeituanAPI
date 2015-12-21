@@ -1,17 +1,12 @@
 $(function() {
+	
 	if (window.location.protocol + "//" + window.location.host + window.location.pathname != _ctx + "/web/login") {
 		sessionAuthentication();
-	}
-	
-	if("1"!=SessionCache.get("userId") && 1!=SessionCache.get("userId")){
-		$("#authorization").hide();
-	}
-
-	$("#logout").click(function(e) {
+	} else {
 		SessionCache.remove("userId");
 		SessionCache.remove("userName");
-		window.location.href = _ctx + "/web/login";
-	});
+	}
+	
 });
 
 function GetQueryString(name) {
@@ -23,6 +18,7 @@ function GetQueryString(name) {
 }
 
 function sessionAuthentication() {
+	
 	var userId = SessionCache.get("userId");
 	if (null == userId || "" == userId) {
 		SessionCache.remove("userId");

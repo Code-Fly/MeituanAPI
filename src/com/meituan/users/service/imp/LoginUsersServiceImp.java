@@ -20,4 +20,10 @@ public class LoginUsersServiceImp implements LoginUsersService {
 		return loginUsersMapper.selectByExample(example);
 	}
 
+	@Override
+	public LoginUsers selectByPrimaryKey(Integer user_id) {
+		// TODO Auto-generated method stub
+		return loginUsersMapper.selectByPrimaryKey(user_id);
+	}
+
 }
