@@ -230,12 +230,41 @@
 									<td>${user.nfdj}</td>
 									<td>${user.descption}</td>
 									<td><a href="login" class="btn mini green">进入审核门店</a></td>
+									<td>	<button type="button" class="btn red edit" name="edit_cancel_url" date-message="http://120.26.103.47:8080/MeituanAPI/Api/cancelOrder">修改</button><td>
 								</tr>
 						</tbody>
 					</table>
 				</div>
 			</div>
 			<!-- END SAMPLE TABLE PORTLET-->
+			<!-- url -->
+			<div class="modal fade" id="J-callback-url">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="pull-right" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="glyphicon glyphicon-remove "></span></button>
+                    <h4 class="modal-title">修改URL</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form role="form" action="#">
+                    	<div class="form-group">
+                    		<div class="alert alert-danger" role = "alert">
+                    		请保证正式和测试环境的回调URL地址不同
+                    		</div>
+                    	</div>
+                       <div class="input-group input-group-lg">
+                           <input type="text" class="m-wrap span12" id="J-url-text" placeholder="请输入对应URL"/>
+                       </div>
+                      </form>                           
+                  </div>
+                  <div class="modal-footer">                      
+                      <button type="button" class="btn btn-primary" id="J-submit-btn">确认</button>
+                      <button type="button" class="btn btn-default" id="J-cancle-btn" data-dismiss="modal">取消</button>
+                  </div>
+
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div>
 		</div>
 	</div>
 
