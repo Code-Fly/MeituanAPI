@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +21,9 @@ import com.base.utils.JsonUtil;
 import com.meituan.api.entity.ApiData;
 import com.meituan.app.entity.App;
 import com.meituan.app.entity.AppExample;
+import com.meituan.apppoi.entity.AppPoi;
+import com.meituan.apppoi.entity.AppPoiExample;
+import com.meituan.apppoi.service.iface.AppPoiService;
 import com.meituan.common.MeituanConst.MeituanResponse;
 import com.meituan.utils.SigUtil;
 
@@ -68,14 +72,30 @@ public class AppController extends BaseController {
 		return JsonUtil.json2Sting(appData);
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/queryApps")
-	public String getApp(HttpServletRequest request, 
+	@RequestMapping(value = "/web/appList")
+	public String appList(HttpServletRequest request, 
 			@RequestParam(value = "userId", required = true) int userId) {
 		AppExample example = new AppExample();
 		example.or().andUseridEqualTo(userId);
 		List<App> apps = appService.selectByExample(example);
-		ApiData ret = new ApiData(JsonUtil.jsonArray2Sting(apps));
-		return JsonUtil.json2Sting(ret);
+		request.setAttribute("apps", apps);
+		return "/appList";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/web/deleteApp")
+	public String deleteApp(HttpServletRequest request, 
+			@RequestParam(value = "app_id", required = true) String app_id) {
+		AppPoiExample example = new AppPoiExample();
+		example.or().andAppidEqualTo(app_id);
+		List<AppPoi> pois = appPoiService.selectByExample(example);
+		if (pois.size()>0) {
+			return "HASPOI";
+		} else {
+			appService.deleteByPrimaryKey(app_id);
+			return SUCCESS;
+		}
+		
+		
 	}
 }

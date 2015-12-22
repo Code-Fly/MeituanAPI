@@ -3,10 +3,13 @@
  */
 package com.meituan.apppoi.service.imp;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.meituan.apppoi.entity.AppPoi;
+import com.meituan.apppoi.entity.AppPoiExample;
 import com.meituan.apppoi.entity.AppPoiKey;
 import com.meituan.apppoi.mapper.AppPoiMapper;
 import com.meituan.apppoi.service.iface.AppPoiService;
@@ -27,6 +30,11 @@ public class AppPoiServiceImp implements AppPoiService {
 		key.setApp_poi_code(app_poi_code);
 		key.setAppid(appid);
 		return apppoiMapper.selectByPrimaryKey(key);
+	}
+
+	@Override
+	public List<AppPoi> selectByExample(AppPoiExample example) {
+		return apppoiMapper.selectByExample(example);
 	}
 
 }

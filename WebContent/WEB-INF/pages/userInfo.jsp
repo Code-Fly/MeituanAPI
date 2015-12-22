@@ -5,13 +5,9 @@
 <!-- BEGIN HEAD -->
 
 <head>
-
-	
 	<title>美团外卖管理后台</title>
  	<%@ include file="meta/meta.jsp"%>
- 	
-
-
+	<script  src="${ctx}/static/js/pages/userInfo.js" type="text/javascript"></script>
 </head>
 
 <!-- END HEAD -->
@@ -80,7 +76,7 @@
 
 								<i class="icon-home"></i>
 
-								<a href="index.html">Home</a> 
+								<a id="home_href" href="#">Home</a> 
 
 								<i class="icon-angle-right"></i>
 
@@ -166,10 +162,13 @@
                     		</div>
                     	</div>
                        <div class="input-group input-group-lg">
-                           <input type="password" class="m-wrap span12" id="J-newpass-text" placeholder="旧密码"/>
+                           <input type="password" class="m-wrap span12" id="J-oldpass-text" placeholder="旧密码"/>
                        </div>
                         <div class="input-group input-group-lg">
-                           <input type="password" class="m-wrap span12" id="J-oldpass-text" placeholder="新密码"/>
+                           <input type="password" class="m-wrap span12" id="J-newpass-text" placeholder="新密码"/>
+                       </div>
+                        <div class="input-group input-group-lg">
+                           <input type="password" class="m-wrap span12" id="J-newpass2-text" placeholder="确认新密码"/>
                        </div>
                       </form>                           
                   </div>
@@ -193,7 +192,7 @@
 		<!-- END PAGE -->
 
 	</div>
-
+</div>
 	<!-- END CONTAINER -->
 
 	<!-- BEGIN FOOTER -->

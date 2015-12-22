@@ -25,5 +25,9 @@ public class LoginUsersServiceImp implements LoginUsersService {
 		// TODO Auto-generated method stub
 		return loginUsersMapper.selectByPrimaryKey(user_id);
 	}
-
+	
+	@Override
+	public int updateByPrimaryKeySelective(LoginUsers record) {
+		return loginUsersMapper.updateByPrimaryKeySelective(record);
+	}
 }

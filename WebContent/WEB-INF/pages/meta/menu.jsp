@@ -53,7 +53,7 @@
 
 						<li >
 
-							<a href="apppoi">
+							<a id="applist_href" href="#">
 
 							APP一览</a>
 
@@ -80,7 +80,7 @@
 
 						<li >
 
-							<a href="apppoi">
+							<a href="poilist_href">
 
 							门店一览</a>
 

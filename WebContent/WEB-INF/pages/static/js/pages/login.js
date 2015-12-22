@@ -2,14 +2,14 @@ $(document).ready(function() {
 	$("#login").click(function(e) {
 		$("#login").addClass("disabled");
 		$.ajax({
-			url : _ctx + "/Api/login?userName=" + $("#userName").val() + "&password=" + $("#password").val(),
+			url : _ctx + "/web/to_login?userName=" + $("#userName").val() + "&password=" + $("#password").val(),
 			cache : false,
 			success : function(data, textStatus, jqXHR) {
 				
 				if ("" != data && null != data) {
 					SessionCache.update("userId", data);
 					SessionCache.update("userName", $("#userName").val());					
-					window.location.href = _ctx + "/Api/web/index?userId="+data;
+					window.location.href = _ctx + "/web/index?userId="+data;
 				} else {
 					SessionCache.remove("userId");
 					SessionCache.remove("userName");

@@ -24,5 +24,9 @@ public class AppServiceImp implements AppService {
 	public List<App> selectByExample(AppExample example) {
 		return appMapper.selectByExample(example);
 	}
-
+	
+	@Override
+	public int deleteByPrimaryKey(String appid) {
+		return appMapper.deleteByPrimaryKey(appid);
+	}
 }

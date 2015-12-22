@@ -1,7 +1,9 @@
 $(function() {
 	 $("#modify_password").bind().click(function(){
          if ($("#J-callback-url").is(":hidden")) {
-            $("#J-url-text").val("");
+        	$("#J-oldpass-text").val("");
+            $("#J-newpass-text").val("");
+            $("#J-newpass2-text").val("");
          };
          $("#J-callback-url").modal();
        
@@ -11,34 +13,40 @@ $(function() {
                         var new_pass = $.trim($("#J-newpass-text").val());
                         if(old_pass!=oldPass){
                         	alert("旧密码错误");
+                        	return;
+                        } 
+                        if(''== new_pass || null == new_pass){
+                        	alert("新密码不能为空");
+                        	return;
                         } 
                         if(new_pass == old_pass){
                         	alert("新密码不能与旧密码相同");
+                        	return;
                         }
-                        var paramData = {};
-                        paramData["app_id"]=app_id;
-                        paramData[url_type]=res_url;
+                        var new_pass2 = $.trim($("#J-newpass2-text").val());
+                        if(new_pass != new_pass2){
+                        	alert("两次输入的密码不一致");
+                        	return;
+                        }
+                      
                         $.ajax({
-                            url: "/basis/callback/url_edit",
-                            type: 'post',
-                            data: paramData,
-                            dataType: 'json',
+                            url:  _ctx + "/web/updatePwd?userId="+SessionCache.get("userId")+"&password="+new_pass,
                             success: function(result){
-                                if(result.code == 0){
+                                if("OPSUCCESS" == result){
                                     alert("保存成功");
                                     setTimeout(function(){
-                                         window.location.reload();
+                                    	window.location.href = _ctx + "/web/login";
                                      },500);
                                 }
                                 else{
-                                    alert(result.msg);
+                                    alert(result);
                                     setTimeout(function(){
                                          window.location.reload();
                                      },500);
                                 }
                             },
                             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                               // wmHeadertip.error(errorThrown,true,1500);
+                            	 alert(textStatus);
                             }
                          
                         });

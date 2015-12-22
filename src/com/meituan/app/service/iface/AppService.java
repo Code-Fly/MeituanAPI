@@ -9,4 +9,6 @@ public interface AppService {
 	App selectByPrimaryKey(String appid);
 	
 	List<App>  selectByExample(AppExample example);
+
+	int deleteByPrimaryKey(String appid);
 }

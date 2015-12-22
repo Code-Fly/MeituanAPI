@@ -1,6 +1,7 @@
 $(function() {
 	if (window.location.protocol + "//" + window.location.host + window.location.pathname != _ctx + "/web/login") {
 		sessionAuthentication();
+		menuHerf();
 	} else {
 		SessionCache.remove("userId");
 		SessionCache.remove("userName");
@@ -16,6 +17,11 @@ function GetQueryString(name) {
 	return null;
 }
 
+function menuHerf(){
+	$("#home_href").attr("href",_ctx+"/web/index?userId="+ SessionCache.get("userId"));
+	$("#applist_href").attr("href",_ctx+"/Api/web/appList?userId="+ SessionCache.get("userId"));
+	$("#poilist_href").attr("href",_ctx+"/Api//web/poiList?userId="+ SessionCache.get("userId"));
+}
 function sessionAuthentication() {
 	
 	var userId = SessionCache.get("userId");

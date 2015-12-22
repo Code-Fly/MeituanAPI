@@ -2,6 +2,8 @@ package com.base.controller;
 
 import net.sf.json.JSONObject;
 
+import javax.security.auth.login.FailedLoginException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ import com.meituan.common.MeituanConst.MeituanResponse;
  * @param <T>
  */
 public abstract class BaseController {
+	
+	public String SUCCESS = "OPSUCCESS";
+	public String FAIL =  "OPFAIL";
 	
 	@Autowired
 	protected AppPoiService appPoiService;

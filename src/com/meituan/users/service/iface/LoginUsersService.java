@@ -8,4 +8,5 @@ import com.meituan.users.entity.LoginUsersExample;
 public interface LoginUsersService {
 	List<LoginUsers> selectByExample(LoginUsersExample example);
 	LoginUsers selectByPrimaryKey(Integer user_id);
+	public int updateByPrimaryKeySelective(LoginUsers record);
 }

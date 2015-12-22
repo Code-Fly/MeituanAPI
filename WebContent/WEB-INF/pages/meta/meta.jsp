@@ -1,4 +1,5 @@
 <%@page import="net.sf.json.JSONObject"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -8,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <SCRIPT type="text/javascript">
 	var _ctx = "${ctx}";
+	var userId = "${user.user_id}";
 </SCRIPT>
 <!-- external js -->
 	
@@ -119,5 +121,5 @@
 
 
 
-	<script  src="${ctx}/static/js/callback.js" type="text/javascript"></script>
+	
 	<script  src="${ctx}/static/js/global.js" type="text/javascript"></script>
