@@ -64,101 +64,13 @@
 
 					<div class="span12">
 
-						<!-- BEGIN STYLE CUSTOMIZER -->
-
-						<div class="color-panel hidden-phone" style="display: none;">
-
-							<div class="color-mode-icons icon-color"></div>
-
-							<div class="color-mode-icons icon-color-close"></div>
-
-							<div class="color-mode">
-
-								<p>THEME COLOR</p>
-
-								<ul class="inline">
-
-									<li class="color-black current color-default" data-style="default"></li>
-
-									<li class="color-blue" data-style="blue"></li>
-
-									<li class="color-brown" data-style="brown"></li>
-
-									<li class="color-purple" data-style="purple"></li>
-
-									<li class="color-grey" data-style="grey"></li>
-
-									<li class="color-white color-light" data-style="light"></li>
-
-								</ul>
-
-								<label>
-
-									<span>Layout</span>
-
-									<select class="layout-option m-wrap small">
-
-										<option value="fluid" selected>Fluid</option>
-
-										<option value="boxed">Boxed</option>
-
-									</select>
-
-								</label>
-
-								<label>
-
-									<span>Header</span>
-
-									<select class="header-option m-wrap small">
-
-										<option value="fixed" selected>Fixed</option>
-
-										<option value="default">Default</option>
-
-									</select>
-
-								</label>
-
-								<label>
-
-									<span>Sidebar</span>
-
-									<select class="sidebar-option m-wrap small">
-
-										<option value="fixed">Fixed</option>
-
-										<option value="default" selected>Default</option>
-
-									</select>
-
-								</label>
-
-								<label>
-
-									<span>Footer</span>
-
-									<select class="footer-option m-wrap small">
-
-										<option value="fixed">Fixed</option>
-
-										<option value="default" selected>Default</option>
-
-									</select>
-
-								</label>
-
-							</div>
-
-						</div>
-
-						<!-- END BEGIN STYLE CUSTOMIZER -->    
+						  
 
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 
 						<h3 class="page-title">
 
-							用户 <small></small>
+							我的信息<small></small>
 
 						</h3>
 
@@ -174,7 +86,7 @@
 
 							</li>
 
-							<li><a href="#">用户信息</a></li>
+							<li><a href="#">我的信息</a></li>
 
 							<li class="pull-right no-text-shadow">
 
@@ -207,7 +119,7 @@
 			<!-- BEGIN SAMPLE TABLE PORTLET-->
 			<div class="portlet box blue">
 				<div class="portlet-title">
-					<div class="caption"><i class="icon-briefcase"></i>拥有的App权限</div>
+					<div class="caption"><i class="icon-briefcase"></i>我的信息</div>
 					<div class="tools">
 						<a href="javascript:;" class="collapse"></a>
 					</div>
@@ -229,8 +141,9 @@
 									<td>${user.login_id}</td>
 									<td>${user.nfdj}</td>
 									<td>${user.descption}</td>
-									<td><a href="login" class="btn mini green">进入审核门店</a></td>
-									<td>	<button type="button" class="btn red edit" name="edit_cancel_url" date-message="http://120.26.103.47:8080/MeituanAPI/Api/cancelOrder">修改</button><td>
+									<td>	
+										<button id="modify_password" type="button" class="btn red edit" name="edit_cancel_url" date-message="${user.login_pass}">修改密码</button>
+									<td>
 								</tr>
 						</tbody>
 					</table>
@@ -238,22 +151,25 @@
 			</div>
 			<!-- END SAMPLE TABLE PORTLET-->
 			<!-- url -->
-			<div class="modal fade" id="J-callback-url">
-              <div class="modal-dialog">
-                <div class="modal-content">
+			<div class="modal fade" id="J-callback-url" style="display:block">
+              <div class="modal-dialog" style="display:block">
+                <div class="modal-content" style="display:block">
                   <div class="modal-header">
                     <button type="button" class="pull-right" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="glyphicon glyphicon-remove "></span></button>
-                    <h4 class="modal-title">修改URL</h4>
+                    <h4 class="modal-title">修改密码</h4>
                   </div>
                   <div class="modal-body">
                     <form role="form" action="#">
                     	<div class="form-group">
                     		<div class="alert alert-danger" role = "alert">
-                    		请保证正式和测试环境的回调URL地址不同
+                    		提示：新密码与旧密码不能相同
                     		</div>
                     	</div>
                        <div class="input-group input-group-lg">
-                           <input type="text" class="m-wrap span12" id="J-url-text" placeholder="请输入对应URL"/>
+                           <input type="password" class="m-wrap span12" id="J-newpass-text" placeholder="旧密码"/>
+                       </div>
+                        <div class="input-group input-group-lg">
+                           <input type="password" class="m-wrap span12" id="J-oldpass-text" placeholder="新密码"/>
                        </div>
                       </form>                           
                   </div>

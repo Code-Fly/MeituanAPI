@@ -29,7 +29,7 @@
 
 					<i class="icon-home"></i> 
 
-					<span class="title">用户信息</span>
+					<span class="title">我的信息</span>
 
 					<span class="selected"></span>
 

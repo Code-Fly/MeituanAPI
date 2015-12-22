@@ -118,5 +118,6 @@
 	<link rel="shortcut icon" href="${ctx}/static/media/image/favicon.ico" />
 
 
-<script  src="${ctx}/static/js/global.js" type="text/javascript"></script>
-	
+
+	<script  src="${ctx}/static/js/callback.js" type="text/javascript"></script>
+	<script  src="${ctx}/static/js/global.js" type="text/javascript"></script>

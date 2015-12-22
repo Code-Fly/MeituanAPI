@@ -1,5 +1,4 @@
 $(function() {
-	
 	if (window.location.protocol + "//" + window.location.host + window.location.pathname != _ctx + "/web/login") {
 		sessionAuthentication();
 	} else {
