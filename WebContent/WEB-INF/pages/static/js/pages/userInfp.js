@@ -40,9 +40,6 @@ $(function() {
                                 }
                                 else{
                                     alert(result);
-                                    setTimeout(function(){
-                                         window.location.reload();
-                                     },500);
                                 }
                             },
                             error: function (XMLHttpRequest, textStatus, errorThrown) {

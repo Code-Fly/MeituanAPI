@@ -13,13 +13,13 @@ function deleteApp(appId){
             } else if ("HASPOI" == result){
             	alert("该APP下存在门店不能被删除！");
                 setTimeout(function(){
-                	window.location.reload();
+                	return;
                  },500);
             }
             else{
                 alert(result);
                 setTimeout(function(){
-                	window.location.reload();
+                	return;
                  },500);
             }
         },
@@ -30,65 +30,56 @@ function deleteApp(appId){
     });
 	
 }
+
 $(function() {
-	 $("#modify_password").bind().click(function(){
-         if ($("#J-callback-url").is(":hidden")) {
-        	$("#J-oldpass-text").val("");
-            $("#J-newpass-text").val("");
-            $("#J-newpass2-text").val("");
-         };
-         $("#J-callback-url").modal();
-       
-          var oldPass = $(this).attr("date-message");
-          $("#J-submit-btn").unbind().click(function(){
-                        var old_pass = $.trim($("#J-oldpass-text").val());
-                        var new_pass = $.trim($("#J-newpass-text").val());
-                        if(old_pass!=oldPass){
-                        	alert("旧密码错误");
-                        	return;
-                        } 
-                        if(''== new_pass || null == new_pass){
-                        	alert("新密码不能为空");
-                        	return;
-                        } 
-                        if(new_pass == old_pass){
-                        	alert("新密码不能与旧密码相同");
-                        	return;
-                        }
-                        var new_pass2 = $.trim($("#J-newpass2-text").val());
-                        if(new_pass != new_pass2){
-                        	alert("两次输入的密码不一致");
-                        	return;
-                        }
-                      
-                        $.ajax({
-                            url:  _ctx + "/web/updatePwd?userId="+SessionCache.get("userId")+"&password="+new_pass,
-                            success: function(result){
-                                if("OPSUCCESS" == result){
-                                    alert("保存成功");
-                                    setTimeout(function(){
-                                    	window.location.href = _ctx + "/web/login";
-                                     },500);
-                                }
-                                else{
-                                    alert(result);
-                                    setTimeout(function(){
-                                         window.location.reload();
-                                     },500);
-                                }
-                            },
-                            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            	 alert(textStatus);
-                            }
-                         
-                        });
-                    });
-    });
-    $("#J-btn-search").click(function(){
+	// 清空 
+	$(".edit").bind().click(function(){
+		if ($("#J-callback-url").is(":hidden")) {
+	  	 	$("#J-secret-text").val("");
+	  	 	$("#J-price-text").val("");
+	  	 	$("#J-desc-text").val("");
+	   };
+	   $("#J-callback-url").modal();
+	   var appId= $(this).attr("date-message");
+	   // 初始化
+	   $("#J-secret-text").val($.trim($("#secret_"+appId).text()));
+ 	   $("#J-price-text").val($.trim($("#price_"+appId).text()));
+ 	   $("#J-desc-text").val($.trim($("#desc_"+appId).text()));
+       $("#J-submit-btn").unbind().click(function(){
+           var secret = $.trim($("#J-secret-text").val());
+           var price = $.trim($("#J-price-text").val());
+           var description = $.trim($("#J-desc-text").val());
+           if(''== secret || null == secret){
+           		alert("密钥不能为空");
+           		return;
+           }
+           if(''!= price && isNaN(price)){
+        	    alert("年费输入有误！");
+          		return;
+           }
+           $.ajax({
+               url:  _ctx + "/Api/web/updateApp?app_id="+appId+"&price="+price+"&descption="+description+"&secret="+secret,
+               success: function(result){
+                   if("OPSUCCESS" == result){
+                       alert("保存成功");
+                       setTimeout(function(){
+                    	   window.location.reload();
+                        },500);
+                   }
+                   else{
+                       alert(result);
+                   }
+               },
+               error: function (XMLHttpRequest, textStatus, errorThrown) {
+               	 alert(textStatus);
+               }
+            
+           });
+       });
+ 	   
+	});
+	 $("#J-btn-search").click(function(){
          $("#form").submit();
     });
-
-
-	
 });
    

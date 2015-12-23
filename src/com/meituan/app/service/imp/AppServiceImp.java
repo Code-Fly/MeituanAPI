@@ -29,4 +29,10 @@ public class AppServiceImp implements AppService {
 	public int deleteByPrimaryKey(String appid) {
 		return appMapper.deleteByPrimaryKey(appid);
 	}
+	
+	
+	@Override
+	public int updateByPrimaryKeySelective(App record) {
+		return appMapper.updateByPrimaryKeySelective(record);
+	}
 }

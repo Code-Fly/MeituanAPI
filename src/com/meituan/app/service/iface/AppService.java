@@ -11,4 +11,6 @@ public interface AppService {
 	List<App>  selectByExample(AppExample example);
 
 	int deleteByPrimaryKey(String appid);
+
+	int updateByPrimaryKeySelective(App record);
 }

@@ -119,7 +119,7 @@
 			<!-- BEGIN SAMPLE TABLE PORTLET-->
 			<div class="portlet box blue">
 				<div class="portlet-title">
-					<div class="caption"><i class="icon-briefcase"></i>我的信息</div>
+					<div class="caption"><i class="icon-briefcase"></i>APP一览</div>
 					<div class="tools">
 						<a href="javascript:;" class="collapse"></a>
 					</div>
@@ -133,19 +133,22 @@
 								<th>密钥</th>
 								<th>年费</th>
 								<th>描述</th>
-								<th>操作</th>
+								<th colspan= 2>操作</th>
 							</tr>
 						</thead>
 						<tbody>
 						<c:forEach var="app" items="${apps}" varStatus="st">
 								<tr>
 									<td>${st.count}</td>
-									<td>${app.appid}</td>
-									<td>${app.secret}</td>
-									<td>${app.price}</td>
-									<td>${app.descption}</td>
+									<td id="appid_${app.appid}">${app.appid}</td>
+									<td id="secret_${app.appid}">${app.secret}</td>
+									<td id="price_${app.appid}">${app.price}</td>
+									<td id="desc_${app.appid}">${app.descption}</td>
 									<td>	
-										<button id="del_app_"${app.appid} type="button" onclick="deleteApp(${app.appid})"class="btn red edit" name="edit_cancel_url" date-message="${app.appid}">删除</button>
+										<button id="del_app_${app.appid}" type="button" onclick="deleteApp(${app.appid})" class="btn red delete" name="edit_cancel_url" date-message="${app.appid}">删除</button>
+									<td>
+									<td>	
+										<button id="edit_app_${app.appid}" type="button" class="btn red edit" name="edit_cancel_url" date-message="${app.appid}">修改</button>
 									<td>
 								</tr>
 						</c:forEach>
@@ -161,23 +164,23 @@
                 <div class="modal-content" style="display:block">
                   <div class="modal-header">
                     <button type="button" class="pull-right" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="glyphicon glyphicon-remove "></span></button>
-                    <h4 class="modal-title">修改密码</h4>
+                    <h4 class="modal-title">修改APP</h4>
                   </div>
                   <div class="modal-body">
                     <form role="form" action="#">
                     	<div class="form-group">
                     		<div class="alert alert-danger" role = "alert">
-                    		提示：新密码与旧密码不能相同
+                    		提示：不要将密钥告诉他人
                     		</div>
                     	</div>
                        <div class="input-group input-group-lg">
-                           <input type="password" class="m-wrap span12" id="J-oldpass-text" placeholder="旧密码"/>
+                           <input type="text" class="m-wrap span12" id="J-secret-text" placeholder="密钥"/>
                        </div>
                         <div class="input-group input-group-lg">
-                           <input type="password" class="m-wrap span12" id="J-newpass-text" placeholder="新密码"/>
+                           <input type="text" class="m-wrap span12" id="J-price-text" placeholder="年费"/>
                        </div>
                         <div class="input-group input-group-lg">
-                           <input type="password" class="m-wrap span12" id="J-newpass2-text" placeholder="确认新密码"/>
+                           <input type="text" class="m-wrap span12" id="J-desc-text" placeholder="描述"/>
                        </div>
                       </form>                           
                   </div>

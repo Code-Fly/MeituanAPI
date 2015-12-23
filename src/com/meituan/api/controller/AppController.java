@@ -98,4 +98,20 @@ public class AppController extends BaseController {
 		
 		
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/web/updateApp")
+	public String updateApp(HttpServletRequest request, 
+			@RequestParam(value = "app_id", required = true) String app_id,
+			@RequestParam(value = "price", required = false,defaultValue="0") Float price,
+			@RequestParam(value = "descption", required = false, defaultValue=" ") String descption,
+			@RequestParam(value = "secret", required = true) String secret) {
+		App app = new App();
+		app.setAppid(app_id);
+		app.setDescption(descption);
+		app.setPrice(price);
+		app.setSecret(secret);
+		appService.updateByPrimaryKeySelective(app);
+		return SUCCESS;
+	}
 }
