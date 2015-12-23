@@ -37,4 +37,11 @@ public class AppPoiServiceImp implements AppPoiService {
 		return apppoiMapper.selectByExample(example);
 	}
 
+	@Override
+	public List<AppPoi> selectLimt(int beginNum, int endNum, AppPoiExample example) {
+		return apppoiMapper.selectLimt(beginNum, endNum, example);
+	}
+
+	
+
 }

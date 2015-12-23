@@ -75,4 +75,24 @@ public class AppPoiController extends BaseController {
 		ApiData appData =  new ApiData(poi.getExpiredate());
 		return JsonUtil.json2Sting(appData);
 	}
+	
+	
+	/**
+	 * 
+	 * @param request
+	 * @param userId
+	 * @param page 第几页
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/poiList")
+	public String poiList(HttpServletRequest request, 
+			// system params
+			@RequestParam(value = "userId", required = false,defaultValue="1") int userId, 
+			@RequestParam(value = "page", required = false,defaultValue="1") int page) {
+		
+		
+		return JsonUtil.json2Sting(appData);
+	}
+
 }
