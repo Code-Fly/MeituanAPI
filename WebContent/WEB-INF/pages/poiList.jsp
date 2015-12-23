@@ -9,8 +9,8 @@
 	
 	<title>美团外卖管理后台</title>
  	<%@ include file="meta/meta.jsp"%>
- 	<script  src="${ctx}/static/js/pages/appList.js" type="text/javascript"></script>
-
+ 	<script  src="${ctx}/static/js/pages/poiList.js" type="text/javascript"></script>
+<script src="${ctx}/static/media/js/bootstrap-paginator.js" type="text/javascript"></script>
 
 </head>
 
@@ -160,46 +160,19 @@
         </div>
     </div>
 					<div class="row-fluid">
-		<div class="span10">
+		<div class="span12">
 			<!-- BEGIN SAMPLE TABLE PORTLET-->
 			<div class="portlet box blue">
 				<div class="portlet-title">
-					<div class="caption"><i class="icon-briefcase"></i>APP一览</div>
+					<div class="caption"><i class="icon-briefcase"></i>门店一览</div>
 					<div class="tools">
 						<a href="javascript:;" class="collapse"></a>
 					</div>
 				</div>
-				<div class="portlet-body">
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>APPID</th>
-								<th>密钥</th>
-								<th>年费</th>
-								<th>描述</th>
-								<th>操作</th>
-							</tr>
-						</thead>
-						<tbody>
-						<c:forEach var="app" items="${apps}" varStatus="st">
-								<tr>
-									<td>${st.count}</td>
-									<td id="appid_${app.appid}">${app.appid}</td>
-									<td id="secret_${app.appid}">${app.secret}</td>
-									<td id="price_${app.appid}">${app.price}</td>
-									<td id="desc_${app.appid}">${app.descption}</td>
-									<td>	
-										<button id="del_app_${app.appid}" type="button" onclick="deleteApp(${app.appid})" class="btn red delete" name="edit_cancel_url" date-message="${app.appid}">删除</button>
-										<button id="edit_app_${app.appid}" type="button" class="btn red edit" name="edit_cancel_url" date-message="${app.appid}">修改</button>
-									</td>
-									
-								</tr>
-						</c:forEach>
-								
-						</tbody>
-					</table>
-				</div>
+				
+				 <div id="list" class="portlet-body j-portlet"></div>
+
+        			<div id="example"></div>
 			</div>
 			<!-- END SAMPLE TABLE PORTLET-->
 			<!-- url -->

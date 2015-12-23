@@ -5,31 +5,35 @@
       success: function (data) {
         if (data != null) {
           $.each(eval("(" + data + ")").list, function (index, item) { //遍历返回的json
-            $("#list").append('<table id="data_table" class="table table-striped">');
+            $("#list").append('<table id="data_table" class="table table-hover"');
             $("#list").append('<thead>');
             $("#list").append('<tr>');
-            $("#list").append('<th>Id</th>');
-            $("#list").append('<th>部门名称</th>');
-            $("#list").append('<th>备注</th>');
+            $("#list").append('<th width="35" rowspan="2" style="text-align:center">Id</th>');
+            $("#list").append('<th width="35" rowspan="2" style="text-align:center>门店ID</th>');
+            $("#list").append('<th width="35" rowspan="2" style="text-align:center>门店名称</th>');
+            $("#list").append('<th width="35" rowspan="2" style="text-align:center>所属APP</th>');
+            $("#list").append('<th width="35" rowspan="2" style="text-align:center>门店电话号码</th>');
+            $("#list").append('<th width="35" rowspan="2" style="text-align:center>门店地址</th>');
+            $("#list").append('<th width="35" rowspan="2" style="text-align:center>门店有效期</th>');
+            $("#list").append('<th width="35" rowspan="2" style="text-align:center>操作</th>');
             $("#list").append('<th> </th>');
             $("#list").append('</tr>');
             $("#list").append('</thead>');
             $("#list").append('<tbody>');
             $("#list").append('<tr>');
-            $("#list").append('<td>' + item.Id + '</td>');
-            $("#list").append('<td>' + item.Name + '</td>');
-            $("#list").append('<td>备注</td>');
+            $("#list").append('<td text-align:center><div class="th-inner">' + index+ '</div></td>');
+            $("#list").append('<td text-align:center><div class="th-inner">' + item.app_poi_code + '</div></td>');
+            $("#list").append('<td text-align:center><div class="th-inner">' + item.wm_poi_name + '</div></td>');
+            $("#list").append('<td text-align:center><div class="th-inner">' + item.appid + '</div></td>');
+            $("#list").append('<td text-align:center><div class="th-inner">' + item.wm_poi_phone + '</div></td>');
+            $("#list").append('<td text-align:center><div class="th-inner">' + item.wm_poi_address + '</div></td>');
+            $("#list").append('<td text-align:center><div class="th-inner">' + item.expiredate + '</div></td>');
             $("#list").append('<td>');
-            $("#list").append('<button class="btn btn-warning" onclick="Edit(' + item.Id + ' );">修改</button>');
-            $("#list").append('<button class="btn btn-warning" onclick="Edit(' + item.Id + ' );">删除</button>');
+            $("#list").append('<button class="btn red edit" onclick="editPoi(' + item.app_poi_code + ' );">修改</button>');
+            $("#list").append('<button class="btn red delete" onclick="deletePoi(' + item.app_poi_code + ' );">删除</button>');
             $("#list").append('</td>');
             $("#list").append('</tr>');
             $("#list").append('</tbody>');
-
-            $("#list").append('<tr>');
-            $("#list").append('<td>内容</td>');
-            $("#list").append('<td>' + item.Message + '</td>');
-            $("#list").append('</tr>');
             $("#list").append('</table>');
           });
           var pageCount = eval("(" + data + ")").pageCount; //取到pageCount的值(把返回数据转成object类型)
@@ -58,33 +62,36 @@
                 success: function (data1) {
                   if (data1 != null) {
                     $.each(eval("(" + data + ")").list, function (index, item) { //遍历返回的json
-                      $("#list").append('<table id="data_table" class="table table-striped">');
-                      $("#list").append('<thead>');
-                      $("#list").append('<tr>');
-                      $("#list").append('<th>Id</th>');
-                      $("#list").append('<th>部门名称</th>');
-                      $("#list").append('<th>备注</th>');
-                      $("#list").append('<th> </th>');
-                      $("#list").append('</tr>');
-                      $("#list").append('</thead>');
-                      $("#list").append('<tbody>');
-                      $("#list").append('<tr>');
-                      $("#list").append('<td>' + item.Id + '</td>');
-                      $("#list").append('<td>' + item.Name + '</td>');
-                      $("#list").append('<td>备注</td>');
-                      $("#list").append('<td>');
-                      $("#list").append('<button class="btn btn-warning" onclick="Edit(' + item.Id + ' );">修改</button>');
-                      $("#list").append('<button class="btn btn-warning" onclick="Edit(' + item.Id + ' );">删除</button>');
-                      $("#list").append('</td>');
-                      $("#list").append('</tr>');
-                      $("#list").append('</tbody>');
-
-                      $("#list").append('<tr>');
-                      $("#list").append('<td>内容</td>');
-                      $("#list").append('<td>' + item.Message + '</td>');
-                      $("#list").append('</tr>');
-                      $("#list").append('</table>');
-                    });
+                    	 $("#list").append('<table id="data_table" class="table table-hover">');
+                         $("#list").append('<thead>');
+                         $("#list").append('<tr>');
+                         $("#list").append('<th width="35" rowspan="2" style="text-align:center">Id</th>');
+                         $("#list").append('<th width="35" rowspan="2" style="text-align:center>门店ID</th>');
+                         $("#list").append('<th width="35" rowspan="2" style="text-align:center>门店名称</th>');
+                         $("#list").append('<th width="35" rowspan="2" style="text-align:center>所属APP</th>');
+                         $("#list").append('<th width="35" rowspan="2" style="text-align:center>门店电话号码</th>');
+                         $("#list").append('<th width="35" rowspan="2" style="text-align:center>门店地址</th>');
+                         $("#list").append('<th width="35" rowspan="2" style="text-align:center>门店有效期</th>');
+                         $("#list").append('<th width="35" rowspan="2" style="text-align:center>操作</th>');
+                         $("#list").append('<th> </th>');
+                         $("#list").append('</tr>');
+                         $("#list").append('</thead>');
+                         $("#list").append('<tbody>');
+                         $("#list").append('<tr>');
+                         $("#list").append('<td text-align:center><div class="th-inner">' + item.app_poi_code + '</div></td>');
+                         $("#list").append('<td text-align:center><div class="th-inner">' + item.wm_poi_name + '</div></td>');
+                         $("#list").append('<td text-align:center><div class="th-inner">' + item.appid + '</div></td>');
+                         $("#list").append('<td text-align:center><div class="th-inner">' + item.wm_poi_phone + '</div></td>');
+                         $("#list").append('<td text-align:center><div class="th-inner">' + item.wm_poi_address + '</div></td>');
+                         $("#list").append('<td text-align:center><div class="th-inner">' + item.expiredate + '</div></td>');
+                         $("#list").append('<td>');
+                         $("#list").append('<button class="btn red edit" onclick="editPoi(' + item.app_poi_code + ' );">修改</button>');
+                         $("#list").append('<button class="btn red delete" onclick="deletePoi(' + item.app_poi_code + ' );">删除</button>');
+                         $("#list").append('</td>');
+                         $("#list").append('</tr>');
+                         $("#list").append('</tbody>');
+                         $("#list").append('</table>');                 
+                     });
                   }
                 }
               });

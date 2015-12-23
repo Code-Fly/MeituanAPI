@@ -22,7 +22,7 @@ function menuHerf(){
 	$("#index_href").attr("href",_ctx+"/web/index?userId="+ SessionCache.get("userId"));
 	$("#home_href").attr("href",_ctx+"/web/index?userId="+ SessionCache.get("userId"));
 	$("#applist_href").attr("href",_ctx+"/Api/web/appList?userId="+ SessionCache.get("userId"));
-	$("#poilist_href").attr("href",_ctx+"/Api/web/poiList?userId="+ SessionCache.get("userId"));
+	$("#poilist_href").attr("href",_ctx+"/Api/poiList?userId="+ SessionCache.get("userId"));
 }
 function sessionAuthentication() {
 	

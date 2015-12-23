@@ -3,6 +3,8 @@
  */
 package com.meituan.api.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ import com.base.utils.JsonUtil;
 import com.meituan.api.entity.ApiData;
 import com.meituan.app.entity.App;
 import com.meituan.apppoi.entity.AppPoi;
+import com.meituan.apppoi.entity.AppPoiExample;
 import com.meituan.apppoi.service.iface.AppPoiService;
 import com.meituan.common.MeituanConst.MeituanResponse;
 import com.meituan.utils.SigUtil;
@@ -77,6 +80,10 @@ public class AppPoiController extends BaseController {
 	}
 	
 	
+	@RequestMapping(value = "/poiList")
+	public String poiList(HttpServletRequest request) {
+		return "/poiList";
+	}
 	/**
 	 * 
 	 * @param request
@@ -85,14 +92,42 @@ public class AppPoiController extends BaseController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/poiList")
+	@RequestMapping(value = "/web/poiList")
 	public String poiList(HttpServletRequest request, 
 			// system params
 			@RequestParam(value = "userId", required = false,defaultValue="1") int userId, 
 			@RequestParam(value = "page", required = false,defaultValue="1") int page) {
-		
-		
-		return JsonUtil.json2Sting(appData);
+		int pageSize = 20;
+		AppPoiExample poiExample = new AppPoiExample();
+		poiExample.or().andUseridEqualTo(userId);
+		int beginNum = (page-1)*20;
+		int endNum = page * 20 - 1;
+		List<AppPoi> pois = appPoiService.selectByExample(poiExample);
+		List<AppPoi> pagePois = new ArrayList<>();
+		int poiSize = pois.size();
+		if (pois.size() > 0 ) {
+			if (poiSize < beginNum) {
+				pagePois = pois;
+			} else if (poiSize >  beginNum && poiSize < endNum ) {
+				pagePois = pois.subList(beginNum, poiSize);
+			} else {
+				pagePois = pois.subList(beginNum, endNum);
+			}
+			int rowCount=0;
+			if(poiSize%pageSize!=0)
+		      {
+		        rowCount = poiSize / pageSize + 1;
+		      }
+		      else
+		      {
+		        rowCount = poiSize / pageSize;
+		    }
+			String list = JsonUtil.jsonArray2Sting(pagePois);
+			return "{\"pageCount\":"+rowCount+",\"CurrentPage\":"+page+",\"list\":" + list + "}";
+		}  else {
+			return "NODATA";
+		}
+	
 	}
 
 }
