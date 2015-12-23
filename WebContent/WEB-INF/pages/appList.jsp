@@ -115,7 +115,7 @@
 				<div id="dashboard">
 
 					<div class="row-fluid">
-		<div class="span7">
+		<div class="span10">
 			<!-- BEGIN SAMPLE TABLE PORTLET-->
 			<div class="portlet box blue">
 				<div class="portlet-title">
@@ -133,7 +133,7 @@
 								<th>密钥</th>
 								<th>年费</th>
 								<th>描述</th>
-								<th colspan= 2>操作</th>
+								<th>操作</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -146,10 +146,9 @@
 									<td id="desc_${app.appid}">${app.descption}</td>
 									<td>	
 										<button id="del_app_${app.appid}" type="button" onclick="deleteApp(${app.appid})" class="btn red delete" name="edit_cancel_url" date-message="${app.appid}">删除</button>
-									<td>
-									<td>	
 										<button id="edit_app_${app.appid}" type="button" class="btn red edit" name="edit_cancel_url" date-message="${app.appid}">修改</button>
-									<td>
+									</td>
+									
 								</tr>
 						</c:forEach>
 								

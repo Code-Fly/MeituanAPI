@@ -25,7 +25,7 @@
 
 				<li class="start active ">
 
-					<a href="index">
+					<a id="index_href" href="#">
 
 					<i class="icon-home"></i> 
 

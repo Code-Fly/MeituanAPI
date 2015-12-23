@@ -18,9 +18,11 @@ function GetQueryString(name) {
 }
 
 function menuHerf(){
+	$("#login_out").attr("href",_ctx + "/web/login");
+	$("#index_href").attr("href",_ctx+"/web/index?userId="+ SessionCache.get("userId"));
 	$("#home_href").attr("href",_ctx+"/web/index?userId="+ SessionCache.get("userId"));
 	$("#applist_href").attr("href",_ctx+"/Api/web/appList?userId="+ SessionCache.get("userId"));
-	$("#poilist_href").attr("href",_ctx+"/Api//web/poiList?userId="+ SessionCache.get("userId"));
+	$("#poilist_href").attr("href",_ctx+"/Api/web/poiList?userId="+ SessionCache.get("userId"));
 }
 function sessionAuthentication() {
 	

@@ -59,7 +59,7 @@
 
 						<ul class="dropdown-menu">
 
-							<li><a href="login"><i class="icon-key"></i> Log Out</a></li>
+							<li><a id="login_out" href="#"><i class="icon-key"></i> Log Out</a></li>
 
 						</ul>
 
