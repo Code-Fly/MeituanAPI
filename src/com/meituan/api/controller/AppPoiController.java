@@ -96,12 +96,12 @@ public class AppPoiController extends BaseController {
 	public String poiList(HttpServletRequest request, 
 			// system params
 			@RequestParam(value = "userId", required = false,defaultValue="1") int userId, 
-			@RequestParam(value = "page", required = false,defaultValue="1") int page) {
+			@RequestParam(value = "pageId", required = false,defaultValue="1") int page) {
 		int pageSize = 20;
 		AppPoiExample poiExample = new AppPoiExample();
 		poiExample.or().andUseridEqualTo(userId);
 		int beginNum = (page-1)*20;
-		int endNum = page * 20 - 1;
+		int endNum = page * 20;
 		List<AppPoi> pois = appPoiService.selectByExample(poiExample);
 		List<AppPoi> pagePois = new ArrayList<>();
 		int poiSize = pois.size();

@@ -1,4 +1,4 @@
-	
+	<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 	<!-- BEGIN HEADER -->
 
 	<div class="header navbar navbar-inverse navbar-fixed-top">
@@ -11,11 +11,9 @@
 
 				<!-- BEGIN LOGO -->
 
-				<a class="brand" href="index.html">
-
-				<img src="${ctx}/static/media/image/logo.png" alt="logo"/>
-
-				</a>
+				<div class="brand" >
+				美团外卖管理后台
+				</div>
 
 				<!-- END LOGO -->
 

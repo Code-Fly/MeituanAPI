@@ -116,7 +116,7 @@
 <div class="row-fluid">
         <div class="portlet box yellow">
             <div class="portlet-title">
-                <div class="caption"><i class="icon-briefcase"></i>订单推送/取消查询</div>
+                <div class="caption"><i class="icon-briefcase"></i>门店查询</div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse"></a>
                 </div>
@@ -159,7 +159,7 @@
             </div>
         </div>
     </div>
-					<div class="row-fluid">
+	<div class="row-fluid">
 		<div class="span12">
 			<!-- BEGIN SAMPLE TABLE PORTLET-->
 			<div class="portlet box blue">
@@ -169,11 +169,26 @@
 						<a href="javascript:;" class="collapse"></a>
 					</div>
 				</div>
-				
-				 <div id="list" class="portlet-body j-portlet"></div>
-
-        			<div id="example"></div>
+				 <div class="portlet-body"  >
+				 <table class="table table-hover">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>门店ID</th>
+								<th>门店名称</th>
+								<th>所属APP</th>
+								<th>电话号码</th>
+								<th>地址</th>
+								<th>有效期</th>
+								<th colspan=2>操作</th>
+							</tr>
+						</thead>
+						<tbody id="list">
+						</tbody>
+						</table>
+				 </div>
 			</div>
+			<div id="example" class="pagination pagination-centered" style="text-align: center;"></div>
 			<!-- END SAMPLE TABLE PORTLET-->
 			<!-- url -->
 			<div class="modal fade" id="J-callback-url" style="display:block">
