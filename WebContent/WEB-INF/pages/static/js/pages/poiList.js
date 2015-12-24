@@ -1,45 +1,4 @@
-function editPoi(num){
-	if ($("#J-callback-url").is(":hidden")) {
-  	 	$("#J-name-text").val("");
-  	 	$("#J-phone-text").val("");
-  	 	$("#J-address-text").val("");
-   };
-   $("#J-callback-url").modal();
-   // 初始化
-       $("#J-name-text").val($.trim($("#secret_"+appId).text()));
-	   $("#J-phone-text").val($.trim($("#price_"+appId).text()));
-	   $("#J-address-text").val($.trim($("#desc_"+appId).text()));
-       $("#J-submit-btn").unbind().click(function(){
-       var name = $.trim($("#J-name-text").val());
-       var phone = $.trim($("#J-phone-text").val());
-       var address = $.trim($("#J-address-text").val());
-       if(''== name || null == name){
-       		alert("门店名称不能为空");
-       		return;
-       }
-       
-       $.ajax({
-           url:  _ctx + "/Api/web/updatePoi?app_id="+appId+"&price="+price+"&descption="+description+"&secret="+secret,
-           success: function(result){
-               if("OPSUCCESS" == result){
-                   alert("保存成功");
-                   setTimeout(function(){
-                	   window.location.reload();
-                    },500);
-               }
-               else{
-                   alert(result);
-               }
-           },
-           error: function (XMLHttpRequest, textStatus, errorThrown) {
-           	 alert(textStatus);
-           }
-        
-       });
-   });
-	   
 
-}
 
 function deletePoi(num){
 	if (!confirm("确定要删除该门店吗？")) return false;
@@ -69,6 +28,58 @@ function deletePoi(num){
 }
 
 
+
+function initEdit(){
+	// 清空 
+	$(".edit").bind().click(function(){
+		if ($("#J-callback-url").is(":hidden")) {
+	  	 	$("#J-name-text").val("");
+	  	 	$("#J-phone-text").val("");
+	  	 	$("#J-address-text").val("");
+	   };
+	   $("#J-callback-url").modal();
+	   var num= $(this).attr("date-message");
+	   // 初始化
+       $("#J-name-text").val($.trim($("#poi_name_"+num).text()));
+	   $("#J-phone-text").val($.trim($("#poi_phone_"+num).text()));
+	   $("#J-address-text").val($.trim($("#poi_address_"+num).text()));
+       $("#J-submit-btn").unbind().click(function(){
+       var name = $.trim($("#J-name-text").val());
+       var phone = $.trim($("#J-phone-text").val());
+       var address = $.trim($("#J-address-text").val());
+       if(''== name || null == name){
+       		alert("门店名称不能为空");
+       		return;
+       }
+       var appId =$.trim($("#appid_"+num).text());
+       var poiCode =$.trim($("#poi_code_"+num).text());
+       $.ajax({
+           url:  _ctx + "/Api/web/updatePoi?app_id="+appId+"&price="+price+"&descption="+description+"&secret="+secret+"&poi_code="+poiCode,
+               success: function(result){
+                   if("OPSUCCESS" == result){
+                       alert("保存成功");
+                       setTimeout(function(){
+                    	   window.location.reload();
+                        },500);
+                   }
+                   else{
+                       alert(result);
+                   }
+               },
+               error: function (XMLHttpRequest, textStatus, errorThrown) {
+               	 alert(textStatus);
+               }
+            
+           });
+       });
+ 	   
+	});
+	 $("#J-btn-search").click(function(){
+         $("#form").submit();
+    });
+}
+
+
 $(function () {
     var carId = 1;
     $("#list").html(""),
@@ -82,21 +93,21 @@ $(function () {
         	  var num = index+1;
             $("#list").append('<tr>');
             $("#list").append('<td>' + num+ '</td>');
-            $("#list").append('<td id=poi_code'+num+'>' + item.app_poi_code + '</td>');
+            $("#list").append('<td id=poi_code_'+num+'>' + item.app_poi_code + '</td>');
             $("#list").append('<td id=poi_name_'+num+'>' + item.wm_poi_name + '</td>');
             $("#list").append('<td id=appid_'+num+'>' + item.appid + '</td>');
             $("#list").append('<td id=poi_phone_'+num+'>' + item.wm_poi_phone + '</td>');
             $("#list").append('<td id=poi_address_'+num+'>' + item.wm_poi_address + '</td>');
             $("#list").append('<td id=expiredate_'+num+'>' + item.expiredate + '</td>');
             $("#list").append('<td>');
-            $("#list").append('<button class="btn red edit" onclick="editPoi(' + item.app_poi_code + ' );">修改</button>');
+            $("#list").append('<button class="btn red edit" date-message='+num+'>修改</button>');
             $("#list").append('</td>');
             $("#list").append('<td>');
             $("#list").append('<button class="btn red delete" onclick="deletePoi(' + item.app_poi_code + ' );">删除</button>');
             $("#list").append('</td>');
             $("#list").append('</tr>');
           });
-         
+          initEdit();
           var pageCount = eval("(" + data + ")").pageCount; //取到pageCount的值(把返回数据转成object类型)
           var currentPage = eval("(" + data + ")").CurrentPage; //得到urrentPage
           var options = {
@@ -127,28 +138,30 @@ $(function () {
                        var num = index+1;
                        $("#list").append('<tr>');
                        $("#list").append('<td>' + num + '</td>');
-                       $("#list").append('<td id=poi_code'+num+'>' + item.app_poi_code + '</td>');
+                       $("#list").append('<td id=poi_code_'+num+'>' + item.app_poi_code + '</td>');
                        $("#list").append('<td id=poi_name_'+num+'>' + item.wm_poi_name + '</td>');
                        $("#list").append('<td id=appid_'+num+'>' + item.appid + '</td>');
                        $("#list").append('<td id=poi_phone_'+num+'>' + item.wm_poi_phone + '</td>');
                        $("#list").append('<td id=poi_address_'+num+'>' + item.wm_poi_address + '</td>');
                        $("#list").append('<td id=expiredate_'+num+'>' + item.expiredate + '</td>');
                        $("#list").append('<td>');
-                       $("#list").append('<button class="btn red edit" onclick="editPoi(' + num + ' );">修改</button>');
+                       $("#list").append('<button class="btn red edit" date-message='+num+'>修改</button>');
                        $("#list").append('</td>');
                        $("#list").append('<td>');
                        $("#list").append('<button class="btn red delete" onclick="deletePoi(' + num + ' );">删除</button>');
                        $("#list").append('</td>');
                        $("#list").append('</tr>');
                      });
-                      
+                     initEdit();
                   }
                 }
               });
+            
             }
           };
           $('#example').bootstrapPaginator(options);
         }
       }
     });
+    
   })
