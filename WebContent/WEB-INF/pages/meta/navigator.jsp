@@ -12,7 +12,7 @@
 				<!-- BEGIN LOGO -->
 
 				<div class="brand" >
-				美团外卖管理后台
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;美团外卖管理后台
 				</div>
 
 				<!-- END LOGO -->

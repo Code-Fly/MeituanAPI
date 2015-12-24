@@ -123,38 +123,31 @@
             </div>
             <div class="portlet-body">
                 <div>
-                    <form id="form" class="form-horizontal">
+                    <div id="form" class="form-horizontal">
                         <div class="row-fluid">
-                            <div class="span3" style="width: 200px">
+                            <div class="span4" style="width: 250px">
                                 <div class="control-group">
                                     <label class="span4 pt5 tr pr5">门店名称</label>
-                                    <input name="wm_poi_name" class="m-wrap span7" placeholder="门店名称" value="" type="text">
+                                    <input id ="wm_poi_name" name="wm_poi_name" class="m-wrap span7" placeholder="门店名称" value="${wm_poi_name}" type="text">
                                 </div>
                             </div>
-                            <div class="span3" style="width: 200px">
+                            <div class="span4" style="width: 250px">
                                 <div class="control-group">
-                                    <label class="span4 pt5 tr pr5">门店名称</label>
-                                    <input name="wm_poi_name" class="m-wrap span7" placeholder="门店名称" value="" type="text">
+                                    <label class="span4 pt5 tr pr5">电话号码</label>
+                                    <input id = "wm_poi_phone" name="wm_poi_phone" class="m-wrap span7" placeholder="电话号码" value="${wm_poi_phone}" type="text">
                                 </div>
                             </div>
-                            <div class="span3">
+                            <div class="span4">
                                 <label class="span4 pt5 tr pr5">门店CODE</label>
-                                <input name="app_poi_code" class="m-wrap span7" placeholder="门店CODE" value="" type="text">
-                            </div>
-                           
-
-                        </div>
-                        <div class="row-fluid">
-                            <div class="span7">&nbsp;
+                                <input id = "app_poi_code"  name="app_poi_code" class="m-wrap span7" placeholder="门店CODE" value="${app_poi_code}" type="text">
                             </div>
                             <div class="span1">
                                 <a href="javascript:void(0)" id="J-btn-search" class="btn blue btn-block">查询</a>
                             </div>
-                            <div class="span2">
-                                <a href="javascript:void(0)" id="J-btn-export" class="btn blue btn-block">下载列表</a>
-                            </div>
+
                         </div>
-                    </form>
+                        
+                    </div>
                 </div>
             </div>
         </div>
@@ -174,7 +167,7 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>门店ID</th>
+								<th>门店CODE</th>
 								<th>门店名称</th>
 								<th>所属APP</th>
 								<th>电话号码</th>

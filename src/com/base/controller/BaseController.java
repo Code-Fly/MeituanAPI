@@ -28,6 +28,8 @@ public abstract class BaseController {
 	public String SUCCESS = "OPSUCCESS";
 	public String FAIL =  "OPFAIL";
 	
+	public int pageSize =  20;
+	
 	@Autowired
 	protected AppPoiService appPoiService;
 	

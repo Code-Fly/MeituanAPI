@@ -3,7 +3,7 @@
 function deletePoi(num){
 	if (!confirm("确定要删除该门店吗？")) return false;
 	var app_id = $.trim($("#appid_"+num).text());
-	var poi_code = $.trim($("#poi_code"+num).text());
+	var poi_code = $.trim($("#poi_code_"+num).text());
     $.ajax({
         url:  _ctx + "/Api/web/deletePoi?app_id="+app_id+"&poi_code="+poi_code,
         success: function(result){
@@ -54,10 +54,10 @@ function initEdit(){
        var appId =$.trim($("#appid_"+num).text());
        var poiCode =$.trim($("#poi_code_"+num).text());
        $.ajax({
-           url:  _ctx + "/Api/web/updatePoi?app_id="+appId+"&price="+price+"&descption="+description+"&secret="+secret+"&poi_code="+poiCode,
+           url:  _ctx + "/Api/web/updatePoi?app_id="+appId+"&name="+name+"&phone="+phone+"&poi_code="+poiCode+"&address="+address,
                success: function(result){
                    if("OPSUCCESS" == result){
-                       alert("保存成功");
+                       alert("修改成功");
                        setTimeout(function(){
                     	   window.location.reload();
                         },500);
@@ -80,11 +80,15 @@ function initEdit(){
 }
 
 
-$(function () {
+function pageGo(){
+
     var carId = 1;
-    $("#list").html(""),
+    $("#list").html("");
+    var app_poi_code = $.trim($("#app_poi_code").val());
+    var wm_poi_name = $.trim($("#wm_poi_name").val());
+    var wm_poi_phone = $.trim($("#wm_poi_phone").val());
     $.ajax({
-      url: _ctx + "/Api/web/poiList?userId="+SessionCache.get("userId")+"&pageId="+carId,
+      url: _ctx + "/Api/web/poiList?userId="+SessionCache.get("userId")+"&pageId="+carId+"&app_poi_code="+app_poi_code+"&wm_poi_name="+wm_poi_name+"&wm_poi_phone="+wm_poi_phone,
     
       success: function (data) {
         if (data != null) {
@@ -103,7 +107,7 @@ $(function () {
             $("#list").append('<button class="btn red edit" date-message='+num+'>修改</button>');
             $("#list").append('</td>');
             $("#list").append('<td>');
-            $("#list").append('<button class="btn red delete" onclick="deletePoi(' + item.app_poi_code + ' );">删除</button>');
+            $("#list").append('<button class="btn red delete" onclick="deletePoi('+num+');">删除</button>');
             $("#list").append('</td>');
             $("#list").append('</tr>');
           });
@@ -130,7 +134,7 @@ $(function () {
             },//点击事件，用于通过Ajax来刷新整个list列表
             onPageClicked: function (event, originalEvent, type, page) {
               $.ajax({
-            	url: _ctx + "/Api/web/poiList?userId="+SessionCache.get("userId")+"&pageId="+page,
+            	  url: _ctx + "/Api/web/poiList?userId="+SessionCache.get("userId")+"&pageId="+page+"&app_poi_code="+app_poi_code+"&wm_poi_name="+wm_poi_name+"&wm_poi_phone="+wm_poi_phone,
                 success: function (data1) {
                 	$("#list").html("");
                 	if (data1 != null) {
@@ -148,7 +152,7 @@ $(function () {
                        $("#list").append('<button class="btn red edit" date-message='+num+'>修改</button>');
                        $("#list").append('</td>');
                        $("#list").append('<td>');
-                       $("#list").append('<button class="btn red delete" onclick="deletePoi(' + num + ' );">删除</button>');
+                       $("#list").append('<button class="btn red delete" onclick="deletePoi('+num+');">删除</button>');
                        $("#list").append('</td>');
                        $("#list").append('</tr>');
                      });
@@ -163,5 +167,11 @@ $(function () {
         }
       }
     });
-    
-  })
+}
+
+$(function () {
+	pageGo();
+	 $("#J-btn-search").click(function(){
+		 pageGo();
+    });
+ })

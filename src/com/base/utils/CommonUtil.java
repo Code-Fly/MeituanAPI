@@ -33,6 +33,18 @@ public class CommonUtil {
 		System.out.println(addYear(new Date(),2));
 	}
 	
+	public static boolean isEmpty(String arg){
+		if (null == arg || arg.trim().length() == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public static boolean isNotEmpty(String arg){
+		return !isEmpty(arg);
+	}
+	
 	public static Date addYear(Date date,int year){
 	        Calendar rightNow = Calendar.getInstance();
 	        rightNow.setTime(date);

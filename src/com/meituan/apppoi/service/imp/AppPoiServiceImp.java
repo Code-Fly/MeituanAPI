@@ -42,6 +42,14 @@ public class AppPoiServiceImp implements AppPoiService {
 		return apppoiMapper.selectLimt(beginNum, endNum, example);
 	}
 
+	@Override
+	public int deleteByPrimaryKey(AppPoiKey key) {
+		return apppoiMapper.deleteByPrimaryKey(key);
+	}
 	
+	@Override
+	public int updateByPrimaryKeySelective(AppPoi record) {
+		return apppoiMapper.updateByPrimaryKeySelective(record);
+	}
 
 }

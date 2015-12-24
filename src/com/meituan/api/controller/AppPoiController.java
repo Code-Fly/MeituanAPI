@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.ListModel;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,11 +19,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.base.controller.BaseController;
 import com.base.utils.MapUtil;
 import com.base.utils.PathUtil;
+import com.base.utils.CommonUtil;
 import com.base.utils.JsonUtil;
 import com.meituan.api.entity.ApiData;
 import com.meituan.app.entity.App;
 import com.meituan.apppoi.entity.AppPoi;
 import com.meituan.apppoi.entity.AppPoiExample;
+import com.meituan.apppoi.entity.AppPoiKey;
 import com.meituan.apppoi.service.iface.AppPoiService;
 import com.meituan.common.MeituanConst.MeituanResponse;
 import com.meituan.utils.SigUtil;
@@ -82,8 +85,58 @@ public class AppPoiController extends BaseController {
 	
 	@RequestMapping(value = "/poiList")
 	public String poiList(HttpServletRequest request) {
+		 request.getSession().setAttribute("wm_poi_name","");
+		 request.getSession().setAttribute("wm_poi_code","");
+		 request.getSession().setAttribute("wm_poi_phone","");
 		return "/poiList";
 	}
+	
+	
+/**
+ * 
+ * @param request
+ * @param app_id
+ * @param poi_code
+ * @return
+ */
+	@ResponseBody
+	@RequestMapping(value = "/web/deletePoi")
+	public String deletePoi(HttpServletRequest request, 
+			// system params
+			@RequestParam(value = "app_id", required = true) String app_id, 
+			@RequestParam(value = "poi_code", required = true) String poi_code) {
+		AppPoiKey key = new AppPoiKey();
+		key.setApp_poi_code(poi_code);
+		key.setAppid(app_id);
+		appPoiService.deleteByPrimaryKey(key);
+		return SUCCESS;
+	}
+	
+	
+	/**
+	 * 
+	 * @param request
+	 * @param app_id
+	 * @param poi_code
+	 * @return
+	 */
+		@ResponseBody
+		@RequestMapping(value = "/web/updatePoi")
+		public String updatePoi(HttpServletRequest request, 
+				@RequestParam(value = "app_id", required = true) String app_id, 
+				@RequestParam(value = "poi_code", required = true) String poi_code,
+				@RequestParam(value = "name", required = true) String name,
+				@RequestParam(value = "phone", required = false,defaultValue="")  String phone,
+				@RequestParam(value = "address", required = false,defaultValue="") String address) {
+			AppPoi appPoi = new AppPoi();
+			appPoi.setAppid(app_id);
+			appPoi.setApp_poi_code(poi_code);
+			appPoi.setWm_poi_name(name);
+			appPoi.setWm_poi_phone(phone);
+			appPoiService.updateByPrimaryKeySelective(appPoi);
+			return SUCCESS;
+		}
+	
 	/**
 	 * 
 	 * @param request
@@ -96,10 +149,26 @@ public class AppPoiController extends BaseController {
 	public String poiList(HttpServletRequest request, 
 			// system params
 			@RequestParam(value = "userId", required = false,defaultValue="1") int userId, 
-			@RequestParam(value = "pageId", required = false,defaultValue="1") int page) {
-		int pageSize = 20;
+			@RequestParam(value = "pageId", required = false,defaultValue="1") int page,
+			@RequestParam(value = "wm_poi_name", required = false,defaultValue="") String poi_name,
+			@RequestParam(value = "app_poi_code", required = false,defaultValue="") String poi_code,
+			@RequestParam(value = "wm_poi_phone", required = false,defaultValue="") String poi_phone) {
 		AppPoiExample poiExample = new AppPoiExample();
-		poiExample.or().andUseridEqualTo(userId);
+		AppPoiExample.Criteria criteria = poiExample.createCriteria();
+		criteria.andUseridEqualTo(userId);
+		if (CommonUtil.isNotEmpty(poi_name)) {
+			criteria.andWm_poi_nameLike(poi_name+"%");
+		}
+		if (CommonUtil.isNotEmpty(poi_code)) {
+			criteria.andApp_poi_codeEqualTo(poi_code);
+		}
+		if (CommonUtil.isNotEmpty(poi_phone)) {
+			criteria.andWm_poi_phoneLike(poi_phone+"%");
+		}
+		 request.getSession().setAttribute("userId",userId);
+		 request.getSession().setAttribute("wm_poi_name",poi_name);
+		 request.getSession().setAttribute("app_poi_code",poi_code);
+		 request.getSession().setAttribute("wm_poi_phone",poi_phone);
 		int beginNum = (page-1)*20;
 		int endNum = page * 20;
 		List<AppPoi> pois = appPoiService.selectByExample(poiExample);
