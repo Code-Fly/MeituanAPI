@@ -196,23 +196,21 @@
                 <div class="modal-content" style="display:block">
                   <div class="modal-header">
                     <button type="button" class="pull-right" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="glyphicon glyphicon-remove "></span></button>
-                    <h4 class="modal-title">修改APP</h4>
+                    <h4 class="modal-title">修改门店信息</h4>
                   </div>
                   <div class="modal-body">
                     <form role="form" action="#">
                     	<div class="form-group">
-                    		<div class="alert alert-danger" role = "alert">
-                    		提示：不要将密钥告诉他人
-                    		</div>
+                    	
                     	</div>
                        <div class="input-group input-group-lg">
-                           <input type="text" class="m-wrap span12" id="J-secret-text" placeholder="密钥"/>
+                           <input type="text" class="m-wrap span12" id="J-name-text" placeholder="门店名称"/>
                        </div>
                         <div class="input-group input-group-lg">
-                           <input type="text" class="m-wrap span12" id="J-price-text" placeholder="年费"/>
+                           <input type="text" class="m-wrap span12" id="J-phone-text" placeholder="电话号码"/>
                        </div>
-                        <div class="input-group input-group-lg">
-                           <input type="text" class="m-wrap span12" id="J-desc-text" placeholder="描述"/>
+                       <div class="input-group input-group-lg">
+                           <input type="text" class="m-wrap span12" id="J-address-text" placeholder="地址"/>
                        </div>
                       </form>                           
                   </div>
