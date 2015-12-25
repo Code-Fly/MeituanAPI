@@ -23,8 +23,10 @@ function menuHerf(){
 	$("#home_href").attr("href",_ctx+"/web/index?userId="+ SessionCache.get("userId"));
 	$("#applist_href").attr("href",_ctx+"/Api/web/appList?userId="+ SessionCache.get("userId"));
 	$("#poilist_href").attr("href",_ctx+"/Api/poiList?userId="+ SessionCache.get("userId"));
-	$("#recordlist_href").attr("href",_ctx+"/Api/chargeList");
+	$("#recordlist_href").attr("href",_ctx+"/Api/chargeList");userlist_href
+	$("#userlist_href").attr("href",_ctx+"/web/userList");
 }
+
 function sessionAuthentication() {
 	
 	var userId = SessionCache.get("userId");
@@ -34,6 +36,9 @@ function sessionAuthentication() {
 		window.location.href = _ctx + "/web/login";
 	}else{
 		$("#nav-userName").text(SessionCache.get("userName"));
+		if(1!=userId){
+			$("#userlist_li").hide();
+		}
 	}
 }
 

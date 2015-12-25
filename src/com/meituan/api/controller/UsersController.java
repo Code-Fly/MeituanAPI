@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.base.controller.BaseController;
+import com.meituan.common.MeituanConst.UserStatus;
 import com.meituan.users.entity.LoginUsers;
 import com.meituan.users.entity.LoginUsersExample;
 import com.meituan.users.service.iface.LoginUsersService;
@@ -52,13 +53,12 @@ public class UsersController extends BaseController {
 	}
 	
 	/**
-	 * 登陆用户名和密码校验，错误返回error，正确返回对应的opID
-	 * 
+	 * 用户自行修改密码
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/updatePwd")
-	public String loginOp(@RequestParam(value = "userId", required = true) int userId,
+	public String updatePwd(@RequestParam(value = "userId", required = true) int userId,
 			@RequestParam(value = "password", required = true) String password) {
 		LoginUsers record = new LoginUsers();
 		record.setLogin_pass(password);
@@ -66,6 +66,42 @@ public class UsersController extends BaseController {
 		loginUsersService.updateByPrimaryKeySelective(record);
 		return SUCCESS;
 	}
+	
+	
+	/**
+	 * admin 停用 0，启用 1，重置密码2
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/updateUser")
+	public String loginOp(@RequestParam(value = "user_id", required = true) int user_id,
+			@RequestParam(value = "type", required = true) int type) {
+		LoginUsers record = new LoginUsers();
+		if(0 == type){
+			record.setStatus(UserStatus.STOP);
+		} else if (2==type){
+			record.setLogin_pass(UserStatus.DEFAULT_PWD);
+		} else {
+			record.setStatus(UserStatus.START);
+		}
+		record.setUser_id(user_id);
+		loginUsersService.updateByPrimaryKeySelective(record);
+		return SUCCESS;
+	}
+	
+	
+	/**
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/userList")
+	public String userList(HttpServletRequest request) {
+		List<LoginUsers> users = loginUsersService.selectByExample(null);
+		request.setAttribute("users", users);
+		return "/userList";
+	}
+	
+	
 	
 	
 	/**

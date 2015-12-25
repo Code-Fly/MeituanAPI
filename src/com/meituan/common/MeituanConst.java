@@ -64,4 +64,10 @@ public interface MeituanConst {
 		ApiData RESPONSE_2000 = new ApiData(MeituanConst.RETURN_NG, MeituanError.ERROR_2000);
 	}
 	
+	public interface UserStatus{
+		int STOP = 0;
+		int START = 1;
+		String DEFAULT_PWD = "666";
+	}
+	
 }
