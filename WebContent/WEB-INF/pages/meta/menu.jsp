@@ -64,7 +64,7 @@
 					</ul>
 
 				</li>
-<li class="">
+                <li class="">
 
 					<a href="javascript:;">
 
@@ -91,7 +91,34 @@
 					</ul>
 
 				</li>
+			                <li class="">
 
+					<a href="javascript:;">
+
+					<i class="icon-cogs"></i> 
+
+					<span class="title">充值管理</span>
+
+					<span class="arrow "></span>
+
+					</a>
+
+					<ul class="sub-menu">
+
+						<li >
+
+							<a id ="recordlist_href" href="#">
+
+							充值记录</a>
+
+						</li>
+
+						
+
+					</ul>
+
+				</li>
+	
 			</ul>
 
 			<!-- END SIDEBAR MENU -->

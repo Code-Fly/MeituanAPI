@@ -3,6 +3,7 @@
  */
 package com.meituan.api.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,9 @@ import com.base.utils.MapUtil;
 import com.base.utils.PathUtil;
 import com.meituan.api.entity.ApiData;
 import com.meituan.app.entity.App;
+import com.meituan.app.entity.AppExample;
 import com.meituan.apppoi.entity.AppPoi;
+import com.meituan.apppoi.entity.AppPoiExample;
 import com.meituan.chargerecord.entity.ChargeRecord;
 import com.meituan.chargerecord.entity.ChargeRecordExample;
 import com.meituan.chargerecord.service.iface.ChargeRecordService;
@@ -121,5 +124,91 @@ public class ChargeRecordController extends BaseController {
 		
 	}
 	
+	
+	
+
+	@RequestMapping(value = "/chargeList")
+	public String poiList(HttpServletRequest request) {
+		return "/chargeRecordList";
+	}
+	
+	
+	/**
+	 * 
+	 * @param request
+	 * @param userId
+	 * @param page 第几页
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/web/chargeList")
+	public String poiList(HttpServletRequest request, 
+			// system params
+			@RequestParam(value = "userId", required = false,defaultValue="1") int userId, 
+			@RequestParam(value = "pageId", required = false,defaultValue="1") int page,
+			@RequestParam(value = "app_id", required = false,defaultValue="") String app_id,
+			@RequestParam(value = "app_poi_code", required = false,defaultValue="") String app_poi_code,
+			@RequestParam(value = "startTime", required = false)@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date  startTime,
+			@RequestParam(value = "endTime", required = false)@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date endTime) {
+		ChargeRecordExample recordExample = new ChargeRecordExample();
+		ChargeRecordExample.Criteria criteria = recordExample.createCriteria();
+		if (CommonUtil.isNotEmpty(app_poi_code)) {
+			criteria.andApp_poi_codeEqualTo(app_poi_code);
+		}
+		if (CommonUtil.isNotEmpty(app_id)) {
+			criteria.andApp_idEqualTo(app_id);
+		}
+		if (null != startTime) {
+			criteria.andCzsjGreaterThanOrEqualTo(startTime);
+		} 
+		if (null != endTime) {
+			criteria.andCzsjLessThanOrEqualTo(endTime);
+		}
+		request.getSession().setAttribute("userId",userId);
+		request.getSession().setAttribute("startTime",startTime);
+		request.getSession().setAttribute("endTime",endTime);
+		request.getSession().setAttribute("app_poi_code",app_poi_code);
+		request.getSession().setAttribute("app_id",app_id);
+		int beginNum = (page-1)*20;
+		int endNum = page * 20;
+		List<ChargeRecord> chargeAllRecords = chargeRecordService.selectByExample(recordExample);
+		AppExample appExample = new AppExample();
+		appExample.or().andUseridEqualTo(userId);
+		List<App> apps = appService.selectByExample(appExample);
+		List<ChargeRecord> userChargeRecord = new ArrayList<>();
+		List<ChargeRecord> pageRecords = new ArrayList<>();
 		
+		if (chargeAllRecords.size() > 0 ) {
+			for(ChargeRecord recode:chargeAllRecords){
+				for(App app:apps){
+					if(recode.getApp_id().equals(app.getAppid())){
+						userChargeRecord.add(recode);
+					}
+				}
+			}
+			int recordSize = userChargeRecord.size();
+			if (recordSize < beginNum) {
+				pageRecords = userChargeRecord;
+			} else if (recordSize >  beginNum && recordSize < endNum ) {
+				pageRecords = userChargeRecord.subList(beginNum, recordSize);
+			} else {
+				pageRecords = userChargeRecord.subList(beginNum, endNum);
+			}
+			int rowCount=0;
+			if(recordSize%pageSize!=0)
+		      {
+		        rowCount = recordSize / pageSize + 1;
+		      }
+		      else
+		      {
+		        rowCount = recordSize / pageSize;
+		    }
+			String list = JsonUtil.jsonArray2Sting(pageRecords);
+			return "{\"pageCount\":"+rowCount+",\"CurrentPage\":"+page+",\"list\":" + list + "}";
+		}  else {
+			return "NODATA";
+		}
+	
+	}
+	
 }
