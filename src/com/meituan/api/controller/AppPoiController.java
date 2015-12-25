@@ -133,9 +133,40 @@ public class AppPoiController extends BaseController {
 			appPoi.setApp_poi_code(poi_code);
 			appPoi.setWm_poi_name(name);
 			appPoi.setWm_poi_phone(phone);
+			appPoi.setWm_poi_address(address);
 			appPoiService.updateByPrimaryKeySelective(appPoi);
 			return SUCCESS;
 		}
+		
+		
+		/**
+		 * 
+		 * @param request
+		 * @param app_id
+		 * @param poi_code
+		 * @return
+		 */
+			@ResponseBody
+			@RequestMapping(value = "/web/addPoi")
+			public String addPoi(HttpServletRequest request, 
+					@RequestParam(value = "userId", required = true) int userId, 
+					@RequestParam(value = "appid", required = true) String appid, 
+					@RequestParam(value = "app_poi_code", required = true) String app_poi_code,
+					@RequestParam(value = "wm_poi_name", required = true) String wm_poi_name,
+					@RequestParam(value = "wm_poi_phone", required = false)  String wm_poi_phone,
+					@RequestParam(value = "wm_poi_address", required = false) String wm_poi_address,
+					@RequestParam(value = "descption", required = false) String descption) {
+				AppPoi appPoi = new AppPoi();
+				appPoi.setUserid(userId);
+				appPoi.setAppid(appid);
+				appPoi.setApp_poi_code(app_poi_code);
+				appPoi.setWm_poi_name(wm_poi_name);
+				appPoi.setWm_poi_phone(wm_poi_phone);
+				appPoi.setWm_poi_address(wm_poi_address);
+				appPoi.setDescption(descption);
+				appPoiService.insertSelective(appPoi);
+				return SUCCESS;
+			}
 	
 	/**
 	 * 

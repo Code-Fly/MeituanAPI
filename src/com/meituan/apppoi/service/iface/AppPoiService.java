@@ -22,4 +22,5 @@ public interface AppPoiService {
     List<AppPoi> selectLimt(int beginNum,int endNum,  @Param("example") AppPoiExample example);
 	int deleteByPrimaryKey(AppPoiKey key);
 	int updateByPrimaryKeySelective(AppPoi record);
+	int insertSelective(AppPoi record);
  }

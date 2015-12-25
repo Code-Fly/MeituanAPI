@@ -120,6 +120,9 @@
                 <div class="tools">
                     <a href="javascript:;" class="collapse"></a>
                 </div>
+                <div class="actions">
+						<button onclick="" id ="addPoi" class="btn red edit">增 加 门 店</button>
+					</div>
             </div>
             <div class="portlet-body">
                 <div>
@@ -131,12 +134,6 @@
                                     <input id ="wm_poi_name" name="wm_poi_name" class="m-wrap span7" placeholder="门店名称" value="${wm_poi_name}" type="text">
                                 </div>
                             </div>
-                            <div class="span4" style="width: 250px">
-                                <div class="control-group">
-                                    <label class="span4 pt5 tr pr5">电话号码</label>
-                                    <input id = "wm_poi_phone" name="wm_poi_phone" class="m-wrap span7" placeholder="电话号码" value="${wm_poi_phone}" type="text">
-                                </div>
-                            </div>
                             <div class="span4">
                                 <label class="span4 pt5 tr pr5">门店CODE</label>
                                 <input id = "app_poi_code"  name="app_poi_code" class="m-wrap span7" placeholder="门店CODE" value="${app_poi_code}" type="text">
@@ -144,7 +141,12 @@
                             <div class="span1">
                                 <a href="javascript:void(0)" id="J-btn-search" class="btn blue btn-block">查询</a>
                             </div>
-
+  							<div class="span4" style="width: 250px">
+                                <div class="control-group">
+                                    <label class="span4 pt5 tr pr5">电话号码</label>
+                                    <input id = "wm_poi_phone" name="wm_poi_phone" class="m-wrap span7" placeholder="电话号码" value="${wm_poi_phone}" type="text">
+                                </div>
+                            </div>
                         </div>
                         
                     </div>
@@ -209,6 +211,48 @@
                   </div>
                   <div class="modal-footer">                      
                       <button type="button" class="btn btn-primary" id="J-submit-btn">确认</button>
+                      <button type="button" class="btn btn-default" id="J-cancle-btn" data-dismiss="modal">取消</button>
+                  </div>
+
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div>
+		</div>
+		
+		<div class="modal fade" id="J-add-poi" style="display:block">
+              <div class="modal-dialog" style="display:block">
+                <div class="modal-content" style="display:block">
+                  <div class="modal-header">
+                    <button type="button" class="pull-right" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="glyphicon glyphicon-remove "></span></button>
+                    <h4 class="modal-title">增加门店门</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form role="form" action="#">
+                    	<div class="form-group">
+                    	
+                    	</div>
+                       <div class="input-group input-group-lg">
+                           <input type="text" class="m-wrap span12" id="J-app_poi_code-text" placeholder="门店CODE"/>
+                       </div>
+                        <div class="input-group input-group-lg">
+                           <input type="text" class="m-wrap span12" id="J-wm_poi_name-text" placeholder="门店名称"/>
+                       </div>
+                       <div class="input-group input-group-lg">
+                           <input type="text" class="m-wrap span12" id="J-appid-text" placeholder="APPID"/>
+                       </div>
+                       <div class="input-group input-group-lg">
+                           <input type="text" class="m-wrap span12" id="J-wm_poi_address-text" placeholder="门店地址"/>
+                       </div>
+                        <div class="input-group input-group-lg">
+                           <input type="text" class="m-wrap span12" id="J-wm_poi_phone-text" placeholder="电话号码"/>
+                       </div>
+                       <div class="input-group input-group-lg">
+                           <input type="text" class="m-wrap span12" id="J-descption-text" placeholder="描述"/>
+                       </div>
+                      </form>                           
+                  </div>
+                  <div class="modal-footer">                      
+                      <button type="button" class="btn btn-primary" id="J-submit-btn1">确认</button>
                       <button type="button" class="btn btn-default" id="J-cancle-btn" data-dismiss="modal">取消</button>
                   </div>
 

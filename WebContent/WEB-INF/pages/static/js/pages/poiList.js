@@ -79,6 +79,58 @@ function initEdit(){
     });
 }
 
+function initAdd(){
+	// 清空 
+	$("#addPoi").bind().click(function(){
+		if ($("#J-add-poi").is(":hidden")) {
+			$("#J-app_poi_code-text").val("");
+	  	 	$("#J-wm_poi_name-text").val("");
+	  	 	$("#J-appid-text").val("");
+	  	 	$("#J-wm_poi_address-text").val("");
+	  	 	$("#J-wm_poi_phone-text").val("");
+	  	 	$("#J-descption-text").val("");
+	   };
+	   $("#J-add-poi").modal();
+       $("#J-submit-btn1").unbind().click(function(){
+    	  var app_poi_code =  $.trim($("#J-app_poi_code-text").val());
+    	  var wm_poi_name =	$.trim($("#J-wm_poi_name-text").val());
+    	  var appid =	$.trim($("#J-appid-text").val());
+    	  var wm_poi_address =	$.trim($("#J-wm_poi_address-text").val());
+    	  var wm_poi_phone =	$.trim($("#J-wm_poi_phone-text").val());
+    	  var descption =	$.trim($("#J-descption-text").val());
+       if(''== app_poi_code || null == app_poi_code){
+       		alert("门店CODE不能为空");
+       		return;
+       }
+       if(''== appid || null == appid){
+      		alert("APPID不能为空");
+      		return;
+      }
+       $.ajax({
+           url:  _ctx + "/Api/web/addPoi?userId="+SessionCache.get("userId")+"&appid="+appid+"&app_poi_code="+app_poi_code+"&wm_poi_name="+wm_poi_name+"&wm_poi_address="+wm_poi_address+"&wm_poi_phone="+wm_poi_phone+"&descption="+descption,
+               success: function(result){
+                   if("OPSUCCESS" == result){
+                       alert("增加用户成功");
+                       setTimeout(function(){
+                    	   window.location.reload();
+                        },500);
+                   }
+                   else{
+                       alert(result);
+                   }
+               },
+               error: function (XMLHttpRequest, textStatus, errorThrown) {
+               	 alert("输入有误");
+               }
+            
+           });
+       });
+ 	   
+	});
+	 $("#J-btn-search").click(function(){
+         $("#form").submit();
+    });
+}
 
 function pageGo(){
 
@@ -112,6 +164,7 @@ function pageGo(){
             $("#list").append('</tr>');
           });
           initEdit();
+          initAdd();
           var pageCount = eval("(" + data + ")").pageCount; //取到pageCount的值(把返回数据转成object类型)
           var currentPage = eval("(" + data + ")").CurrentPage; //得到urrentPage
           var options = {
@@ -157,6 +210,7 @@ function pageGo(){
                        $("#list").append('</tr>');
                      });
                      initEdit();
+                     initAdd();
                   }
                 }
               });

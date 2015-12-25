@@ -123,6 +123,9 @@
 					<div class="tools">
 						<a href="javascript:;" class="collapse"></a>
 					</div>
+					<div class="actions">
+						<button onclick="" id ="addUser" class="btn red edit">增 加 用 户</button>
+					</div>
 				</div>
 				<div class="portlet-body">
 					<table class="table table-hover">
@@ -148,10 +151,10 @@
 									<td>
 										<c:choose>
 											<c:when test="${user.status ==1}">
-											<button id="stop_${user.user_id}" type="button" onclick="stop(${user.user_id})" class="btn red delete" name="edit_cancel_url" >停用</button>
+											<button id="stop_${user.user_id}" type="button" onclick="stop(${user.user_id})" class="btn red delete" name="edit_cancel_url" >停用账号</button>
 											</c:when>
 										<c:otherwise>
-											<button id="start_${user.user_id}" type="button" onclick="start(${user.user_id})" class="btn red delete" name="edit_cancel_url" >停用</button>
+											<button id="start_${user.user_id}" type="button" onclick="start(${user.user_id})" class="btn red delete" name="edit_cancel_url" >启用账号</button>
 										</c:otherwise>
 										</c:choose>
 											<button id="reset_pwd_${user.user_id}" type="button" onclick="resetPwd(${user.user_id})"  class="btn red edit" name="edit_cancel_url">重置密码</button>
@@ -172,23 +175,23 @@
                 <div class="modal-content" style="display:block">
                   <div class="modal-header">
                     <button type="button" class="pull-right" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="glyphicon glyphicon-remove "></span></button>
-                    <h4 class="modal-title">修改用户</h4>
+                    <h4 class="modal-title">增加用户</h4>
                   </div>
                   <div class="modal-body">
                     <form role="form" action="#">
                     	<div class="form-group">
                     		<div class="alert alert-danger" role = "alert">
-                    		提示：不要将密钥告诉他人
+                    		提示：请用户尽快修改默认密码
                     		</div>
                     	</div>
                        <div class="input-group input-group-lg">
-                           <input type="text" class="m-wrap span12" id="J-secret-text" placeholder="密钥"/>
+                           <input type="text" class="m-wrap span12" id="J-login_id-text" placeholder="登陆名"/>
                        </div>
                         <div class="input-group input-group-lg">
-                           <input type="text" class="m-wrap span12" id="J-price-text" placeholder="年费"/>
+                           <input type="text" class="m-wrap span12" id="J-nfdj-text" placeholder="年费单价"/>
                        </div>
                         <div class="input-group input-group-lg">
-                           <input type="text" class="m-wrap span12" id="J-desc-text" placeholder="描述"/>
+                           <input type="text" class="m-wrap span12" id="J-descption-text" placeholder="描述"/>
                        </div>
                       </form>                           
                   </div>

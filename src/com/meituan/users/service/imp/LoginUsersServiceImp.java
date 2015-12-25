@@ -30,4 +30,9 @@ public class LoginUsersServiceImp implements LoginUsersService {
 	public int updateByPrimaryKeySelective(LoginUsers record) {
 		return loginUsersMapper.updateByPrimaryKeySelective(record);
 	}
+	
+	@Override
+	public int insertSelective(LoginUsers record) {
+		return loginUsersMapper.insertSelective(record);
+	}
 }

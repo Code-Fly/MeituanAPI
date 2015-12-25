@@ -51,5 +51,10 @@ public class AppPoiServiceImp implements AppPoiService {
 	public int updateByPrimaryKeySelective(AppPoi record) {
 		return apppoiMapper.updateByPrimaryKeySelective(record);
 	}
+	
+	@Override
+	public int insertSelective(AppPoi record) {
+		return apppoiMapper.insertSelective(record);
+	}
 
 }

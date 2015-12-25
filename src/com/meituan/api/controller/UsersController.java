@@ -74,7 +74,7 @@ public class UsersController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/updateUser")
-	public String loginOp(@RequestParam(value = "user_id", required = true) int user_id,
+	public String updateUser(@RequestParam(value = "user_id", required = true) int user_id,
 			@RequestParam(value = "type", required = true) int type) {
 		LoginUsers record = new LoginUsers();
 		if(0 == type){
@@ -89,6 +89,30 @@ public class UsersController extends BaseController {
 		return SUCCESS;
 	}
 	
+	
+	/**
+	 * admin 停用 0，启用 1，重置密码2
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/addUser")
+	public String addUser(@RequestParam(value = "login_id", required = true) String login_id,
+			@RequestParam(value = "descption", required = true) String descption,
+			@RequestParam(value = "nfdj", required = true) Float nfdj) {
+		LoginUsersExample loginUsersExample = new LoginUsersExample();
+		loginUsersExample.or().andLogin_idEqualTo(login_id);
+		List<LoginUsers> tabMasterOps = loginUsersService.selectByExample(loginUsersExample);
+		if (tabMasterOps.size()>0) {
+			return "HASUSER";
+		} else {
+			LoginUsers user = new LoginUsers();
+			user.setDescption(descption);
+			user.setLogin_id(login_id);
+			user.setNfdj(nfdj);
+			loginUsersService.insertSelective(user);
+		}
+		return SUCCESS;
+	}
 	
 	/**
 	 * 
