@@ -27,14 +27,12 @@ import com.meituan.api.entity.ApiData;
 import com.meituan.app.entity.App;
 import com.meituan.app.entity.AppExample;
 import com.meituan.apppoi.entity.AppPoi;
-import com.meituan.apppoi.entity.AppPoiExample;
 import com.meituan.chargerecord.entity.ChargeRecord;
 import com.meituan.chargerecord.entity.ChargeRecordExample;
 import com.meituan.chargerecord.service.iface.ChargeRecordService;
 import com.meituan.common.MeituanConst.MeituanResponse;
 import com.meituan.utils.SigUtil;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 /**

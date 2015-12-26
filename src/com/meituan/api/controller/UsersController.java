@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.base.controller.BaseController;
+import com.meituan.common.MeituanConst;
 import com.meituan.common.MeituanConst.UserStatus;
 import com.meituan.users.entity.LoginUsers;
 import com.meituan.users.entity.LoginUsersExample;
@@ -42,12 +43,15 @@ public class UsersController extends BaseController {
 		loginUsersExample.or().andLogin_idEqualTo(userName);
 		List<LoginUsers> tabMasterOps = loginUsersService.selectByExample(loginUsersExample);
 		if (null == tabMasterOps || 0 == tabMasterOps.size()) {
-			return "";
+			return "NOUSER";
 		} else {
-			if (password.equals(tabMasterOps.get(0).getLogin_pass())) {
+			if (MeituanConst.UserStatus.STOP == tabMasterOps.get(0).getStatus()) {
+				return "USERSTOP";
+			}
+			else if (password.equals(tabMasterOps.get(0).getLogin_pass())) {
 				return tabMasterOps.get(0).getUser_id().toString();
 			} else {
-				return "";
+				return "PWDWRONG";
 			}
 		}
 	}

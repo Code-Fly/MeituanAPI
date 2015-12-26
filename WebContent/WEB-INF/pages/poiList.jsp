@@ -121,7 +121,7 @@
                     <a href="javascript:;" class="collapse"></a>
                 </div>
                 <div class="actions">
-						<button onclick="" id ="addPoi" class="btn red edit">增 加 门 店</button>
+						<button onclick="" id ="addPoi" class="btn red add">增 加 门 店</button>
 					</div>
             </div>
             <div class="portlet-body">
@@ -138,15 +138,18 @@
                                 <label class="span4 pt5 tr pr5">门店CODE</label>
                                 <input id = "app_poi_code"  name="app_poi_code" class="m-wrap span7" placeholder="门店CODE" value="${app_poi_code}" type="text">
                             </div>
-                            <div class="span1">
-                                <a href="javascript:void(0)" id="J-btn-search" class="btn blue btn-block">查询</a>
-                            </div>
-  							<div class="span4" style="width: 250px">
+                            
+                            <div class="span4" style="width: 250px">
                                 <div class="control-group">
                                     <label class="span4 pt5 tr pr5">电话号码</label>
                                     <input id = "wm_poi_phone" name="wm_poi_phone" class="m-wrap span7" placeholder="电话号码" value="${wm_poi_phone}" type="text">
                                 </div>
                             </div>
+                            
+                            <div class="span1">
+                                <a href="javascript:void(0)" id="J-btn-search" class="btn blue btn-block">查询</a>
+                            </div>
+  							
                         </div>
                         
                     </div>
@@ -224,7 +227,7 @@
                 <div class="modal-content" style="display:block">
                   <div class="modal-header">
                     <button type="button" class="pull-right" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="glyphicon glyphicon-remove "></span></button>
-                    <h4 class="modal-title">增加门店门</h4>
+                    <h4 class="modal-title">增加门店</h4>
                   </div>
                   <div class="modal-body">
                     <form role="form" action="#">
@@ -260,6 +263,9 @@
               </div><!-- /.modal-dialog -->
             </div>
 		</div>
+		
+		</div>
+		
 	</div>
 
 			</div>
@@ -305,7 +311,6 @@
 		   App.init(); // initlayout and core plugins
 
 		   Index.init();
-		   
 
 		   /* Index.initJQVMAP(); // init index page's custom scripts
 
@@ -317,7 +322,7 @@
 
 		   Index.initMiniCharts();
 
-		   Index.initDashboardDaterange();
+		  
 
 		   Index.initIntro(); */
 

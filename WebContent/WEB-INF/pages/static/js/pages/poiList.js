@@ -110,7 +110,7 @@ function initAdd(){
            url:  _ctx + "/Api/web/addPoi?userId="+SessionCache.get("userId")+"&appid="+appid+"&app_poi_code="+app_poi_code+"&wm_poi_name="+wm_poi_name+"&wm_poi_address="+wm_poi_address+"&wm_poi_phone="+wm_poi_phone+"&descption="+descption,
                success: function(result){
                    if("OPSUCCESS" == result){
-                       alert("增加用户成功");
+                       alert("增加门店成功");
                        setTimeout(function(){
                     	   window.location.reload();
                         },500);

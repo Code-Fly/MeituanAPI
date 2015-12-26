@@ -78,6 +78,60 @@ $(function() {
        });
  	   
 	});
+	
+	
+
+		// 清空 
+		$("#addApp").bind().click(function(){
+			if ($("#J-addapp-url").is(":hidden")) {
+		  	 	$("#J-appid1-text").val("");
+		  	 	$("#J-secret1-text").val("");
+		  		$("#J-price1-text").val("");
+		  	 	$("#J-descption1-text").val("");
+		   };
+		   $("#J-addapp-url").modal();
+		   // 初始化
+	       $("#J-submit-btn1").unbind().click(function(){
+	    	 var appid =  $.trim($("#J-appid1-text").val());
+		  	 var secret = $.trim($("#J-secret1-text").val());
+		  	 var price =  $.trim($("#J-price1-text").val());
+		  	 var descption =$.trim($("#J-descption1-text").val());
+	           if(''== appid || null == appid){
+	           		alert("APPID不能为空");
+	           		return;
+	           }
+	           if(''== secret || null == secret){
+	           		alert("密钥不能为空");
+	           		return;
+	           }
+	           if(''!= price && isNaN(price)){
+	        	    alert("单价输入有误！");
+	          		return;
+	           }
+	           $.ajax({
+	               url:  _ctx + "/Api/web/addApp?appid="+appid+"&secret="+secret+"&price="+price+"&descption="+descption+"&userid="+SessionCache.get("userId"),
+	               success: function(result){
+	                   if("OPSUCCESS" == result){
+	                       alert("添加APP成功");
+	                       setTimeout(function(){
+	                    	   window.location.reload();
+	                        },500);
+	                   } else if("HASAPP" == result ){
+	                	   alert("APP（"+appid+"）已经存在");
+	                   }
+	                   else{
+	                       alert(result);
+	                   }
+	               },
+	               error: function (XMLHttpRequest, textStatus, errorThrown) {
+	               	 alert("表单输入错误");
+	               }
+	            
+	           });
+	       });
+	 	   
+		});
+		
 	 $("#J-btn-search").click(function(){
          $("#form").submit();
     });

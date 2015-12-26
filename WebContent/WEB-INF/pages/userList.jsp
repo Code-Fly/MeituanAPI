@@ -124,7 +124,7 @@
 						<a href="javascript:;" class="collapse"></a>
 					</div>
 					<div class="actions">
-						<button onclick="" id ="addUser" class="btn red edit">增 加 用 户</button>
+						<button onclick="" id ="addUser" class="btn red add">增 加 用 户</button>
 					</div>
 				</div>
 				<div class="portlet-body">
@@ -249,7 +249,6 @@
 		   App.init(); // initlayout and core plugins
 
 		   Index.init();
-		   
 
 		   /* Index.initJQVMAP(); // init index page's custom scripts
 

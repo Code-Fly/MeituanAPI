@@ -35,4 +35,9 @@ public class AppServiceImp implements AppService {
 	public int updateByPrimaryKeySelective(App record) {
 		return appMapper.updateByPrimaryKeySelective(record);
 	}
+	
+	@Override
+	public int insertSelective(App record) {
+		return appMapper.insertSelective(record);
+	}
 }

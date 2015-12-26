@@ -13,4 +13,7 @@ public interface AppService {
 	int deleteByPrimaryKey(String appid);
 
 	int updateByPrimaryKeySelective(App record);
+
+	int insertSelective(App record);
+
 }

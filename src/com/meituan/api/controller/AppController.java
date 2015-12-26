@@ -3,6 +3,7 @@
  */
 package com.meituan.api.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -13,10 +14,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.w3c.dom.css.ElementCSSInlineStyle;
 
 import com.base.controller.BaseController;
 import com.base.utils.MapUtil;
 import com.base.utils.PathUtil;
+import com.base.utils.CommonUtil;
 import com.base.utils.JsonUtil;
 import com.meituan.api.entity.ApiData;
 import com.meituan.app.entity.App;
@@ -26,6 +29,7 @@ import com.meituan.apppoi.entity.AppPoiExample;
 import com.meituan.apppoi.service.iface.AppPoiService;
 import com.meituan.common.MeituanConst.MeituanResponse;
 import com.meituan.utils.SigUtil;
+import com.thoughtworks.xstream.mapper.Mapper.Null;
 
 import net.sf.json.JSONObject;
 
@@ -112,6 +116,29 @@ public class AppController extends BaseController {
 		app.setPrice(price);
 		app.setSecret(secret);
 		appService.updateByPrimaryKeySelective(app);
+		return SUCCESS;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/web/addApp")
+	public String addApp(HttpServletRequest request, 
+			@RequestParam(value = "appid", required = true) String app_id,
+			@RequestParam(value = "price", required = false,defaultValue="0") Float price,
+			@RequestParam(value = "descption", required = false) String descption,
+			@RequestParam(value = "secret", required = true) String secret,
+			@RequestParam(value = "userid", required = true) int userId) {
+		 if(null != appService.selectByPrimaryKey(app_id)){
+			 return "HASAPP";
+		 } else {
+			 App app = new App();
+			 app.setAppid(app_id);
+			 app.setDescption(descption);
+			 app.setPrice(price);
+			 app.setSecret(secret);
+			 app.setUserid(userId);
+			 app.setExpiredate(CommonUtil.addMonth(new Date(),2));
+			 appService.insertSelective(app);
+		 }
 		return SUCCESS;
 	}
 }

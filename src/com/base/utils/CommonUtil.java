@@ -51,4 +51,11 @@ public class CommonUtil {
 	        rightNow.add(Calendar.YEAR,+year);
 	        return rightNow.getTime();
 	}
+	
+	public static Date addMonth(Date date,int month){
+		 	Calendar rightNow = Calendar.getInstance();
+	        rightNow.setTime(date);
+	        rightNow.add(Calendar.MONTH,+month);
+	        return rightNow.getTime();
+	}
 }

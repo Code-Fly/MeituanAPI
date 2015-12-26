@@ -4,6 +4,7 @@
 package com.meituan.api.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -163,6 +164,7 @@ public class AppPoiController extends BaseController {
 				appPoi.setWm_poi_name(wm_poi_name);
 				appPoi.setWm_poi_phone(wm_poi_phone);
 				appPoi.setWm_poi_address(wm_poi_address);
+				appPoi.setExpiredate(CommonUtil.addMonth(new Date(),2));
 				appPoi.setDescption(descption);
 				appPoiService.insertSelective(appPoi);
 				return SUCCESS;

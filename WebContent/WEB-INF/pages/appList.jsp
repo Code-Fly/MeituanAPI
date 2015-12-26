@@ -123,6 +123,9 @@
 					<div class="tools">
 						<a href="javascript:;" class="collapse"></a>
 					</div>
+					<div class="actions">
+						<button onclick="" id="addApp" class="btn red add">增 加 APP</button>
+					</div>
 				</div>
 				<div class="portlet-body">
 					<table class="table table-hover">
@@ -192,6 +195,42 @@
               </div><!-- /.modal-dialog -->
             </div>
 		</div>
+		<div class="modal fade" id="J-addapp-url" style="display:block">
+              <div class="modal-dialog" style="display:block">
+                <div class="modal-content" style="display:block">
+                  <div class="modal-header">
+                    <button type="button" class="pull-right" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="glyphicon glyphicon-remove "></span></button>
+                    <h4 class="modal-title">增加APP</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form role="form" action="#">
+                    	<div class="form-group">
+                    		<div class="alert alert-danger" role = "alert">
+                    		提示：切忌不要将APP密钥告诉他人
+                    		</div>
+                    	</div>
+                       <div class="input-group input-group-lg">
+                           <input type="text" class="m-wrap span12" id="J-appid1-text" placeholder="APPID"/>
+                       </div>
+                        <div class="input-group input-group-lg">
+                           <input type="text" class="m-wrap span12" id="J-secret1-text" placeholder="密钥"/>
+                       </div>
+                        <div class="input-group input-group-lg">
+                           <input type="text" class="m-wrap span12" id="J-price1-text" placeholder="单价"/>
+                       </div>
+                       <div class="input-group input-group-lg">
+                           <input type="text" class="m-wrap span12" id="J-descption1-text" placeholder="描述"/>
+                       </div>
+                      </form>                           
+                  </div>
+                  <div class="modal-footer">                      
+                      <button type="button" class="btn btn-primary" id="J-submit-btn1">确认</button>
+                      <button type="button" class="btn btn-default" id="J-cancle-btn" data-dismiss="modal">取消</button>
+                  </div>
+
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div>
 	</div>
 
 			</div>
