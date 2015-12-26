@@ -146,13 +146,13 @@
                             <div class="span5" style="width: 250px">
                                 <div class="control-group">
                                     <label class="span4 pt5 tr pr5">选择日期</label>
-                                    <input id ="startTime" name="startTime" class="m-wrap span8 date-picker hasDatepicker" data-date-format="yyyy-mm-dd" placeholder="开始时间" value="${startTime}" type="text">
+                                    <input id ="startTime"  type="text" name="startTime"  size="30" class="m-wrap span8" data-date-format="yyyy-mm-dd" placeholder="开始时间" value="${startTime}">
                                 </div>
                             </div>
                            <div class="span5" style="width: 250px">
                                 <div class="control-group">
-                                    <label class="span4 pt5 tr pr5">至</label>
-                                    <input id ="endTime" name="endTime" class="m-wrap span8 date-picker hasDatepicker" data-date-format="yyyy-mm-dd" placeholder="结束时间" value="${endTime}" type="text">
+                                    <label class="span4 pt5 tr pr5"> &nbsp;&nbsp;至</label>
+                                    <input id ="endTime" type="text" name="endTime"  size="30"  class="m-wrap span8 date-picker" data-date-format="yyyy-mm-dd" placeholder="结束时间" value="${endTime}" >
                                 </div>
                             </div>
  							
@@ -271,7 +271,6 @@
 		   App.init(); // initlayout and core plugins
 
 		   Index.init();
-		   
 
 		   /* Index.initJQVMAP(); // init index page's custom scripts
 

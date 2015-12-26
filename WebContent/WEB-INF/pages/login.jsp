@@ -26,12 +26,12 @@
         <div class="validate-info" style="visibility:hidden"></div>
 
         <span class="login-type" data-mtevent="login.mobile.switch">
-            	账号登录
+            	用户登录
         </span>
 
         <div class="form-field form-field--icon">
             <i class="icon icon-user"></i>
-            <input id="userName" class="f-text" name="email" placeholder="手机号/用户名/邮箱" value="" type="text">
+            <input id="userName" class="f-text" name="email" placeholder="登陆名" value="" type="text">
         </div>
         <div class="form-field form-field--icon">
             <i class="icon icon-password"></i>

@@ -23,7 +23,7 @@
 
 				</li>
 
-				<li class="start active ">
+				<li id="index_href_p" class="">
 
 					<a id="index_href" href="#">
 
@@ -36,87 +36,65 @@
 					</a>
 
 				</li>
+				
+				<li id="applist_href_p" class="">
 
-				<li class="">
-
-					<a href="javascript:;">
+					<a id="applist_href" href="#">
 
 					<i class="icon-cogs"></i> 
 
-					<span class="title">APP管理</span>
+					<span class="title">App管理</span>
 
-					<span class="arrow "></span>
+					<span class="selected"></span>
 
 					</a>
 
-					<ul class="sub-menu">
-
-						<li >
-
-							<a id="applist_href" href="#">
-
-							APP一览</a>
-
-						</li>
-
-						
-
-					</ul>
-
 				</li>
-                <li class="">
 
-					<a href="javascript:;">
+				<li id="poilist_href_p" class=" ">
+
+					<a id="poilist_href" href="#">
 
 					<i class="icon-cogs"></i> 
 
 					<span class="title">门店管理</span>
 
-					<span class="arrow "></span>
+					<span class="selected"></span>
 
 					</a>
 
-					<ul class="sub-menu">
-
-						<li >
-
-							<a id ="poilist_href" href="#">
-
-							门店一览</a>
-
-						</li>
-
-						
-
-					</ul>
 				</li>
-			                <li class="">
-					<a href="javascript:;">
+				
+				
+				<li id="recordlist_href_p" class=" ">
+
+					<a id="recordlist_href" href="#">
+
 					<i class="icon-cogs"></i> 
+
 					<span class="title">充值管理</span>
-					<span class="arrow "></span>
+
+					<span class="selected"></span>
+
 					</a>
-					<ul class="sub-menu">
-						<li >
-							<a id ="recordlist_href" href="#">
-							充值记录</a>
-						</li>
-					</ul>
+
 				</li>
-	
-	               <li id ="userlist_li" class="">
-					<a href="javascript:;">
+				
+				<li class=" "  id ="userlist_li">
+
+					<a id="userlist_href" href="#">
+
 					<i class="icon-cogs"></i> 
+
 					<span class="title">用户管理</span>
-					<span class="arrow "></span>
+
+				<span class="selected"></span>
+
 					</a>
-					<ul class="sub-menu">
-						<li >
-							<a id ="userlist_href" href="#">
-							用户一览</a>
-						</li>
-					</ul>
+
 				</li>
+			     
+	
 				
 			</ul>
 

@@ -19,7 +19,7 @@
 
 <link href="${ctx}/static/styles/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="${ctx}/static/styles/css/meituan.css" rel="stylesheet">
-
+<link rel="shortcut icon" href="${ctx}/static/media/image/favicon.ico" />
 
 
 

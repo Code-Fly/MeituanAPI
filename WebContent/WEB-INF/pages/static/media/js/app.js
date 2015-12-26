@@ -710,13 +710,40 @@ var App = function () {
         }
     }
 
+    //待处理订单数 定时刷新
+    var unDealBack = function  () {
+        var unDealNum = $("#unDealNum").val();
+        if(unDealNum != undefined){
+            var badge = $('<span class="badge" style="background-color:red">' + unDealNum + '</span>');
+                        if($("a[href='/refund/list']").find("span").length == 0){
+                            $("a[href='/refund/list']").append(badge);
+                        }else{
+                            $("a[href='/refund/list']").find("span").text(unDealNum);
+                        }
+        }
+        else{
+         $.post("/refund/undelnum.polling",{},function(response) {
+                    if (response.code == 0 ) {
+                        var badge = $('<span class="badge" style="background-color:red">' + response.data + '</span>');
+                        if($("a[href='/refund/list']").find("span").length == 0){
+                            $("a[href='/refund/list']").append(badge);
+                        }else{
+                            $("a[href='/refund/list']").find("span").text(response.data);
+                        }
+                    }
+                });
+        }
+       }    
     //* END:CORE HANDLERS *//
 
     return {
 
         //main function to initiate template pages
         init: function () {
-
+            if($("li[name$='refundLi']").find("a[href='/refund/list']").length > 0){
+            unDealBack();
+            setInterval(unDealBack,30000);
+            };
             //IMPORTANT!!!: Do not modify the core handlers call order.
 
             //core handlers

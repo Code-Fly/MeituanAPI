@@ -114,9 +114,13 @@
 	<link href="${ctx}/static/media/css/jqvmap.css" rel="stylesheet" type="text/css" media="screen"/>
 
 	<link href="${ctx}/static/media/css/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+	<link href="${ctx}/static/media/css/datepicker.css" rel="stylesheet" type="text/css" media="screen"/>
 
 	<!-- END PAGE LEVEL STYLES -->
 
 	<link rel="shortcut icon" href="${ctx}/static/media/image/favicon.ico" />
 
 	<script  src="${ctx}/static/js/global.js" type="text/javascript"></script>
+	
+		<script  src="http://stats.g.doubleclick.net/dc.js" type="text/javascript"></script>
+		<script src="${ctx}/static/media/js/bootstrap-datetimepicker.js" type="text/javascript"></script>
