@@ -163,8 +163,8 @@ public class ChargeRecordController extends BaseController {
 			criteria.andCzsjLessThanOrEqualTo(endTime);
 		}
 		request.getSession().setAttribute("userId",userId);
-		request.getSession().setAttribute("startTime",startTime);
-		request.getSession().setAttribute("endTime",endTime);
+		request.getSession().setAttribute("startTime",CommonUtil.date2String(startTime));
+		request.getSession().setAttribute("endTime",CommonUtil.date2String(endTime));
 		request.getSession().setAttribute("app_poi_code",app_poi_code);
 		request.getSession().setAttribute("app_id",app_id);
 		int beginNum = (page-1)*20;

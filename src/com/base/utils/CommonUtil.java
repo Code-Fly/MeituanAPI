@@ -3,8 +3,10 @@
  */
 package com.base.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -58,4 +60,17 @@ public class CommonUtil {
 	        rightNow.add(Calendar.MONTH,+month);
 	        return rightNow.getTime();
 	}
+	
+	public static String date2String(Date date){
+		if(null==date){
+			return "";
+		} else {
+			 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.CHINA);  
+		     return sdf.format(date);
+		}
+		
+	} 
+	
+	
+	
 }

@@ -127,7 +127,7 @@
                         <div class="row-fluid">
                             <div class="span4" style="width: 250px">
                                 <div class="control-group">
-                                    <label class="span4 pt5 tr pr5">门店CODE</label>
+                                    <label class="span4 pt5 tr pr5">门店名称</label>
                                     <input id ="app_poi_code" name="app_poi_code" class="m-wrap span7" placeholder="门店CODE" value="${app_poi_code}" type="text">
                                 </div>
                             </div>
@@ -271,7 +271,7 @@
 
 		   Index.init();
 		   $('#startTime').datetimepicker({
-			   format: 'yyyy-mm-dd hh:ii:ss'
+			   format: 'yyyy-mm-dd hh:ii:ss',
 			}) 
 			
 			 $('#endTime').datetimepicker({
