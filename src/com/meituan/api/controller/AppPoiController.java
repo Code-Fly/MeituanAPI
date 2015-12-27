@@ -188,7 +188,9 @@ public class AppPoiController extends BaseController {
 			@RequestParam(value = "wm_poi_phone", required = false,defaultValue="") String poi_phone) {
 		AppPoiExample poiExample = new AppPoiExample();
 		AppPoiExample.Criteria criteria = poiExample.createCriteria();
-		criteria.andUseridEqualTo(userId);
+		if(userId!=1){
+			criteria.andUseridEqualTo(userId);
+		}
 		if (CommonUtil.isNotEmpty(poi_name)) {
 			criteria.andWm_poi_nameLike(poi_name+"%");
 		}

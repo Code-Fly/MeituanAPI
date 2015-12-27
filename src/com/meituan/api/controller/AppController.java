@@ -80,7 +80,9 @@ public class AppController extends BaseController {
 	public String appList(HttpServletRequest request, 
 			@RequestParam(value = "userId", required = true) int userId) {
 		AppExample example = new AppExample();
-		example.or().andUseridEqualTo(userId);
+		if(1!= userId){
+			example.or().andUseridEqualTo(userId);
+		}
 		List<App> apps = appService.selectByExample(example);
 		request.setAttribute("apps", apps);
 		return "/appList";

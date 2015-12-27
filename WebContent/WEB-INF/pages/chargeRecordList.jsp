@@ -11,7 +11,6 @@
  	<%@ include file="meta/meta.jsp"%>
  	<script  src="${ctx}/static/js/pages/chargeRecordList.js" type="text/javascript"></script>
 <script src="${ctx}/static/media/js/bootstrap-paginator.js" type="text/javascript"></script>
-
 </head>
 
 <!-- END HEAD -->
@@ -142,21 +141,21 @@
                                 <a href="javascript:void(0)" id="J-btn-search" class="btn blue btn-block">查询</a>
                             </div>
                         </div>
-                        <div class="row-fluid">
+                     <div class="row-fluid">
                             <div class="span5" style="width: 250px">
                                 <div class="control-group">
                                     <label class="span4 pt5 tr pr5">选择日期</label>
-                                    <input id ="startTime"  type="text" name="startTime"  size="30" class="m-wrap span8" data-date-format="yyyy-mm-dd" placeholder="开始时间" value="${startTime}">
+                                    <input id ="startTime"  type="date"  name="startTime"  size="30" class="m-wrap span8" placeholder="开始时间" value="${startTime}">
                                 </div>
                             </div>
                            <div class="span5" style="width: 250px">
                                 <div class="control-group">
                                     <label class="span4 pt5 tr pr5"> &nbsp;&nbsp;至</label>
-                                    <input id ="endTime" type="text" name="endTime"  size="30"  class="m-wrap span8 date-picker" data-date-format="yyyy-mm-dd" placeholder="结束时间" value="${endTime}" >
+                                    <input id ="endTime" type="date" name="endTime"  size="30"  class="m-wrap span8" placeholder="结束时间" value="${endTime}" >
                                 </div>
                             </div>
  							
-                        </div>
+                        </div> 
                     </div>
                 </div>
             </div>
@@ -271,7 +270,13 @@
 		   App.init(); // initlayout and core plugins
 
 		   Index.init();
-
+		   $('#startTime').datetimepicker({
+			   format: 'yyyy-mm-dd hh:ii:ss'
+			}) 
+			
+			 $('#endTime').datetimepicker({
+			   format: 'yyyy-mm-dd hh:ii:ss'
+			}) 
 		   /* Index.initJQVMAP(); // init index page's custom scripts
 
 		   Index.initCalendar(); // init index page's custom scripts

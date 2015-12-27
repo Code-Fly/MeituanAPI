@@ -143,8 +143,7 @@ function pageGo(){
       url: _ctx + "/Api/web/poiList?userId="+SessionCache.get("userId")+"&pageId="+carId+"&app_poi_code="+app_poi_code+"&wm_poi_name="+wm_poi_name+"&wm_poi_phone="+wm_poi_phone,
     
       success: function (data) {
-        if (data != null) {
-        	
+        if (data != null && data!='NODATA') {
           $.each(eval("(" + data + ")").list, function (index, item) { //遍历返回的json
         	  var num = index+1;
             $("#list").append('<tr>');

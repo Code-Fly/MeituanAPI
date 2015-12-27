@@ -20,7 +20,7 @@
 
 	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
 
-	<script src="${ctx}/static/media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
+   
 
 	<script src="${ctx}/static/media/js/bootstrap.min.js" type="text/javascript"></script>
 
@@ -34,8 +34,6 @@
 
 	<script src="${ctx}/static/media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
 
-	<script src="${ctx}/static/media/js/jquery.blockui.min.js" type="text/javascript"></script>  
-
 	<script src="${ctx}/static/media/js/jquery.cookie.min.js" type="text/javascript"></script>
 
 	<script src="${ctx}/static/media/js/jquery.uniform.min.js" type="text/javascript" ></script>
@@ -44,29 +42,11 @@
 
 	<!-- BEGIN PAGE LEVEL PLUGINS -->
 
-	<script src="${ctx}/static/media/js/jquery.vmap.js" type="text/javascript"></script>   
-
-	<script src="${ctx}/static/media/js/jquery.vmap.russia.js" type="text/javascript"></script>
-
-	<script src="${ctx}/static/media/js/jquery.vmap.world.js" type="text/javascript"></script>
-
-	<script src="${ctx}/static/media/js/jquery.vmap.europe.js" type="text/javascript"></script>
-
-	<script src="${ctx}/static/media/js/jquery.vmap.germany.js" type="text/javascript"></script>
-
-	<script src="${ctx}/static/media/js/jquery.vmap.usa.js" type="text/javascript"></script>
-
-	<script src="${ctx}/static/media/js/jquery.vmap.sampledata.js" type="text/javascript"></script>  
-
 	<script src="${ctx}/static/media/js/jquery.flot.js" type="text/javascript"></script>
 
 	<script src="${ctx}/static/media/js/jquery.flot.resize.js" type="text/javascript"></script>
 
 	<script src="${ctx}/static/media/js/jquery.pulsate.min.js" type="text/javascript"></script>
-
-	<script src="${ctx}/static/media/js/date.js" type="text/javascript"></script>
-
-	<script src="${ctx}/static/media/js/daterangepicker.js" type="text/javascript"></script>     
 
 	<script src="${ctx}/static/media/js/jquery.gritter.js" type="text/javascript"></script>
 
@@ -89,7 +69,6 @@
 
 	<link href="${ctx}/static/media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
 
-	<link href="${ctx}/static/media/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
 	<link href="${ctx}/static/media/css/style-metro.css" rel="stylesheet" type="text/css"/>
 
@@ -107,20 +86,18 @@
 
 	<link href="${ctx}/static/media/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
 
-	<link href="${ctx}/static/media/css/daterangepicker.css" rel="stylesheet" type="text/css" />
-
-	<link href="${ctx}/static/media/css/fullcalendar.css" rel="stylesheet" type="text/css"/>
-
-	<link href="${ctx}/static/media/css/jqvmap.css" rel="stylesheet" type="text/css" media="screen"/>
-
-	<link href="${ctx}/static/media/css/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
-	<link href="${ctx}/static/media/css/datepicker.css" rel="stylesheet" type="text/css" media="screen"/>
-
+	
+	
 	<!-- END PAGE LEVEL STYLES -->
 
 	<link rel="shortcut icon" href="${ctx}/static/media/image/favicon.ico" />
 
 	<script  src="${ctx}/static/js/global.js" type="text/javascript"></script>
 	
-		<script  src="http://stats.g.doubleclick.net/dc.js" type="text/javascript"></script>
-		<script src="${ctx}/static/media/js/bootstrap-datetimepicker.js" type="text/javascript"></script>
+     <link href="${ctx}/static/media/css/jquery-ui-1.10.1.custom.min.css" rel="stylesheet" type="text/css" media="screen"/>
+     	<script src="${ctx}/static/media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>   
+     	<link href="${ctx}/static/media/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" media="screen"/>
+     	<script src="${ctx}/static/media/js/bootstrap-datetimepicker.js" type="text/javascript"></script>   
+     	
+     	
+     	
