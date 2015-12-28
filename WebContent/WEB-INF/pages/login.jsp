@@ -2,7 +2,7 @@
 <%@ include file="meta/config.jsp"%>
 <html>
 <head>
-    <title>登录 | 美团外卖后台管理</title>
+    <title>登录 | 线上外卖后台管理</title>
     <%@ include file="meta/homemeta.jsp"%>
 <script type="text/javascript" src="${ctx}/static/js/pages/login.js"></script>
 </head>
@@ -10,7 +10,7 @@
 <body class="pg-unitive-login theme--waimai_developer">
 	<header class="header cf">
     <a class="site-logo" href="http://waimai.meituan.com"></a>
-    <span class="site-des">美团外卖后台管理</span>
+    <span class="site-des">线上外卖后台管理</span>
 </header>
 
 
@@ -18,7 +18,7 @@
     <div class="site-body-wrapper">
     <div class="site-body cf">
         <div class="promotion-banner">
-	    <img src="${ctx}/static/styles/image/s0.meituan.com.png" alt="美团外卖开发者" height="370" width="480">
+	    <img src="${ctx}/static/styles/image/s0.meituan.com.png" alt="线上外卖开发者" height="370" width="480">
 </div>
 
         <div class="login-section">

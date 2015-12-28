@@ -33,6 +33,7 @@ import com.meituan.chargerecord.entity.ChargeRecord;
 import com.meituan.chargerecord.entity.ChargeRecordExample;
 import com.meituan.chargerecord.service.iface.ChargeRecordService;
 import com.meituan.common.MeituanConst.MeituanResponse;
+import com.meituan.users.service.iface.LoginUsersService;
 import com.meituan.utils.SigUtil;
 
 import net.sf.json.JSONObject;
@@ -47,6 +48,10 @@ public class ChargeRecordController extends BaseController {
 	
 	@Autowired
 	private ChargeRecordService chargeRecordService;
+	
+	@Autowired
+	private LoginUsersService loginUsersService;
+	
 	
 	@Autowired
 	private AppPoiService appPoiService;
@@ -130,6 +135,8 @@ public class ChargeRecordController extends BaseController {
 		if (null != endTime) {
 			criteria.andCzsjLessThanOrEqualTo(endTime);
 		}
+		// 统计差额
+		float chae = 0;
 		request.getSession().setAttribute("userId",userId);
 		request.getSession().setAttribute("startTime",CommonUtil.date2String(startTime));
 		request.getSession().setAttribute("endTime",CommonUtil.date2String(endTime));
@@ -147,6 +154,7 @@ public class ChargeRecordController extends BaseController {
 				for(AppPoi poi:pois){
 					if(recode.getPoi_id() == poi.getPoi_id()){
 						userChargeRecord.add(recode);
+						chae+=(recode.getCzje()-loginUsersService.selectByPrimaryKey(appPoiService.selectByPrimaryKey(recode.getPoi_id()).getUserid()).getNfdj()*recode.getCzns());
 					}
 				}
 			}
@@ -167,8 +175,9 @@ public class ChargeRecordController extends BaseController {
 		      {
 		        rowCount = recordSize / pageSize;
 		    }
+			request.getSession().setAttribute("chae",chae);
 			String list = JsonUtil.jsonArray2Sting(pageRecords);
-			return "{\"pageCount\":"+rowCount+",\"CurrentPage\":"+page+",\"list\":" + list + "}";
+			return "{\"pageCount\":"+rowCount+",\"CurrentPage\":"+page+",\"list\":" + list + ",\"chae\":"+chae+"}";
 		}  else {
 			return "NODATA";
 		}

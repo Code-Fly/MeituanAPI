@@ -2,6 +2,7 @@
 function pageGo(){
     var carId = 1;
     $("#list").html("");
+    $("#foot_tr").html("");
     var poi_name = $.trim($("#poi_name").val());
     var startTime = $.trim($("#startTime").val());
     var endTime = $.trim($("#endTime").val());
@@ -20,6 +21,7 @@ function pageGo(){
             $("#list").append('<td>' + item.czsj + '</td>');
             $("#list").append('</tr>');
           });
+          $("#foot_tr").append('<td>差额统计</td><td></td><td></td><td></td><td></td><td>'+eval("(" + data + ")").chae+'</td>');
           var pageCount = eval("(" + data + ")").pageCount; //取到pageCount的值(把返回数据转成object类型)
           var currentPage = eval("(" + data + ")").CurrentPage; //得到urrentPage
           var options = {

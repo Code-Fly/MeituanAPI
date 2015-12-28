@@ -181,6 +181,11 @@
 						</thead>
 						<tbody id="list">
 						</tbody>
+						<tfoot>
+							<tr id="foot_tr">
+								
+							</tr>
+						</tfoot>
 						</table>
 				 </div>
 			</div>
