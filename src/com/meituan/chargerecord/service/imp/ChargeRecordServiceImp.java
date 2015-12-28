@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.base.utils.CommonUtil;
 import com.meituan.apppoi.entity.AppPoi;
+import com.meituan.apppoi.entity.AppPoiExample;
 import com.meituan.apppoi.mapper.AppPoiMapper;
 import com.meituan.chargerecord.entity.ChargeRecord;
 import com.meituan.chargerecord.entity.ChargeRecordExample;
@@ -26,11 +27,9 @@ public class ChargeRecordServiceImp implements ChargeRecordService {
 	@Override
 	public int insertSelective(ChargeRecord record) {
 		chargeRecordMapper.insertSelective(record);
-		AppPoi appPoi = new AppPoi();
-		appPoi.setApp_poi_code(record.getApp_poi_code());
-		appPoi.setAppid(record.getApp_id());
-		appPoi.setExpiredate(CommonUtil.addYear(appPoiMapper.selectByPrimaryKey(appPoi).getExpiredate(), record.getCzns()));
-		return appPoiMapper.updateByPrimaryKeySelective(appPoi);
+		AppPoi poi = appPoiMapper.selectByPrimaryKey(record.getPoi_id());
+		poi.setExpiredate(CommonUtil.addYear(poi.getExpiredate(), record.getCzns()));
+		return appPoiMapper.updateByPrimaryKeySelective(poi);
 	}
 
 

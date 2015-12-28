@@ -27,6 +27,8 @@ import com.meituan.api.entity.ApiData;
 import com.meituan.app.entity.App;
 import com.meituan.app.entity.AppExample;
 import com.meituan.apppoi.entity.AppPoi;
+import com.meituan.apppoi.entity.AppPoiExample;
+import com.meituan.apppoi.service.iface.AppPoiService;
 import com.meituan.chargerecord.entity.ChargeRecord;
 import com.meituan.chargerecord.entity.ChargeRecordExample;
 import com.meituan.chargerecord.service.iface.ChargeRecordService;
@@ -46,79 +48,48 @@ public class ChargeRecordController extends BaseController {
 	@Autowired
 	private ChargeRecordService chargeRecordService;
 	
+	@Autowired
+	private AppPoiService appPoiService;
 	
 	@ResponseBody
 	@RequestMapping(value = "/charge")
 	public String charge(HttpServletRequest request,
-			// system params
-			@RequestParam(value = "sig", required = true) String sig, 
-			@RequestParam(value = "app_id", required = true) String app_id,
-			@RequestParam(value = "timestamp", required = true) String timestamp,
-			// application params
-			@RequestParam(value = "app_poi_code", required = true) String app_poi_code) {
+			@RequestParam(value = "poi_id", required = true) int poi_id
+			) {
 		Map<String, Object> params = MapUtil.getParameterMap(request,true);
-		params.remove("sig");
-		String url = PathUtil.getServerUrl(request) + "/Api" + "/charge";
-		App app = appService.selectByPrimaryKey(app_id);
-		if(null == app){
-			logger.error("app_id("+app_id+")不存在");
-			return JSONObject.fromObject(MeituanResponse.RESPONSE_702).toString();
+		AppPoi apppoi = appPoiService.selectByPrimaryKey(poi_id);
+		if(null == apppoi){
+			logger.error("门店("+apppoi+")不存在");
+			return JSONObject.fromObject(MeituanResponse.RESPONSE_803).toString();
 		}
-		String appSecret = app.getSecret();
-		String md5sum = SigUtil.sign(url, params, appSecret, "MD5");
-		if (false) {
-			logger.error("签名验证错误, sig:" + sig + ", md5sum:" + md5sum);
-			return JSONObject.fromObject(MeituanResponse.RESPONSE_703).toString();
-		} else {
 			ChargeRecord chargeRecord = new ChargeRecord();
 			try {
 				chargeRecord = (ChargeRecord) CommonUtil.transMap2Bean(params, chargeRecord);
+				chargeRecord.setPoi_name(apppoi.getWm_poi_name());
 			} catch (Exception e) {				
 				logger.error("数据转换错误");
 				throw new ApiControllerException("数据转换错误",e);
 			}
 			chargeRecordService.insertSelective(chargeRecord);
 			return JSONObject.fromObject(MeituanResponse.RESPONSE_OK).discard("error").toString();
-		}
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/getChargeRecords")
 	public String getChargeRecords(HttpServletRequest request, 
-			// system params
-			@RequestParam(value = "sig", required = true) String sig, 
-			@RequestParam(value = "app_id", required = true) String app_id,
-			@RequestParam(value = "timestamp", required = true) String timestamp,
-			// application params
-			@RequestParam(value = "app_poi_code", required = true) String app_poi_code,
+			@RequestParam(value = "poi_id", required = true) int poi_id,
 			@RequestParam(value = "qsrq", required = true) @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date qsrq,
 			@RequestParam(value = "jsrq", required = true) @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date jsrq) {
-		
-		Map<String, Object> params = MapUtil.getParameterMap(request,false);
-		params.remove("sig");
-		String url = PathUtil.getServerUrl(request) + "/Api" + "/getChargeRecords";
-		App app = appService.selectByPrimaryKey(app_id);
-		if(null == app ){
-			logger.error("app_id("+app_id+")不存在");
-			return JSONObject.fromObject(MeituanResponse.RESPONSE_702).toString();
-		}
-		String appSecret = app.getSecret();
-		String md5sum = SigUtil.sign(url, params, appSecret, "MD5");
-		if (false) {
-			logger.error("签名验证错误, sig:" + sig + ", md5sum:" + md5sum);
-			return JSONObject.fromObject(MeituanResponse.RESPONSE_703).toString();
-		} else {
-			AppPoi poi = appPoiService.selectByPrimaryKey(app_poi_code,app_id);
+			AppPoi poi = appPoiService.selectByPrimaryKey(poi_id);
 			if (null == poi) {
 				return JSONObject.fromObject(MeituanResponse.RESPONSE_803).toString();
 			} else  {	
 				ChargeRecordExample example = new ChargeRecordExample();
-				example.or().andApp_idEqualTo(app_id).andApp_poi_codeEqualTo(app_poi_code).andCzsjBetween(qsrq, jsrq);
+				example.or().andPoi_idEqualTo(poi_id).andCzsjBetween(qsrq, jsrq);
 				List<ChargeRecord> oList = chargeRecordService.selectByExample(example);
 				ApiData ret = new ApiData(JsonUtil.jsonArray2Sting(oList));
 				return JsonUtil.json2Sting(ret);
 			}
-		}
 		
 	}
 	
@@ -144,17 +115,14 @@ public class ChargeRecordController extends BaseController {
 			// system params
 			@RequestParam(value = "userId", required = false,defaultValue="1") int userId, 
 			@RequestParam(value = "pageId", required = false,defaultValue="1") int page,
-			@RequestParam(value = "app_id", required = false,defaultValue="") String app_id,
-			@RequestParam(value = "app_poi_code", required = false,defaultValue="") String app_poi_code,
+			@RequestParam(value = "poi_name", required = false,defaultValue="") String poi_name,
 			@RequestParam(value = "startTime", required = false)@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date  startTime,
 			@RequestParam(value = "endTime", required = false)@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date endTime) {
 		ChargeRecordExample recordExample = new ChargeRecordExample();
 		ChargeRecordExample.Criteria criteria = recordExample.createCriteria();
-		if (CommonUtil.isNotEmpty(app_poi_code)) {
-			criteria.andApp_poi_codeEqualTo(app_poi_code);
-		}
-		if (CommonUtil.isNotEmpty(app_id)) {
-			criteria.andApp_idEqualTo(app_id);
+		
+		if (CommonUtil.isNotEmpty(poi_name)) {
+			criteria.andPoi_nameLike(poi_name+"%");
 		}
 		if (null != startTime) {
 			criteria.andCzsjGreaterThanOrEqualTo(startTime);
@@ -165,21 +133,19 @@ public class ChargeRecordController extends BaseController {
 		request.getSession().setAttribute("userId",userId);
 		request.getSession().setAttribute("startTime",CommonUtil.date2String(startTime));
 		request.getSession().setAttribute("endTime",CommonUtil.date2String(endTime));
-		request.getSession().setAttribute("app_poi_code",app_poi_code);
-		request.getSession().setAttribute("app_id",app_id);
+		request.getSession().setAttribute("poi_name",poi_name);
 		int beginNum = (page-1)*20;
 		int endNum = page * 20;
 		List<ChargeRecord> chargeAllRecords = chargeRecordService.selectByExample(recordExample);
-		AppExample appExample = new AppExample();
-		appExample.or().andUseridEqualTo(userId);
-		List<App> apps = appService.selectByExample(appExample);
+		AppPoiExample poiExample = new AppPoiExample();
+		poiExample.or().andUseridEqualTo(userId);
+		List<AppPoi> pois = appPoiService.selectByExample(poiExample);
 		List<ChargeRecord> userChargeRecord = new ArrayList<>();
 		List<ChargeRecord> pageRecords = new ArrayList<>();
-		
 		if (chargeAllRecords.size() > 0 ) {
 			for(ChargeRecord recode:chargeAllRecords){
-				for(App app:apps){
-					if(recode.getApp_id().equals(app.getAppid())){
+				for(AppPoi poi:pois){
+					if(recode.getPoi_id() == poi.getPoi_id()){
 						userChargeRecord.add(recode);
 					}
 				}

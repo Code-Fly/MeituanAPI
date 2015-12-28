@@ -235,11 +235,12 @@
                     	
                     	</div>
                        <div class="input-group input-group-lg">
-                           <input type="text" class="m-wrap span12" id="J-app_poi_code-text" placeholder="门店CODE"/>
-                       </div>
-                        <div class="input-group input-group-lg">
                            <input type="text" class="m-wrap span12" id="J-wm_poi_name-text" placeholder="门店名称"/>
                        </div>
+                       <div class="input-group input-group-lg">
+                           <input type="text" class="m-wrap span12" id="J-app_poi_code-text" placeholder="门店CODE"/>
+                       </div>
+                       
                        <div class="input-group input-group-lg">
                            <input type="text" class="m-wrap span12" id="J-appid-text" placeholder="APPID"/>
                        </div>

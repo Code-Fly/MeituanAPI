@@ -25,6 +25,7 @@ import com.meituan.api.entity.ApiData;
 import com.meituan.app.entity.App;
 import com.meituan.app.service.iface.AppService;
 import com.meituan.apppoi.entity.AppPoi;
+import com.meituan.apppoi.entity.AppPoiExample;
 import com.meituan.common.MeituanConst.MeituanResponse;
 import com.meituan.order.entity.MeituanOrder;
 import com.meituan.order.entity.MeituanOrderExample;
@@ -68,7 +69,9 @@ public class DoGetOrder extends BaseController {
 			logger.error("签名验证错误, sig:" + sig + ", md5sum:" + md5sum);
 			return JSONObject.fromObject(MeituanResponse.RESPONSE_703).toString();
 		} else {
-			AppPoi poi = appPoiService.selectByPrimaryKey(app_poi_code,app_id);
+			AppPoiExample poiexample = new AppPoiExample();
+			poiexample.or().andApp_poi_codeEqualTo(app_poi_code).andAppidEqualTo(app_id);
+			AppPoi poi = appPoiService.selectByExample(poiexample).get(0);
 			if (null == poi) {
 				return JSONObject.fromObject(MeituanResponse.RESPONSE_803).toString();
 			} else if (poi.getExpiredate().before(new Date())) {

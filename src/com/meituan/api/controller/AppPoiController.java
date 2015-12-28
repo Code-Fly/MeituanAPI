@@ -57,28 +57,8 @@ public class AppPoiController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value = "/getAppPoi")
 	public String getAppPoi(HttpServletRequest request, 
-			// system params
-			@RequestParam(value = "sig", required = true) String sig, 
-			@RequestParam(value = "app_id", required = true) String app_id,
-			@RequestParam(value = "timestamp", required = true) String timestamp,
-			// application params
-			@RequestParam(value = "app_poi_code", required = true) String app_poi_code) {
-		
-		Map<String, Object> params = MapUtil.getParameterMap(request,true);
-		params.remove("sig");
-		String url = PathUtil.getServerUrl(request) + "/Api/getAppPoi";
-		App app = appService.selectByPrimaryKey(app_id);
-		if(null == app){
-			logger.error("app_id("+app_id+")不存在");
-			return JSONObject.fromObject(MeituanResponse.RESPONSE_702).toString();
-		}
-		String appSecret = app.getSecret();
-		String md5sum = SigUtil.sign(url, params, appSecret, "MD5");
-		if (false) {
-			logger.error("签名验证错误, sig:" + sig + ", md5sum:" + md5sum);
-			return JSONObject.fromObject(MeituanResponse.RESPONSE_703).toString();
-		}
-		AppPoi poi = appPoiService.selectByPrimaryKey(app_poi_code, app_id);
+			@RequestParam(value = "poi_id", required = true) int poi_id) {
+		AppPoi poi = appPoiService.selectByPrimaryKey(poi_id);
 		ApiData appData =  new ApiData(poi.getExpiredate());
 		return JsonUtil.json2Sting(appData);
 	}
@@ -106,10 +86,7 @@ public class AppPoiController extends BaseController {
 			// system params
 			@RequestParam(value = "app_id", required = true) String app_id, 
 			@RequestParam(value = "poi_code", required = true) String poi_code) {
-		AppPoiKey key = new AppPoiKey();
-		key.setApp_poi_code(poi_code);
-		key.setAppid(app_id);
-		appPoiService.deleteByPrimaryKey(key);
+		appPoiService.deleteByExample(poi_code, app_id);
 		return SUCCESS;
 	}
 	
@@ -129,13 +106,15 @@ public class AppPoiController extends BaseController {
 				@RequestParam(value = "name", required = true) String name,
 				@RequestParam(value = "phone", required = false,defaultValue="")  String phone,
 				@RequestParam(value = "address", required = false,defaultValue="") String address) {
+			AppPoiExample example = new AppPoiExample();
+			example.or().andAppidEqualTo(app_id).andApp_poi_codeEqualTo(poi_code);
 			AppPoi appPoi = new AppPoi();
 			appPoi.setAppid(app_id);
 			appPoi.setApp_poi_code(poi_code);
 			appPoi.setWm_poi_name(name);
 			appPoi.setWm_poi_phone(phone);
 			appPoi.setWm_poi_address(address);
-			appPoiService.updateByPrimaryKeySelective(appPoi);
+			appPoiService.updateByExampleSelective(appPoi, example);
 			return SUCCESS;
 		}
 		

@@ -124,24 +124,7 @@
             <div class="portlet-body">
                 <div>
                     <div id="form" class="form-horizontal">
-                        <div class="row-fluid">
-                            <div class="span4" style="width: 250px">
-                                <div class="control-group">
-                                    <label class="span4 pt5 tr pr5">门店名称</label>
-                                    <input id ="app_poi_code" name="app_poi_code" class="m-wrap span7" placeholder="门店CODE" value="${app_poi_code}" type="text">
-                                </div>
-                            </div>
-                            <div class="span4" style="width: 250px">
-                                <div class="control-group">
-                                    <label class="span4 pt5 tr pr5">所属APP</label>
-                                    <input id = "app_id" name="app_id" class="m-wrap span7" placeholder="APP" value="${app_id}" type="text">
-                                </div>
-                            </div>
-                           <div class="span2">
-                                <a href="javascript:void(0)" id="J-btn-search" class="btn blue btn-block">查询</a>
-                            </div>
-                        </div>
-                     <div class="row-fluid">
+                    <div class="row-fluid">
                             <div class="span5" style="width: 250px">
                                 <div class="control-group">
                                     <label class="span4 pt5 tr pr5">选择日期</label>
@@ -155,7 +138,19 @@
                                 </div>
                             </div>
  							
-                        </div> 
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span4" style="width: 250px">
+                                <div class="control-group">
+                                    <label class="span4 pt5 tr pr5">门店名称</label>
+                                    <input id ="poi_name" name="poi_name" class="m-wrap span7" placeholder="门店名称" value="${poi_name}" type="text">
+                                </div>
+                            </div>
+                            
+                           <div class="span2">
+                                <a href="javascript:void(0)" id="J-btn-search" class="btn blue btn-block">查询</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -177,8 +172,7 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>所属APP</th>
-								<th>门店CODE</th>
+								<th>门店名称</th>
 								<th>充值金额</th>
 								<th>充值年限</th>
 								<th>充值方式</th>
