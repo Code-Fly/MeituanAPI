@@ -135,7 +135,8 @@ public class AppPoiController extends BaseController {
 					@RequestParam(value = "wm_poi_name", required = true) String wm_poi_name,
 					@RequestParam(value = "wm_poi_phone", required = false)  String wm_poi_phone,
 					@RequestParam(value = "wm_poi_address", required = false) String wm_poi_address,
-					@RequestParam(value = "descption", required = false) String descption) {
+					@RequestParam(value = "descption", required = false) String descption,
+					@RequestParam(value = "price", required = false) Float price) {
 				AppPoi appPoi = new AppPoi();
 				appPoi.setUserid(userId);
 				appPoi.setAppid(appid);
@@ -145,6 +146,7 @@ public class AppPoiController extends BaseController {
 				appPoi.setWm_poi_address(wm_poi_address);
 				appPoi.setExpiredate(CommonUtil.addMonth(new Date(),2));
 				appPoi.setDescption(descption);
+				appPoi.setPrice(price);
 				appPoiService.insertSelective(appPoi);
 				return SUCCESS;
 			}

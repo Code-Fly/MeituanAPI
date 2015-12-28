@@ -134,10 +134,10 @@
                                     <input id ="wm_poi_name" name="wm_poi_name" class="m-wrap span7" placeholder="门店名称" value="${wm_poi_name}" type="text">
                                 </div>
                             </div>
-                            <div class="span4">
+                           <%--  <div class="span4">
                                 <label class="span4 pt5 tr pr5">门店CODE</label>
                                 <input id = "app_poi_code"  name="app_poi_code" class="m-wrap span7" placeholder="门店CODE" value="${app_poi_code}" type="text">
-                            </div>
+                            </div> --%>
                             
                             <div class="span4" style="width: 250px">
                                 <div class="control-group">
@@ -172,8 +172,9 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>门店CODE</th>
 								<th>门店名称</th>
+								<th>门店年费</th>
+								<th>门店CODE</th>
 								<th>所属APP</th>
 								<th>电话号码</th>
 								<th>地址</th>
@@ -189,40 +190,7 @@
 			<div id="example" class="pagination pagination-centered" style="text-align: center;"></div>
 			<!-- END SAMPLE TABLE PORTLET-->
 			<!-- url -->
-			<div class="modal fade" id="J-callback-url" style="display:block">
-              <div class="modal-dialog" style="display:block">
-                <div class="modal-content" style="display:block">
-                  <div class="modal-header">
-                    <button type="button" class="pull-right" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="glyphicon glyphicon-remove "></span></button>
-                    <h4 class="modal-title">修改门店信息</h4>
-                  </div>
-                  <div class="modal-body">
-                    <form role="form" action="#">
-                    	<div class="form-group">
-                    	
-                    	</div>
-                       <div class="input-group input-group-lg">
-                           <input type="text" class="m-wrap span12" id="J-name-text" placeholder="门店名称"/>
-                       </div>
-                        <div class="input-group input-group-lg">
-                           <input type="text" class="m-wrap span12" id="J-phone-text" placeholder="电话号码"/>
-                       </div>
-                       <div class="input-group input-group-lg">
-                           <input type="text" class="m-wrap span12" id="J-address-text" placeholder="地址"/>
-                       </div>
-                      </form>                           
-                  </div>
-                  <div class="modal-footer">                      
-                      <button type="button" class="btn btn-primary" id="J-submit-btn">确认</button>
-                      <button type="button" class="btn btn-default" id="J-cancle-btn" data-dismiss="modal">取消</button>
-                  </div>
-
-                </div><!-- /.modal-content -->
-              </div><!-- /.modal-dialog -->
-            </div>
-		</div>
-		
-		<div class="modal fade" id="J-add-poi" style="display:block">
+				<div class="modal fade" id="J-add-poi" style="display:none">
               <div class="modal-dialog" style="display:block">
                 <div class="modal-content" style="display:block">
                   <div class="modal-header">
@@ -238,11 +206,14 @@
                            <input type="text" class="m-wrap span12" id="J-wm_poi_name-text" placeholder="门店名称"/>
                        </div>
                        <div class="input-group input-group-lg">
-                           <input type="text" class="m-wrap span12" id="J-app_poi_code-text" placeholder="门店CODE"/>
+                           <input type="text" class="m-wrap span12" id="J-price-text"  placeholder="年费"/>
+                       </div>
+                       <div class="input-group input-group-lg">
+                           <input type="text" class="m-wrap span12" id="J-app_poi_code-text" placeholder="美团门店CODE"/>
                        </div>
                        
                        <div class="input-group input-group-lg">
-                           <input type="text" class="m-wrap span12" id="J-appid-text" placeholder="APPID"/>
+                           <input type="text" class="m-wrap span12" id="J-appid-text" placeholder="美团APPID"/>
                        </div>
                        <div class="input-group input-group-lg">
                            <input type="text" class="m-wrap span12" id="J-wm_poi_address-text" placeholder="门店地址"/>
@@ -263,6 +234,40 @@
                 </div><!-- /.modal-content -->
               </div><!-- /.modal-dialog -->
             </div>
+            <div class="modal fade" id="J-callback-url" style="display:block">
+              <div class="modal-dialog" style="display:block">
+                <div class="modal-content" style="display:block">
+                  <div class="modal-header">
+                    <button type="button" class="pull-right" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="glyphicon glyphicon-remove "></span></button>
+                    <h4 class="modal-title">修改门店信息</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form role="form" action="#">
+                    	
+                       <div class="input-group input-group-lg">
+                           <input type="text" class="m-wrap span12" id="J-name1-text" placeholder="门店名称"/>
+                       </div>
+                        <div class="input-group input-group-lg">
+                           <input type="text" class="m-wrap span12" id="J-phone1-text" placeholder="电话号码"/>
+                       </div>
+                       <div class="input-group input-group-lg">
+                           <input type="text" class="m-wrap span12" id="J-address1-text" placeholder="地址"/>
+                       </div>
+                      </form>                           
+                  </div>
+                  <div class="modal-footer">                      
+                      <button type="button" class="btn btn-primary" id="J-submit-btn">确认</button>
+                      <button type="button" class="btn btn-default" id="J-cancle-btn" data-dismiss="modal">取消</button>
+                  </div>
+
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div>
+            		
+	
+		</div>
+		
+
 		</div>
 		
 		</div>
@@ -277,8 +282,6 @@
 
 		<!-- END PAGE -->
 
-	</div>
-   </div>
 	<!-- END CONTAINER -->
 
 	<!-- BEGIN FOOTER -->

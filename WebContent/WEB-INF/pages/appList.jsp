@@ -134,7 +134,6 @@
 								<th>#</th>
 								<th>APPID</th>
 								<th>密钥</th>
-								<th>年费</th>
 								<th>描述</th>
 								<th>操作</th>
 							</tr>
@@ -145,7 +144,6 @@
 									<td>${st.count}</td>
 									<td id="appid_${app.appid}">${app.appid}</td>
 									<td id="secret_${app.appid}">${app.secret}</td>
-									<td id="price_${app.appid}">${app.price}</td>
 									<td id="desc_${app.appid}">${app.descption}</td>
 									<td>	
 										<button id="del_app_${app.appid}" type="button" onclick="deleteApp(${app.appid})" class="btn red delete" name="edit_cancel_url" date-message="${app.appid}">删除</button>
@@ -178,7 +176,7 @@
                        <div class="input-group input-group-lg">
                            <input type="text" class="m-wrap span12" id="J-secret-text" placeholder="密钥"/>
                        </div>
-                        <div class="input-group input-group-lg">
+                        <div class="input-group input-group-lg"  style="display:none">
                            <input type="text" class="m-wrap span12" id="J-price-text" placeholder="年费"/>
                        </div>
                         <div class="input-group input-group-lg">
@@ -215,7 +213,7 @@
                         <div class="input-group input-group-lg">
                            <input type="text" class="m-wrap span12" id="J-secret1-text" placeholder="密钥"/>
                        </div>
-                        <div class="input-group input-group-lg">
+                        <div class="input-group input-group-lg" style="display:none">
                            <input type="text" class="m-wrap span12" id="J-price1-text" placeholder="单价"/>
                        </div>
                        <div class="input-group input-group-lg">

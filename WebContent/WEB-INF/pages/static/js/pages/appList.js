@@ -78,9 +78,6 @@ $(function() {
        });
  	   
 	});
-	
-	
-
 		// 清空 
 		$("#addApp").bind().click(function(){
 			if ($("#J-addapp-url").is(":hidden")) {

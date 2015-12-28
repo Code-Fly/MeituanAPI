@@ -33,20 +33,20 @@ function initEdit(){
 	// 清空 
 	$(".edit").bind().click(function(){
 		if ($("#J-callback-url").is(":hidden")) {
-	  	 	$("#J-name-text").val("");
-	  	 	$("#J-phone-text").val("");
-	  	 	$("#J-address-text").val("");
+	  	 	$("#J-name1-text").val("");
+	  	 	$("#J-phone1-text").val("");
+	  	 	$("#J-address1-text").val("");
 	   };
 	   $("#J-callback-url").modal();
 	   var num= $(this).attr("date-message");
 	   // 初始化
-       $("#J-name-text").val($.trim($("#poi_name_"+num).text()));
-	   $("#J-phone-text").val($.trim($("#poi_phone_"+num).text()));
-	   $("#J-address-text").val($.trim($("#poi_address_"+num).text()));
+       $("#J-name1-text").val($.trim($("#poi_name_"+num).text()));
+	   $("#J-phone1-text").val($.trim($("#poi_phone_"+num).text()));
+	   $("#J-address1-text").val($.trim($("#poi_address_"+num).text()));
        $("#J-submit-btn").unbind().click(function(){
-       var name = $.trim($("#J-name-text").val());
-       var phone = $.trim($("#J-phone-text").val());
-       var address = $.trim($("#J-address-text").val());
+       var name = $.trim($("#J-name1-text").val());
+       var phone = $.trim($("#J-phone1-text").val());
+       var address = $.trim($("#J-address1-text").val());
        if(''== name || null == name){
        		alert("门店名称不能为空");
        		return;
@@ -86,6 +86,7 @@ function initAdd(){
 			$("#J-app_poi_code-text").val("");
 	  	 	$("#J-wm_poi_name-text").val("");
 	  	 	$("#J-appid-text").val("");
+	  	 	$("#J-price-text").val("");
 	  	 	$("#J-wm_poi_address-text").val("");
 	  	 	$("#J-wm_poi_phone-text").val("");
 	  	 	$("#J-descption-text").val("");
@@ -98,6 +99,7 @@ function initAdd(){
     	  var wm_poi_address =	$.trim($("#J-wm_poi_address-text").val());
     	  var wm_poi_phone =	$.trim($("#J-wm_poi_phone-text").val());
     	  var descption =	$.trim($("#J-descption-text").val());
+    	  var price = $.trim($("#J-price-text").val());
        if(''== app_poi_code || null == app_poi_code){
        		alert("门店CODE不能为空");
        		return;
@@ -106,8 +108,12 @@ function initAdd(){
       		alert("APPID不能为空");
       		return;
       }
+       if(''!= price && isNaN(price)){
+   	    	alert("年费输入有误！");
+     		return;
+      }
        $.ajax({
-           url:  _ctx + "/Api/web/addPoi?userId="+SessionCache.get("userId")+"&appid="+appid+"&app_poi_code="+app_poi_code+"&wm_poi_name="+wm_poi_name+"&wm_poi_address="+wm_poi_address+"&wm_poi_phone="+wm_poi_phone+"&descption="+descption,
+           url:  _ctx + "/Api/web/addPoi?userId="+SessionCache.get("userId")+"&appid="+appid+"&app_poi_code="+app_poi_code+"&wm_poi_name="+wm_poi_name+"&wm_poi_address="+wm_poi_address+"&wm_poi_phone="+wm_poi_phone+"&descption="+descption+"&price="+price,
                success: function(result){
                    if("OPSUCCESS" == result){
                        alert("增加门店成功");
@@ -133,23 +139,21 @@ function initAdd(){
 }
 
 function pageGo(){
-
     var carId = 1;
     $("#list").html("");
-    var app_poi_code = $.trim($("#app_poi_code").val());
     var wm_poi_name = $.trim($("#wm_poi_name").val());
     var wm_poi_phone = $.trim($("#wm_poi_phone").val());
     $.ajax({
-      url: _ctx + "/Api/web/poiList?userId="+SessionCache.get("userId")+"&pageId="+carId+"&app_poi_code="+app_poi_code+"&wm_poi_name="+wm_poi_name+"&wm_poi_phone="+wm_poi_phone,
-    
+      url: _ctx + "/Api/web/poiList?userId="+SessionCache.get("userId")+"&pageId="+carId+"&wm_poi_name="+wm_poi_name+"&wm_poi_phone="+wm_poi_phone,
       success: function (data) {
         if (data != null && data!='NODATA') {
           $.each(eval("(" + data + ")").list, function (index, item) { //遍历返回的json
         	  var num = index+1;
             $("#list").append('<tr>');
             $("#list").append('<td>' + num+ '</td>');
-            $("#list").append('<td id=poi_code_'+num+'>' + item.app_poi_code + '</td>');
             $("#list").append('<td id=poi_name_'+num+'>' + item.wm_poi_name + '</td>');
+            $("#list").append('<td id=poi_price_'+num+'>' + item.price + '</td>');
+            $("#list").append('<td id=poi_code_'+num+'>' + item.app_poi_code + '</td>');
             $("#list").append('<td id=appid_'+num+'>' + item.appid + '</td>');
             $("#list").append('<td id=poi_phone_'+num+'>' + item.wm_poi_phone + '</td>');
             $("#list").append('<td id=poi_address_'+num+'>' + item.wm_poi_address + '</td>');
@@ -162,8 +166,8 @@ function pageGo(){
             $("#list").append('</td>');
             $("#list").append('</tr>');
           });
-          initEdit();
           initAdd();
+          initEdit();
           var pageCount = eval("(" + data + ")").pageCount; //取到pageCount的值(把返回数据转成object类型)
           var currentPage = eval("(" + data + ")").CurrentPage; //得到urrentPage
           var options = {
@@ -186,7 +190,7 @@ function pageGo(){
             },//点击事件，用于通过Ajax来刷新整个list列表
             onPageClicked: function (event, originalEvent, type, page) {
               $.ajax({
-            	  url: _ctx + "/Api/web/poiList?userId="+SessionCache.get("userId")+"&pageId="+page+"&app_poi_code="+app_poi_code+"&wm_poi_name="+wm_poi_name+"&wm_poi_phone="+wm_poi_phone,
+            	  url: _ctx + "/Api/web/poiList?userId="+SessionCache.get("userId")+"&pageId="+page+"&wm_poi_name="+wm_poi_name+"&wm_poi_phone="+wm_poi_phone,
                 success: function (data1) {
                 	$("#list").html("");
                 	if (data1 != null) {
@@ -194,8 +198,9 @@ function pageGo(){
                        var num = index+1;
                        $("#list").append('<tr>');
                        $("#list").append('<td>' + num + '</td>');
-                       $("#list").append('<td id=poi_code_'+num+'>' + item.app_poi_code + '</td>');
                        $("#list").append('<td id=poi_name_'+num+'>' + item.wm_poi_name + '</td>');
+                       $("#list").append('<td id=poi_price_'+num+'>' + item.price + '</td>');
+                       $("#list").append('<td id=poi_code_'+num+'>' + item.app_poi_code + '</td>');
                        $("#list").append('<td id=appid_'+num+'>' + item.appid + '</td>');
                        $("#list").append('<td id=poi_phone_'+num+'>' + item.wm_poi_phone + '</td>');
                        $("#list").append('<td id=poi_address_'+num+'>' + item.wm_poi_address + '</td>');
@@ -208,8 +213,8 @@ function pageGo(){
                        $("#list").append('</td>');
                        $("#list").append('</tr>');
                      });
-                     initEdit();
                      initAdd();
+                     initEdit();
                   }
                 }
               });
