@@ -59,8 +59,13 @@ public class AppPoiController extends BaseController {
 	public String getAppPoi(HttpServletRequest request, 
 			@RequestParam(value = "poi_id", required = true) int poi_id) {
 		AppPoi poi = appPoiService.selectByPrimaryKey(poi_id);
-		ApiData appData =  new ApiData(poi);
-		return JsonUtil.json2Sting(appData);
+		if(null == poi){
+			return JSONObject.fromObject(MeituanResponse.RESPONSE_803).toString();
+		} else {
+			ApiData appData =  new ApiData(poi);
+			return JsonUtil.json2Sting(appData);
+		}
+		
 	}
 	
 	
