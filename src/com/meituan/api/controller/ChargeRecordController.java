@@ -145,7 +145,11 @@ public class ChargeRecordController extends BaseController {
 		int endNum = page * 20;
 		List<ChargeRecord> chargeAllRecords = chargeRecordService.selectByExample(recordExample);
 		AppPoiExample poiExample = new AppPoiExample();
-		poiExample.or().andUseridEqualTo(userId);
+		AppPoiExample.Criteria criteriaPoi = poiExample.createCriteria();
+		criteriaPoi.andUseridEqualTo(userId);
+		if (CommonUtil.isNotEmpty(poi_name)) {
+			criteriaPoi.andWm_poi_nameLike(poi_name+"%");
+		}
 		List<AppPoi> pois = appPoiService.selectByExample(poiExample);
 		List<ChargeRecord> userChargeRecord = new ArrayList<>();
 		List<ChargeRecord> pageRecords = new ArrayList<>();
@@ -153,21 +157,18 @@ public class ChargeRecordController extends BaseController {
 		if (chargeAllRecords.size() > 0 ) {
 			for(ChargeRecord recode:chargeAllRecords){
 				for(AppPoi poi:pois){
+					userIdTmp = appPoiService.selectByPrimaryKey(recode.getPoi_id()).getUserid();
 					if(1!=userId){
-						userIdTmp = appPoiService.selectByPrimaryKey(recode.getPoi_id()).getUserid();
-						if(userIdTmp == userId ){
 							if(recode.getPoi_id() == poi.getPoi_id()){
 								userChargeRecord.add(recode);
 								chae+=(recode.getCzje()-loginUsersService.selectByPrimaryKey(userIdTmp).getNfdj()*recode.getCzns());
 							}
-						}
 					} else {
 						if(recode.getPoi_id() == poi.getPoi_id()){
 							userChargeRecord.add(recode);
-							chae+=(recode.getCzje()-loginUsersService.selectByPrimaryKey(userIdTmp).getNfdj()*recode.getCzns());
+							chae+=recode.getCzje()-loginUsersService.selectByPrimaryKey(userIdTmp).getNfdj()*recode.getCzns();
 						}
 					}
-					
 				}
 			}
 			int recordSize = userChargeRecord.size();
