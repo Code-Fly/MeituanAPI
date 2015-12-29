@@ -153,19 +153,27 @@ public class ChargeRecordController extends BaseController {
 		if (chargeAllRecords.size() > 0 ) {
 			for(ChargeRecord recode:chargeAllRecords){
 				for(AppPoi poi:pois){
-					userIdTmp = appPoiService.selectByPrimaryKey(recode.getPoi_id()).getUserid();
-					if(userIdTmp == userId ){
+					if(1!=userId){
+						userIdTmp = appPoiService.selectByPrimaryKey(recode.getPoi_id()).getUserid();
+						if(userIdTmp == userId ){
+							if(recode.getPoi_id() == poi.getPoi_id()){
+								userChargeRecord.add(recode);
+								chae+=(recode.getCzje()-loginUsersService.selectByPrimaryKey(userIdTmp).getNfdj()*recode.getCzns());
+							}
+						}
+					} else {
 						if(recode.getPoi_id() == poi.getPoi_id()){
 							userChargeRecord.add(recode);
 							chae+=(recode.getCzje()-loginUsersService.selectByPrimaryKey(userIdTmp).getNfdj()*recode.getCzns());
 						}
 					}
+					
 				}
 			}
 			int recordSize = userChargeRecord.size();
 			if (recordSize <= beginNum) {
 				pageRecords = userChargeRecord;
-			} else if (recordSize >  beginNum && recordSize <= endNum ) {
+			} else if (recordSize >  beginNum && recordSize < endNum ) {
 				pageRecords = userChargeRecord.subList(beginNum, recordSize);
 			} else {
 				pageRecords = userChargeRecord.subList(beginNum, endNum);
