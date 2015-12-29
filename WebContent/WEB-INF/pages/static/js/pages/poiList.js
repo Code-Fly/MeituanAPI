@@ -166,8 +166,6 @@ function pageGo(){
             $("#list").append('</td>');
             $("#list").append('</tr>');
           });
-          initAdd();
-          initEdit();
           var pageCount = eval("(" + data + ")").pageCount; //取到pageCount的值(把返回数据转成object类型)
           var currentPage = eval("(" + data + ")").CurrentPage; //得到urrentPage
           var options = {
@@ -213,9 +211,9 @@ function pageGo(){
                        $("#list").append('</td>');
                        $("#list").append('</tr>');
                      });
-                     initAdd();
-                     initEdit();
                   }
+                	initAdd();
+                    initEdit();
                 }
               });
             
@@ -223,6 +221,8 @@ function pageGo(){
           };
           $('#example').bootstrapPaginator(options);
         }
+        initAdd();
+        initEdit();
       }
     });
 }

@@ -149,19 +149,23 @@ public class ChargeRecordController extends BaseController {
 		List<AppPoi> pois = appPoiService.selectByExample(poiExample);
 		List<ChargeRecord> userChargeRecord = new ArrayList<>();
 		List<ChargeRecord> pageRecords = new ArrayList<>();
+		int userIdTmp = 0;
 		if (chargeAllRecords.size() > 0 ) {
 			for(ChargeRecord recode:chargeAllRecords){
 				for(AppPoi poi:pois){
-					if(recode.getPoi_id() == poi.getPoi_id()){
-						userChargeRecord.add(recode);
-						chae+=(recode.getCzje()-loginUsersService.selectByPrimaryKey(appPoiService.selectByPrimaryKey(recode.getPoi_id()).getUserid()).getNfdj()*recode.getCzns());
+					userIdTmp = appPoiService.selectByPrimaryKey(recode.getPoi_id()).getUserid();
+					if(userIdTmp == userId ){
+						if(recode.getPoi_id() == poi.getPoi_id()){
+							userChargeRecord.add(recode);
+							chae+=(recode.getCzje()-loginUsersService.selectByPrimaryKey(userIdTmp).getNfdj()*recode.getCzns());
+						}
 					}
 				}
 			}
 			int recordSize = userChargeRecord.size();
-			if (recordSize < beginNum) {
+			if (recordSize <= beginNum) {
 				pageRecords = userChargeRecord;
-			} else if (recordSize >  beginNum && recordSize < endNum ) {
+			} else if (recordSize >  beginNum && recordSize <= endNum ) {
 				pageRecords = userChargeRecord.subList(beginNum, recordSize);
 			} else {
 				pageRecords = userChargeRecord.subList(beginNum, endNum);

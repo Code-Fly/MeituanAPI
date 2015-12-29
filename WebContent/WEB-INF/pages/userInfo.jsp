@@ -5,7 +5,7 @@
 <!-- BEGIN HEAD -->
 
 <head>
-	<title>美团外卖管理后台</title>
+	<title>线上外卖管理后台</title>
  	<%@ include file="meta/meta.jsp"%>
 	<script  src="${ctx}/static/js/pages/userInfo.js" type="text/javascript"></script>
 </head>

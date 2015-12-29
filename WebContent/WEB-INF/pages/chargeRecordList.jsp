@@ -6,7 +6,7 @@
 
 <head>
 	
-	<title>美团外卖管理后台</title>
+	<title>线上外卖管理后台</title>
  	<%@ include file="meta/meta.jsp"%>
  	<script  src="${ctx}/static/js/pages/chargeRecordList.js" type="text/javascript"></script>
 <script src="${ctx}/static/media/js/bootstrap-paginator.js" type="text/javascript"></script>
