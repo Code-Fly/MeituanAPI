@@ -5,7 +5,6 @@
 <!-- BEGIN HEAD -->
 
 <head>
-
 	
 	<title>美团外卖管理后台</title>
  	<%@ include file="meta/meta.jsp"%>
@@ -271,10 +270,12 @@
 		   Index.init();
 		   $('#startTime').datetimepicker({
 			   format: 'yyyy-mm-dd hh:ii:ss',
+			   language:'zh-CN'
 			}) 
 			
 			 $('#endTime').datetimepicker({
-			   format: 'yyyy-mm-dd hh:ii:ss'
+			   format: 'yyyy-mm-dd hh:ii:ss',
+			   language:'zh-CN'
 			}) 
 		   /* Index.initJQVMAP(); // init index page's custom scripts
 
