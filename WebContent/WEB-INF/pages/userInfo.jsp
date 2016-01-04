@@ -111,7 +111,7 @@
 				<div id="dashboard">
 
 					<div class="row-fluid">
-		<div class="span6">
+		<div class="span12">
 			<!-- BEGIN SAMPLE TABLE PORTLET-->
 			<div class="portlet box blue">
 				<div class="portlet-title">
@@ -127,7 +127,7 @@
 								<th>#</th>
 								<th>用户名</th>
 								<th>年费单价</th>
-								<th>描述</th>
+								<th colspan = 3 >描述</th>
 								<th>操作</th>
 							</tr>
 						</thead>
@@ -136,7 +136,7 @@
 									<td>1</td>
 									<td>${user.login_id}</td>
 									<td>${user.nfdj}</td>
-									<td>${user.descption}</td>
+									<td colspan = 3>${user.descption}</td>
 									<td>	
 										<button id="modify_password" type="button" class="btn red edit" name="edit_cancel_url" date-message="${user.login_pass}">修改密码</button>
 									<td>

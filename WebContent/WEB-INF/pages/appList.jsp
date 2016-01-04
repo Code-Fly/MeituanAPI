@@ -115,7 +115,7 @@
 				<div id="dashboard">
 
 					<div class="row-fluid">
-		<div class="span10">
+		<div class="span12">
 			<!-- BEGIN SAMPLE TABLE PORTLET-->
 			<div class="portlet box blue">
 				<div class="portlet-title">
@@ -134,7 +134,7 @@
 								<th>#</th>
 								<th>APPID</th>
 								<th>密钥</th>
-								<th>描述</th>
+								<th colspan=3>描述</th>
 								<th>操作</th>
 							</tr>
 						</thead>
@@ -144,7 +144,7 @@
 									<td>${st.count}</td>
 									<td id="appid_${app.appid}">${app.appid}</td>
 									<td id="secret_${app.appid}">${app.secret}</td>
-									<td id="desc_${app.appid}">${app.descption}</td>
+									<td colspan=3 id="desc_${app.appid}">${app.descption}</td>
 									<td>	
 										<button id="del_app_${app.appid}" type="button" onclick="deleteApp(${app.appid})" class="btn red delete" name="edit_cancel_url" date-message="${app.appid}">删除</button>
 										<button id="edit_app_${app.appid}" type="button" class="btn red edit" name="edit_cancel_url" date-message="${app.appid}">修改</button>

@@ -115,7 +115,7 @@
 				<div id="dashboard">
 
 					<div class="row-fluid">
-		<div class="span10">
+		<div class="span12">
 			<!-- BEGIN SAMPLE TABLE PORTLET-->
 			<div class="portlet box blue">
 				<div class="portlet-title">
@@ -135,7 +135,7 @@
 								<th>登陆名</th>
 								<th>年费单价</th>
 								<th>状态</th>
-								<th>描述</th>
+								<th colspan=3>描述</th>
 								<th>操作</th>
 							</tr>
 						</thead>
@@ -147,7 +147,7 @@
 									<td>${user.nfdj}</td>
 									
 									<td><c:choose><c:when test="${user.status==1}">启用</c:when> <c:otherwise>停用</c:otherwise></c:choose></td>
-									<td>${user.descption}</td>
+									<td colspan=3>${user.descption}</td>
 									<td>
 										<c:choose>
 											<c:when test="${user.status ==1}">

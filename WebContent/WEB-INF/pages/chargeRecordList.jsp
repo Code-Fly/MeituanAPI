@@ -112,7 +112,7 @@
 
 				<div id="dashboard">
 <div class="row-fluid">
-<div class="span9">
+<div class="span12">
         <div class="portlet box yellow">
             <div class="portlet-title">
                 <div class="caption"><i class="icon-briefcase"></i>充值记录查询</div>
@@ -136,10 +136,7 @@
                                     <input id ="endTime" type="date" name="endTime"  size="30"  class="m-wrap span8" placeholder="结束时间" value="${endTime}" >
                                 </div>
                             </div>
- 							
-                        </div>
-                        <div class="row-fluid">
-                            <div class="span4" style="width: 250px">
+ 							 <div class="span4" style="width: 250px">
                                 <div class="control-group">
                                     <label class="span4 pt5 tr pr5">门店名称</label>
                                     <input id ="poi_name" name="poi_name" class="m-wrap span7" placeholder="门店名称" value="${poi_name}" type="text">
@@ -150,6 +147,7 @@
                                 <a href="javascript:void(0)" id="J-btn-search" class="btn blue btn-block">查询</a>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -157,7 +155,7 @@
         </div>
     </div>
 	<div class="row-fluid">
-		<div class="span9">
+		<div class="span12">
 			<!-- BEGIN SAMPLE TABLE PORTLET-->
 			<div class="portlet box blue">
 				<div class="portlet-title">
