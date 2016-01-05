@@ -18,10 +18,12 @@ function pageGo(){
             $("#list").append('<td>' + item.czje + '</td>');
             $("#list").append('<td>' + item.czns + '</td>');
             $("#list").append('<td>' + item.czfs + '</td>');
+            $("#list").append('<td>' + item.jyh + '</td>');
+            $("#list").append('<td>' + item.out_trade_no + '</td>');
             $("#list").append('<td>' + item.czsj + '</td>');
             $("#list").append('</tr>');
           });
-          $("#foot_tr").append('<td>差额统计</td><td></td><td></td><td></td><td></td><td>'+eval("(" + data + ")").chae+'</td>');
+          $("#foot_tr").append('<td>差额统计</td><td></td><td></td><td></td><td></td><td></td><td></td><td>'+eval("(" + data + ")").chae+'</td>');
           var pageCount = eval("(" + data + ")").pageCount; //取到pageCount的值(把返回数据转成object类型)
           var currentPage = eval("(" + data + ")").CurrentPage; //得到urrentPage
           var options = {
@@ -56,6 +58,8 @@ function pageGo(){
                           $("#list").append('<td>' + item.czje + '</td>');
                           $("#list").append('<td>' + item.czns + '</td>');
                           $("#list").append('<td>' + item.czfs + '</td>');
+                          $("#list").append('<td>' + item.jyh + '</td>');
+                          $("#list").append('<td>' + item.out_trade_no + '</td>');
                           $("#list").append('<td>' + item.czsj + '</td>');
                           $("#list").append('</tr>');
                      });

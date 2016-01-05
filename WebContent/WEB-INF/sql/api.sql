@@ -60,16 +60,22 @@ CREATE TABLE IF NOT EXISTS `app_poi` (
 
 
 -- 导出  表 develop.charge_record 结构
-CREATE TABLE IF NOT EXISTS `charge_record` (
-  `record_id` int(11) NOT NULL AUTO_INCREMENT,
-  `poi_id` int(11) NOT NULL DEFAULT '0',
-  `poi_name` varchar(128) DEFAULT NULL,
-  `czsj` datetime DEFAULT CURRENT_TIMESTAMP,
-  `czns` int(11) NOT NULL,
-  `czje` float(8,2) NOT NULL,
-  `czfs` varchar(64) NOT NULL,
-  PRIMARY KEY (`record_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `charge_record` (
+	`record_id` INT(11) NOT NULL AUTO_INCREMENT,
+	`poi_id` INT(11) NOT NULL DEFAULT '0',
+	`poi_name` VARCHAR(128) NULL DEFAULT NULL,
+	`czsj` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`czns` INT(11) NOT NULL,
+	`czje` FLOAT(8,2) NOT NULL,
+	`czfs` VARCHAR(64) NOT NULL,
+	`jyh` VARCHAR(64) NULL DEFAULT NULL COMMENT '交易号',
+	`out_trade_no` VARCHAR(64) NULL DEFAULT NULL COMMENT '流水号',
+	PRIMARY KEY (`record_id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=10000;
+
 
 -- 数据导出被取消选择。
 
