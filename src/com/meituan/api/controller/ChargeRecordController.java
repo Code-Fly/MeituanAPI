@@ -148,7 +148,7 @@ public class ChargeRecordController extends BaseController {
 		AppPoiExample.Criteria criteriaPoi = poiExample.createCriteria();
 		criteriaPoi.andUseridEqualTo(userId);
 		if (CommonUtil.isNotEmpty(poi_name)) {
-			criteriaPoi.andWm_poi_nameLike(poi_name+"%");
+			criteriaPoi.andWm_poi_nameLike("%"+poi_name+"%");
 		}
 		List<AppPoi> pois = appPoiService.selectByExample(poiExample);
 		List<ChargeRecord> userChargeRecord = new ArrayList<>();
