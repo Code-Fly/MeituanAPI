@@ -178,7 +178,7 @@ public class AppPoiController extends BaseController {
 			criteria.andUseridEqualTo(userId);
 		}
 		if (CommonUtil.isNotEmpty(poi_name)) {
-			criteria.andWm_poi_nameLike(poi_name+"%");
+			criteria.andWm_poi_nameLike("%"+poi_name+"%");
 		}
 		if (CommonUtil.isNotEmpty(poi_code)) {
 			criteria.andApp_poi_codeEqualTo(poi_code);

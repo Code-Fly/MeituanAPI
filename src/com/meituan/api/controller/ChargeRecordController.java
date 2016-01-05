@@ -127,7 +127,7 @@ public class ChargeRecordController extends BaseController {
 		ChargeRecordExample.Criteria criteria = recordExample.createCriteria();
 		
 		if (CommonUtil.isNotEmpty(poi_name)) {
-			criteria.andPoi_nameLike(poi_name+"%");
+			criteria.andPoi_nameLike("%"+poi_name+"%");
 		}
 		if (null != startTime) {
 			criteria.andCzsjGreaterThanOrEqualTo(startTime);
@@ -159,12 +159,12 @@ public class ChargeRecordController extends BaseController {
 				for(AppPoi poi:pois){
 					userIdTmp = appPoiService.selectByPrimaryKey(recode.getPoi_id()).getUserid();
 					if(1!=userId){
-							if(recode.getPoi_id() == poi.getPoi_id()){
+							if(recode.getPoi_id().intValue() == poi.getPoi_id().intValue()){
 								userChargeRecord.add(recode);
 								chae+=(recode.getCzje()-loginUsersService.selectByPrimaryKey(userIdTmp).getNfdj()*recode.getCzns());
 							}
 					} else {
-						if(recode.getPoi_id() == poi.getPoi_id()){
+						if(recode.getPoi_id().intValue() == poi.getPoi_id().intValue()){
 							userChargeRecord.add(recode);
 							chae+=recode.getCzje()-loginUsersService.selectByPrimaryKey(userIdTmp).getNfdj()*recode.getCzns();
 						}
